@@ -60,11 +60,6 @@ a:visited {
 	color: #4E5869;
 }
 
-#fm1 label {
-	font-size: 11px;
-	color: #000000;
-}
-
 .container {
 	width: 100%;
 	max-width: 1260px;
@@ -93,10 +88,13 @@ a:visited {
 	text-align:left;
 }
 .login_field {
+	width:250px;
+	height:15px;
+	}
+#login_field {
 	width:100px;
 	height:11px;
 	}
-	
 .nav {
 	padding-left:10px;
 	height:30px;
@@ -236,7 +234,7 @@ td
 .sub_text a {
 	color:#5c85bb;
 	font-size:9px;
-	padding-left:295px;
+	text-align:right;
 	text-decoration:none;
 }
 .pad {
@@ -251,4 +249,8 @@ td
 .sub_width {
 	width:450px;
 	float:left;
+}
+.login_content{
+	text-align:right;
+	padding-right:250px;
 }
