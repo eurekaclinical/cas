@@ -31,6 +31,7 @@
 <p>You are currently accessing CAS over a non-secure connection.  Single Sign on WILL NOT WORK.  In order to have single sign on work, you MUST log in over HTTPS.</p>
 </div>
 </c:if>
+
 <h3>Login</h3>
 
 			<form:form method="post" id="fm1" cssClass="login_content pad_top" commandName="${commandName}" htmlEscape="true">
