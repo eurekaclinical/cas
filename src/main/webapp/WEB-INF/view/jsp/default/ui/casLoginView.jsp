@@ -37,7 +37,7 @@
                   <form:errors path="*" cssClass="errors" id="status" element="div" />
                 <!-- <spring:message code="screen.welcome.welcome" /> -->
                     <p><spring:message code="screen.welcome.instructions" /></p>
-		    <p class="pad">
+		    <span>
                         <!-- label for="username"><spring:message code="screen.welcome.label.netid" /></label -->
                         <spring:message code="screen.welcome.label.netid" />
 						<c:if test="${not empty sessionScope.openIdLocalId}">
@@ -61,7 +61,7 @@
 						--%>
 						<spring:message code="screen.welcome.label.password.accesskey" var="passwordAccessKey" />
 						<form:password cssClass="login_field required" cssErrorClass="error" id="password" size="25" tabindex="2" path="password"  accesskey="${passwordAccessKey}" htmlEscape="true" autocomplete="off" />
-                    </p>
+                    </span>
                     <div class="row check">
                         <input id="warn" name="warn" value="true" tabindex="3" accesskey="<spring:message code="screen.welcome.label.warn.accesskey" />" type="checkbox" />
                         <label for="warn"><spring:message code="screen.welcome.label.warn" /></label>
