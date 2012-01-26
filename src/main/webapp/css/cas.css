@@ -146,10 +146,11 @@ a:visited {
 #submit {
 	font-size:10px;
 	width: 52px;
-	padding-left:10px;
+	text-align:center;
 }
 #btn {
 	font-size:10px;
+	text-align:center;
 }
 .margin {
 	margin-right:40px;
