@@ -76,6 +76,7 @@
 
                         <input name="submit" id="submit" class="submit" accesskey="l" value="<spring:message code="screen.welcome.button.login" />" tabindex="4" type="submit" />
                         <input name="reset" id="submit" class="btn-reset"  accesskey="c" value="<spring:message code="screen.welcome.button.clear" />" tabindex="5" type="reset" />
+                 
 			<br />
 			<br />
 			<span class="sub_text"><a href="forgot_password.html">Login Help</a></span>
