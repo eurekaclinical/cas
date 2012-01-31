@@ -26,12 +26,14 @@
         </c:choose>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link rel="icon" href="<c:url value="/favicon.ico" />" type="image/x-icon" />
-		<!--[if lte IE 7]>
-		<style>
-			.content { margin-right: -1px; }
-			ul.nav a { zoom: 1; }
-		</style>
-		<![endif]-->
+<!--[if IE 7]>
+<link href="${pageContext.request.contextPath}/css/ie7.css" rel="stylesheet" type="text/css">
+<style>
+.container { width:1224px; margin: 0 auto;}
+ul.nav a { zoom: 1; }
+#submit { border:none;}
+</style>
+<![endif]-->
 	</head>
 	<body>
 		<div class="container">
