@@ -53,10 +53,8 @@
 					| need to change this bean declaration (or add additional declarations) to declare a CredentialsToPrincipalResolver that supports the
 					| Credentials you are using.
 					+-->
-<!--
 				<bean
 					class="org.jasig.cas.authentication.principal.UsernamePasswordCredentialsToPrincipalResolver" />
--->
 				<!--
 					| HttpBasedServiceCredentialsToPrincipalResolver supports HttpBasedCredentials.  It supports the CAS 2.0 approach of
 					| authenticating services by SSL callback, extracting the callback URL from the Credentials and representing it as a
@@ -65,11 +63,10 @@
 					| If you are representing services by something more or other than an HTTPS URL whereat they are able to
 					| receive a proxy callback, you will need to change this bean declaration (or add additional declarations).
 					+-->
-				<bean
-					class="org.jasig.cas.authentication.principal.HttpBasedServiceCredentialsToPrincipalResolver"
-					/>
-
+				<bean class="org.jasig.cas.authentication.principal.HttpBasedServiceCredentialsToPrincipalResolver" />
+<!--
 				<ref bean="ldapPrincipalResolver" />
+-->
 			</list>
 		</property>
 
@@ -95,7 +92,8 @@
 					| edu.someschool.its.cas.MySpecialHandler here, or you might use one of the handlers provided in the adaptors modules.
 					+-->
 
-				<ref bean="ldapAuthHandler" />
+				<!-- ref bean="ldapAuthHandler" / -->
+				<ref bean="jdbcAuthHandler" />
 			</list>
 		</property>
 		<property name="authenticationMetaDataPopulators">
@@ -103,6 +101,18 @@
 				<bean class="org.jasig.cas.authentication.SamlAuthenticationMetaDataPopulator" />
 			</list>
 		</property>
+	</bean>
+
+	<bean id="jdbcAuthHandler"
+		class="org.jasig.cas.adaptors.jdbc.SearchModeSearchDatabaseAuthenticationHandler">
+		<property name="tableUsers" value="users" />
+		<property name="fieldUser" value="email" />
+		<property name="fieldPassword" value="password" />
+		<property name="dataSource" ref="jndiDataSource" />
+	</bean>
+
+	<bean id="jndiDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:comp/env/jdbc/EurekaService" />
 	</bean>
 
 	<bean id="ldapAuthHandler"

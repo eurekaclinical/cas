@@ -48,6 +48,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jasig.cas</groupId>
+			<artifactId>cas-server-support-jdbc</artifactId>
+			<version>${cas.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jasig.cas</groupId>
 			<artifactId>cas-server-support-ldap</artifactId>
 			<version>${cas.version}</version>
 		</dependency>
