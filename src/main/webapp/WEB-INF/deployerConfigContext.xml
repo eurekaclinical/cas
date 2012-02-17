@@ -53,8 +53,9 @@
 					| need to change this bean declaration (or add additional declarations) to declare a CredentialsToPrincipalResolver that supports the
 					| Credentials you are using.
 					+-->
-				<bean
-					class="org.jasig.cas.authentication.principal.UsernamePasswordCredentialsToPrincipalResolver" />
+				<bean class="org.jasig.cas.authentication.principal.UsernamePasswordCredentialsToPrincipalResolver">
+					<property name="attributeRepository" ref="jdbcAttributeRepository" />
+				</bean>
 				<!--
 					| HttpBasedServiceCredentialsToPrincipalResolver supports HttpBasedCredentials.  It supports the CAS 2.0 approach of
 					| authenticating services by SSL callback, extracting the callback URL from the Credentials and representing it as a
@@ -103,16 +104,23 @@
 		</property>
 	</bean>
 
-	<bean id="jdbcAuthHandler"
-		class="org.jasig.cas.adaptors.jdbc.SearchModeSearchDatabaseAuthenticationHandler">
-		<property name="tableUsers" value="users" />
-		<property name="fieldUser" value="email" />
-		<property name="fieldPassword" value="password" />
+	<bean id="jdbcAuthHandler" class="org.jasig.cas.adaptors.jdbc.QueryDatabaseAuthenticationHandler">
 		<property name="dataSource" ref="jndiDataSource" />
+		<property name="sql" value="select password from users where email=? and active=1" />
 	</bean>
 
 	<bean id="jndiDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName" value="java:comp/env/jdbc/EurekaService" />
+	</bean>
+
+	<bean name="jdbcAttributeRepository"  class="org.jasig.services.persondir.support.jdbc.SingleRowJdbcPersonAttributeDao">
+		<constructor-arg index="0" ref="jndiDataSource" />
+		<constructor-arg index="1" value="select a.name as authorities from roles a, user_role b, users c where a.id=b.roleid and b.userid=c.id and c.email=?" />
+		<property name="resultAttributeMapping">
+			<map>
+				<entry key="authorities" value="authorities" />
+			</map>
+		</property>
 	</bean>
 
 	<bean id="ldapAuthHandler"
@@ -179,7 +187,7 @@
     <!-- <sec:user name="@@THIS SHOULD BE REPLACED@@" password="notused" authorities="ROLE_ADMIN" />-->
 
     <sec:user-service id="userDetailsService">
-        <sec:user name="hrathod" password="notused" authorities="ROLE_ADMIN" />
+        <sec:user name="super.user@emory.edu" password="notused" authorities="ROLE_ADMIN" />
     </sec:user-service>
 	
 	<!-- 
