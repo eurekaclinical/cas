@@ -39,23 +39,30 @@ ul.nav a { zoom: 1; }
 		<div class="container">
 			<div>
 				<div class="header">
-					<span><a href="index.html"><img src="images/tag_line.gif" alt="Data Analysis Tool" width="238" align="absmiddle" /></a></span>  </div>
+					<span>
+						<a href="index.html">
+							<img src="images/tag_line.gif" alt="Data Analysis Tool" width="238" align="absmiddle" />
+						</a>
+					</span>
 				</div>
-				<div>    
-					<ul class="nav">
-						<li><a href="about.html"><img src="images/about_icon.gif" alt="About" width="30" height="30" align="absmiddle" />About</a></li>
-						<img src="images/reg_icon.gif" alt="Register" width="30" height="30" align="absmiddle" />
-						<li><a href="register.html">Register</a></li>
-						<img src="images/acct_icon.gif" alt="Account" width="30" height="30" align="absmiddle" />
-						<li><a href="acct.html">Account</a></li>
-						<img src="images/contact_icon.gif" alt="Contact" width="30" height="30" align="absmiddle" />
-						<li><a href="contact.html">Contact</a></li>
-						<img src="images/help_icon.gif" alt="Help" width="30" height="30" align="absmiddle" />
-						<li><a href="help.html">Help</a></li>
-					</ul>
-				</div>
-				<div class="sidebar1">
-					<br />
-					<p><img src="images/scientific_research.jpg" /></p>
-				</div>
-				<div class="content">
+			</div>
+			<div>    
+				<ul class="nav">
+<%--
+					<li><a href="about.html"><img src="images/about_icon.gif" alt="About" width="30" height="30" align="absmiddle" />About</a></li>
+					<img src="images/reg_icon.gif" alt="Register" width="30" height="30" align="absmiddle" />
+					<li><a href="register.html">Register</a></li>
+					<img src="images/acct_icon.gif" alt="Account" width="30" height="30" align="absmiddle" />
+					<li><a href="acct.html">Account</a></li>
+					<img src="images/contact_icon.gif" alt="Contact" width="30" height="30" align="absmiddle" />
+					<li><a href="contact.html">Contact</a></li>
+					<img src="images/help_icon.gif" alt="Help" width="30" height="30" align="absmiddle" />
+					<li><a href="help.html">Help</a></li>
+--%>
+				</ul>
+			</div>
+			<div class="sidebar1">
+				<br />
+				<p><img src="images/scientific_research.jpg" /></p>
+			</div>
+			<div class="content">
