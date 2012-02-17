@@ -107,6 +107,11 @@
 	<bean id="jdbcAuthHandler" class="org.jasig.cas.adaptors.jdbc.QueryDatabaseAuthenticationHandler">
 		<property name="dataSource" ref="jndiDataSource" />
 		<property name="sql" value="select password from users where email=? and active=1" />
+		<property name="passwordEncoder">
+			<bean class="org.jasig.cas.authentication.handler.DefaultPasswordEncoder">
+				<constructor-arg value="MD5"/>
+			</bean> 
+		</property>
 	</bean>
 
 	<bean id="jndiDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
