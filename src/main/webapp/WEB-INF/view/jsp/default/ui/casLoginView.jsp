@@ -63,12 +63,14 @@
 						<spring:message code="screen.welcome.label.password.accesskey" var="passwordAccessKey" />
 						<form:password cssClass="login_field required" cssErrorClass="error" id="password" size="25" tabindex="2" path="password"  accesskey="${passwordAccessKey}" htmlEscape="true" autocomplete="off" />
                     </span>
+<%--
                     <div class="row check">
                         <input id="warn" name="warn" value="true" tabindex="3" accesskey="<spring:message code="screen.welcome.label.warn.accesskey" />" type="checkbox" />
                         <label for="warn"><spring:message code="screen.welcome.label.warn" /></label>
 			<br />
 			<br />
                     </div>
+--%>
                     <div class="row btn-row">
 						<input type="hidden" name="lt" value="${loginTicket}" />
 						<input type="hidden" name="execution" value="${flowExecutionKey}" />
