@@ -40,9 +40,13 @@ ul.nav a { zoom: 1; }
 			<div>
 				<div class="header">
 					<span>
+<!--
 						<a href="index.html">
+-->
 							<img src="images/tag_line.gif" alt="Data Analysis Tool" width="238" align="absmiddle" />
+<!--
 						</a>
+-->
 					</span>
 				</div>
 			</div>
