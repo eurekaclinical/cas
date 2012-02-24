@@ -11,7 +11,7 @@
 				</div>
 			</div>
 		<div class="footer">
-				<p>Copyright 2011 . CCI . Center for Comprehensive Informatics  </p>
+				<p>Copyright (c)2012 Emory University -- All  Rights Reserved</p>
 				<!-- end .footer -->
 			</div>
 		<!-- end .container -->
