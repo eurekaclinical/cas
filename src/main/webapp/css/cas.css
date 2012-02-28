@@ -133,6 +133,7 @@ a:visited {
 	margin: 0 5px 5px 5px;
 	border: 1px solid #CCC;
 	height:200px;
+	overflow:hidden;
 }
 
 #release_notes {
@@ -209,6 +210,8 @@ td
 	font-size:9px;
 	border-top:1px solid #369;
 	color:#fff;
+	float:left;
+	width:100%;
 }
 
 .fltrt {
