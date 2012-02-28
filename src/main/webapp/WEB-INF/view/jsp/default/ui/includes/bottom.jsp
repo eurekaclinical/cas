@@ -11,7 +11,7 @@
 				</div>
 			</div>
 		<div class="footer">
-				<p>Copyright (c)2012 Emory University -- All  Rights Reserved</p>
+				<p>Copyright &copy; 2012 Emory University -- All  Rights Reserved</p>
 				<!-- end .footer -->
 			</div>
 		<!-- end .container -->
