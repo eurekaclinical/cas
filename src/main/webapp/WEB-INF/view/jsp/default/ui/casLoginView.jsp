@@ -73,7 +73,7 @@
 						<input type="hidden" name="lt" value="${loginTicket}" />
 						<input type="hidden" name="execution" value="${flowExecutionKey}" />
 						<input type="hidden" name="_eventId" value="submit" />
-
+<br/>
 						<input name="submit" id="submit" class="submit" accesskey="l" value="<spring:message code="screen.welcome.button.login" />" tabindex="4" type="submit" />
 						<input name="reset" id="submit" class="btn-reset"  accesskey="c" value="<spring:message code="screen.welcome.button.clear" />" tabindex="5" type="reset" />
 
