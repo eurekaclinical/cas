@@ -79,7 +79,7 @@
 
 						<br />
 						<br />
-						<span class="sub_text"><a href="forgot_password.html">Login Help</a></span>
+						<span class="sub_text"><a href="/forgot_password.jsp">Login Help</a></span>
 					</div>
 				</form:form>
 
