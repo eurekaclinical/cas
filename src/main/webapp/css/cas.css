@@ -23,7 +23,8 @@ ul.nav a, ul.nav a:visited {
 	text-decoration: none;
 	color: #036;
 	padding-right:10px;
-	font-weight:bold;
+	font-weight: 800;
+	font-size:9px;
 }
 ul.nav a:hover, ul.nav a:active, ul.nav a:focus {
 	color: #999999;
@@ -100,6 +101,7 @@ a:visited {
 	height:30px;
 	background-image:url(../images/header_bg.png);
 	border-bottom:1px solid #369;
+	overflow:hidden;
 }
 
 .sidebar1 {
@@ -139,11 +141,13 @@ a:visited {
 #release_notes {
 	padding-top:15px;
 	float: left;
+	overflow:hidden;
 }
 
 #release_notes .rss-items li {
 	display:block;
-	padding:0 60px 10px 25px;
+	padding:0 40px 10px 25px;
+	overflow:hidden;
 }
 
 #submit {
