@@ -69,6 +69,9 @@
 						<br />
 					</div>
 	--%>
+     <br/>
+                    <br/>
+                    *Please note that loading real patient data into the system is strictly prohibited
 					<div class="row btn-row">
 						<input type="hidden" name="lt" value="${loginTicket}" />
 						<input type="hidden" name="execution" value="${flowExecutionKey}" />
@@ -81,6 +84,7 @@
 						<br />
 						<span class="sub_text"><a href="/forgot_password.jsp">Login Help</a></span>
 					</div>
+                   
 				</form:form>
 
 <jsp:directive.include file="includes/bottom.jsp" />
