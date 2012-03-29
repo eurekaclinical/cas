@@ -260,9 +260,14 @@ td
 .small_text {
 	font-size:9px;
 }
-.error {
-	color:#990000;
+td .error {
+	color:#F00;
 }
 .success {
 	color:#0C0;
+}
+.pw_fail {
+	text-align:left; 
+	padding-left:150px; 
+	font-weight:bold; 
 }
