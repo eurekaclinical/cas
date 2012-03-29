@@ -260,3 +260,9 @@ td
 	text-align:right;
 	padding-right:250px;
 }
+.error {
+	color:#990000;
+}
+.success {
+	color:#0C0;
+}

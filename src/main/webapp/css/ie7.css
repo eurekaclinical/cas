@@ -260,3 +260,9 @@ td
 .small_text {
 	font-size:9px;
 }
+.error {
+	color:#990000;
+}
+.success {
+	color:#0C0;
+}
