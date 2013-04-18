@@ -10,26 +10,59 @@
 	<version>1.0-SNAPSHOT</version>
 
 	<properties>
-		<cas.version>3.4.10</cas.version>
-		<spring.version>3.0.5.RELEASE</spring.version>
+		<cas.version>3.5.2</cas.version>
+		<spring.version>3.1.0.RELEASE</spring.version>
+		<tomcat-plugin-version>1.1</tomcat-plugin-version>
 	</properties>
+
+	<distributionManagement>
+		<site>
+			<id>aiw.sourceforge.net</id>
+			<url>scp://shell.sourceforge.net/home/project-web/aiw/htdocs/dev/cas-server-${project.version}</url>
+		</site>
+		<repository>
+			<id>aiw</id>
+			<name>AIW Repo</name>
+			<url>http://maven.cci.emory.edu/nexus/content/repositories/aiw/</url>
+		</repository>
+		<snapshotRepository>
+			<id>aiw-snapshots</id>
+			<name>AIW Snapshots Repo</name>
+			<url>http://maven.cci.emory.edu/nexus/content/repositories/aiw-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+        
+	<repositories>
+		<repository>
+			<id>maven.cci</id>
+			<url>http://maven.cci.emory.edu/nexus/content/repositories/public</url>
+		</repository>
+		<repository>
+			<id>aiw</id>
+			<url>http://maven.cci.emory.edu/nexus/content/repositories/aiw/</url>
+		</repository>
+	</repositories>
 
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<warName>cas</warName>
-				</configuration>
+				<version>2.3</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>3.1</version>
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.1</version>
 			</plugin>
 		</plugins>
 	</build>
@@ -61,17 +94,45 @@
 			<artifactId>spring-security-ldap</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-cas-client</artifactId>
 			<version>${spring.version}</version>
-		</dependency>
+		</dependency>-->
 	</dependencies>
 
-	<repositories>
-		<repository>
-			<id>ja-sig</id>
-			<url>http://oss.sonatype.org/content/repositories/releases/</url>
-		</repository>
-	</repositories>
+	<profiles>
+		<profile>
+			<id>eureka-tomcat-local</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>tomcat-maven-plugin</artifactId>
+						<version>${tomcat-plugin-version}</version>
+						<configuration>
+							<url>${local.url}</url>
+							<server>eureka.tomcat.local</server>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>eureka-tomcat-dev</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>tomcat-maven-plugin</artifactId>
+						<version>${tomcat-plugin-version}</version>
+						<configuration>
+							<url>${dev.url}</url>
+							<server>eureka.tomcat.dev</server>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
