@@ -25,13 +25,11 @@
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <jsp:directive.include file="includes/top.jsp" />
-
-                <div id="msg" class="success">
-                        <h3><spring:message code="screen.logout.header" /></h3>
-
-                        <p><spring:message code="screen.logout.success" /></p>
-                        <p><spring:message code="screen.logout.security" /></p>
-                </div>
-
-
+	<div id="msg" class="success">
+		<h3>Logout</h3>
+		<div id="msg" class="success">
+			<p>You have successfully logged out of Eureka! Clinical Analytics.</p>
+			<p>For security reasons, exit your web browser.</p>
+		</div>
+	</div>
 <jsp:directive.include file="includes/bottom.jsp" />

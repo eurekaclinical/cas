@@ -118,7 +118,7 @@
 
 	<bean name="jdbcAttributeRepository"  class="org.jasig.services.persondir.support.jdbc.SingleRowJdbcPersonAttributeDao">
 		<constructor-arg index="0" ref="jndiDataSource" />
-		<constructor-arg index="1" value="select a.name as authorities from roles a, user_role b, users c where a.id=b.roleid and b.userid=c.id and c.email=?" />
+		<constructor-arg index="1" value="select a.name as authorities from roles a, user_role b, users c where a.id=b.role_id and b.user_id=c.id and c.email=?" />
 		<property name="resultAttributeMapping">
 			<map>
 				<entry key="authorities" value="authorities" />

@@ -36,33 +36,31 @@ ul.nav a { zoom: 1; }
 <![endif]-->
 	</head>
 	<body>
+		<% String url = new edu.emory.cci.aiw.cvrg.eureka.cas.CasProperties().getApplicationUrl(request); %>
+		<% url = !url.endsWith("/") ? url + "/" : url; %>
 		<div class="container">
 			<div>
 				<div class="header">
 					<span>
-						<a href="/">
-							<img src="images/tag_line.gif" alt="Data Analysis Tool" width="238" align="absmiddle" />
+						<a href="<%= url %>">
+							<img src="<%= url %>images/tag_line.gif" alt="Data Analysis Tool" width="238" align="absmiddle" />
 						</a>
 					</span>
 				</div>
 			</div>
 			<div>    
 				<ul class="nav">
-					<li><a href="/about.jsp"><img src="images/about_icon.gif" alt="About" width="30" height="30" align="absmiddle" />About</a></li>
-					<img src="images/reg_icon.gif" alt="Register" width="30" height="30" align="absmiddle" />
-					<li><a href="/register.jsp">Register</a></li>
-<%--
-					<img src="images/acct_icon.gif" alt="Account" width="30" height="30" align="absmiddle" />
-					<li><a href="/acct.jsp">Account</a></li>
---%>
-					<img src="images/contact_icon.gif" alt="Contact" width="30" height="30" align="absmiddle" />
-					<li><a href="/contact.jsp">Contact</a></li>
-					<img src="images/help_icon.gif" alt="Help" width="30" height="30" align="absmiddle" />
-					<li><a href="/help.jsp">Help</a></li>
+					<li><a href="<%= url %>about.jsp"><img src="<%= url %>images/about_icon.gif" alt="About" width="30" height="30" align="absmiddle" />About</a></li>
+					<img src="<%= url %>images/reg_icon.gif" alt="Register" width="30" height="30" align="absmiddle" />
+					<li><a href="<%= url %>register.jsp">Register</a></li>
+					<img src="<%= url %>images/contact_icon.gif" alt="Contact" width="30" height="30" align="absmiddle" />
+					<li><a href="<%= url %>contact.jsp">Contact</a></li>
+					<img src="<%= url %>images/help_icon.gif" alt="Help" width="30" height="30" align="absmiddle" />
+					<li><a href="<%= url %>help.jsp">Help</a></li>
 				</ul>
 			</div>
 			<div class="sidebar1">
 				<br />
-				<p><img src="images/scientific_research.jpg" /></p>
+				<p><img src="<%= url %>images/scientific_research.jpg" /></p>
 			</div>
 			<div class="content">
