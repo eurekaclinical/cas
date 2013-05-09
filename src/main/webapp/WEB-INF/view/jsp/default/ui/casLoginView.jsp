@@ -25,6 +25,7 @@
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <jsp:directive.include file="includes/top.jsp" />
+<jsp:useBean id="casProperties" scope="page" class="edu.emory.cci.aiw.cvrg.eureka.cas.CasProperties" />
 <h3>Login</h3>
 <c:choose>
 	<c:when test="${not pageContext.request.secure}">
@@ -71,7 +72,9 @@
 			--%>
 			<br/>
 			<br/>
+			<c:if test="${casProperties.demoMode}">
 			*Please note that loading real patient data into the system is strictly prohibited!
+			</c:if>
 			<div class="row btn-row">
 				<input type="hidden" name="lt" value="${loginTicket}" />
 				<input type="hidden" name="execution" value="${flowExecutionKey}" />
