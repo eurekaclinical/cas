@@ -72,7 +72,7 @@
 			--%>
 			<br/>
 			<br/>
-			<c:if test="${casProperties.demoMode}">
+			<c:if test="${casProperties.demoMode or casProperties.ephiProhibited}">
 			*Please note that loading real patient data into the system is strictly prohibited!
 			</c:if>
 			<div class="row btn-row">
