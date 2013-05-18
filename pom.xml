@@ -15,6 +15,14 @@
 		<tomcat-plugin-version>1.1</tomcat-plugin-version>
 	</properties>
 
+	<licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+            <distribution>manual</distribution>
+        </license>
+    </licenses>
+
 	<distributionManagement>
 		<site>
 			<id>aiw.sourceforge.net</id>
