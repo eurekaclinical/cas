@@ -8,12 +8,27 @@
 	<artifactId>cas-server</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
+    <name>CAS Server</name>
+    <description>A customized instance of CAS to work with Eureka!</description>
+    <inceptionYear>2013</inceptionYear>
+
+    <organization>
+        <name>Emory University</name>
+        <url>http://www.emory.edu</url>
+    </organization>
+
+    <url>http://aiw.sourceforge.net/dev/{$project.build.finalName}</url>
 
 	<properties>
 		<cas.version>3.5.2</cas.version>
 		<spring.version>3.1.0.RELEASE</spring.version>
 		<tomcat-plugin-version>1.1</tomcat-plugin-version>
 	</properties>
+
+    <scm>
+        <developerConnection>scm:svn:https://scm.cci.emory.edu/svn/aiw/trunk/cvrg/cas</developerConnection>
+        <url>https://scm.cci.emory.edu/svn/aiw/trunk/cvrg/cas</url>
+    </scm>
 
 	<licenses>
         <license>
@@ -23,10 +38,15 @@
         </license>
     </licenses>
 
+    <issueManagement>
+        <system>JIRA</system>
+        <url>http://jira.cci.emory.edu:8080/jira/secure/Dashboard.jspa</url>
+    </issueManagement>
+
 	<distributionManagement>
 		<site>
 			<id>aiw.sourceforge.net</id>
-			<url>scp://shell.sourceforge.net/home/project-web/aiw/htdocs/dev/cas-server-${project.version}</url>
+			<url>scp://shell.sourceforge.net/home/project-web/aiw/htdocs/dev/${project.build.finalName}</url>
 		</site>
 		<repository>
 			<id>aiw</id>
@@ -106,6 +126,7 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>2.5</version>
+			<scope>provided</scope>
 		</dependency>
 		<!--<dependency>
 			<groupId>org.springframework.security</groupId>
