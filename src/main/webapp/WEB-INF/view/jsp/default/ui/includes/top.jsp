@@ -51,12 +51,9 @@ ul.nav a { zoom: 1; }
 			<div>    
 				<ul class="nav">
 					<li><a href="<%= url %>about.jsp"><img src="<%= url %>images/about_icon.gif" alt="About" width="30" height="30" align="absmiddle" />About</a></li>
-					<img src="<%= url %>images/reg_icon.gif" alt="Register" width="30" height="30" align="absmiddle" />
-					<li><a href="<%= url %>register.jsp">Register</a></li>
-					<img src="<%= url %>images/contact_icon.gif" alt="Contact" width="30" height="30" align="absmiddle" />
-					<li><a href="<%= url %>contact.jsp">Contact</a></li>
-					<img src="<%= url %>images/help_icon.gif" alt="Help" width="30" height="30" align="absmiddle" />
-					<li><a href="<%= url %>help.jsp">Help</a></li>
+					<li><a href="<%= url %>register.jsp"><img src="<%= url %>images/reg_icon.gif" alt="Register" width="30" height="30" align="absmiddle" />Register</a></li>
+					<li><a href="<%= url %>contact.jsp"><img src="<%= url %>images/contact_icon.gif" alt="Contact" width="30" height="30" align="absmiddle" />Contact</a></li>
+					<li><a href="<%= url %>help.jsp"><img src="<%= url %>images/help_icon.gif" alt="Help" width="30" height="30" align="absmiddle" />Help</a></li>
 				</ul>
 			</div>
 			<div class="sidebar1">
