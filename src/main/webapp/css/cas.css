@@ -15,21 +15,30 @@ ul {
 	margin: 0;
 }
 
-ul.nav li {
+ul.left-nav li, ul.right-nav li {
 	list-style: none;
 	display: inline;
 }
 
-ul.nav a, ul.nav a:visited {
+ul.left-nav a, ul.left-nav a:visited, ul.right-nav a, ul.right-nav a:visited {
 	text-decoration: none;
 	color: #036;
 	padding-right:10px;
 	font-weight: 800;
 	font-size:9px;
 }
-ul.nav a:hover, ul.nav a:active, ul.nav a:focus {
+ul.left-nav a:hover, ul.left-nav a:active, ul.left-nav a:focus, ul.right-nav a:hover, ul.right-nav a:active, ul.right-nav a:focus {
 	color: #999999;
 }
+
+ul.left-nav {
+	float: left;
+}
+
+ul.right-nav {
+	float: right;
+}
+
 h1, h2, h3, h4, h5, h6, p {
 	/*margin-top: 0;*/
 	padding-right: 15px;
@@ -62,14 +71,29 @@ a:link {
 a:visited {
 	color: #4E5869;
 }
-#login {
+
+.login_content {
+	margin: 0 auto;
+	width: 350px;
+	padding-right: 26px;
+	padding-bottom: 26px;
+	border: 1px solid #CCC;
+	border-radius: 10px;
+	text-align: right;
+}
+
+.login_content input#username, .login_content input#password {
+	width: 25em;
+}
+
+/*#login {
 	background: #24497a;
 	float: right;
 	width:410px;
 	height:15px;
 	padding-top:20px;
 	text-align:left;
-}
+}*/
 #login_field {
 	width:100px;
 	height:11px;
@@ -97,7 +121,7 @@ a:visited {
 
 .nav {
 	padding-left:10px;
-	height:30px;
+	/*height:30px;*/
 	background-image:url(../images/header_bg.png);
 	border-bottom:1px solid #369;
 	overflow:hidden;
@@ -166,6 +190,7 @@ a:visited {
 	/*float: left;*/
 	margin: 0 auto;
 	border: 1px solid #CCC;
+	border-radius: 10px;
 	/*background-color:#FFF;
 	height:190px;*/
 	overflow:hidden;
@@ -311,7 +336,7 @@ td
 .sub_text a {
 	color:#5c85bb;
 	font-size:9px;
-	padding-left:295px;
+	/*padding-left:295px;*/
 	text-decoration:none;
 }
 .pad {

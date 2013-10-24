@@ -36,7 +36,7 @@
 	<c:otherwise>
 		<form:form method="post" id="fm1" cssClass="login_content pad_top" commandName="${commandName}" htmlEscape="true">
 			<form:errors path="*" cssClass="errors" id="status" element="div" />
-			<p>Enter your e-mail address and password:</p>
+			<%--<p>Enter your e-mail address and password:</p>--%>
 			<span>
 				<!-- label for="username"><spring:message code="screen.welcome.label.netid" /></label -->
 				<%--<spring:message code="screen.welcome.label.netid" />
@@ -53,7 +53,7 @@
 				<form:input cssClass="login_field required" cssErrorClass="error" id="username" size="25" tabindex="1" accesskey="${userNameAccessKey}" path="username" autocomplete="false" htmlEscape="true" />
 				<br />
 				<br />
-				Password
+				Password:
 				<%--
 				NOTE: Certain browsers will offer the option of caching passwords for a user.  There is a non-standard attribute,
 				"autocomplete" that when set to "off" will tell certain browsers not to prompt to cache credentials.  For more
@@ -81,7 +81,7 @@
 				<input type="hidden" name="_eventId" value="submit" />
 				<br/>
 				<input name="submit" id="submit" class="submit" accesskey="l" value="Login" tabindex="4" type="submit" />
-				<input name="reset" id="submit" class="btn-reset"  accesskey="c" value="Clear" tabindex="5" type="reset" />
+				<%--<input name="reset" id="submit" class="btn-reset"  accesskey="c" value="Clear" tabindex="5" type="reset" />--%>
 				<br />
 				<br />
 				<span class="sub_text"><a href="<%= url %>forgot_password.jsp">Login Help</a></span>

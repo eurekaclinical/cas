@@ -48,8 +48,8 @@ ul.nav a { zoom: 1; }
 					</span>
 				</div>
 			</div>
-			<div>    
-				<ul class="nav">
+			<div class="nav">    
+				<ul class="left-nav">
 					<li><a href="<%= url %>about.jsp"><img src="<%= url %>images/about_icon.gif" alt="About" width="30" height="30" align="absmiddle" />About</a></li>
 					<li><a href="<%= url %>register.jsp"><img src="<%= url %>images/reg_icon.gif" alt="Register" width="30" height="30" align="absmiddle" />Register</a></li>
 					<li><a href="<%= url %>contact.jsp"><img src="<%= url %>images/contact_icon.gif" alt="Contact" width="30" height="30" align="absmiddle" />Contact</a></li>
