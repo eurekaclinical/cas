@@ -4,7 +4,7 @@
 	<groupId>edu.emory.cci.cas</groupId>
 	<artifactId>cas-server</artifactId>
 	<packaging>war</packaging>
-	<version>1.0.1</version>
+	<version>1.0.2-SNAPSHOT</version>
     <name>CAS Server</name>
     <description>A customized instance of CAS to work with Eureka!</description>
     <inceptionYear>2013</inceptionYear>
@@ -23,8 +23,8 @@
 	</properties>
 
     <scm>
-        <developerConnection>scm:svn:https://scm.cci.emory.edu/svn/aiw/tags/cas-server-1.0.1</developerConnection>
-        <url>https://scm.cci.emory.edu/svn/aiw/tags/cas-server-1.0.1</url>
+        <developerConnection>scm:svn:https://scm.cci.emory.edu/svn/aiw/trunk/cvrg/cas</developerConnection>
+        <url>https://scm.cci.emory.edu/svn/aiw/trunk/cvrg/cas</url>
     </scm>
 
 	<licenses>
