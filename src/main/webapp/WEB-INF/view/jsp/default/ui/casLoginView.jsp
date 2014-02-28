@@ -48,7 +48,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="username">E-mail address:</label>
+				<label for="username">Username:</label>
 				<form:input cssClass="form-control" cssErrorClass="" id="username" size="25" tabindex="1"
 							accesskey="${userNameAccessKey}" path="username" autocomplete="false"
 							htmlEscape="true"/>
@@ -65,6 +65,10 @@
 							   path="password" accesskey="${passwordAccessKey}" htmlEscape="true"
 							   autocomplete="off"/>
 			</div>
+			<a href="${GoogleProviderUrl}" class="btn btn-social-icon btn-google-plus"/>
+			<a href="${GitHubProviderUrl}" class="btn btn-social-icon btn-github"/>
+			<a href="${SSLTwitterProviderUrl}" class="btn btn-social-icon btn-twitter"/>
+			<!--<a href="${GlobusProviderUrl}">Sign-in with Globus</a><br />-->
 			<input name="submit" id="submit" class="btn btn-primary" accesskey="l" value="Login"
 				   tabindex="4" type="submit"/>
 			<%--<input name="reset" id="submit" class="btn-reset"  accesskey="c" value="Clear" tabindex="5" type="reset" />--%>

@@ -68,6 +68,7 @@
 <!--
 				<ref bean="ldapPrincipalResolver" />
 -->
+				<bean class="org.jasig.cas.support.oauth.authentication.principal.OAuthCredentialsToPrincipalResolver" />
 			</list>
 		</property>
 
@@ -95,11 +96,15 @@
 
 				<!-- ref bean="ldapAuthHandler" / -->
 				<ref bean="jdbcAuthHandler" />
+				<bean class="org.jasig.cas.support.oauth.authentication.handler.support.OAuthAuthenticationHandler">
+					<property name="configuration" ref="oauthConfig" />
+				  </bean>
 			</list>
 		</property>
 		<property name="authenticationMetaDataPopulators">
 			<list>
 				<bean class="org.jasig.cas.authentication.SamlAuthenticationMetaDataPopulator" />
+				<bean class="org.jasig.cas.support.oauth.authentication.OAuthAuthenticationMetaDataPopulator" />
 			</list>
 		</property>
 	</bean>
