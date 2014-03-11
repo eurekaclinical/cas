@@ -106,29 +106,30 @@
 
 	<!-- The scheduler bean wires up any triggers that define scheduled tasks -->
 	<bean id="scheduler" class="org.jasig.cas.util.AutowiringSchedulerFactoryBean"/>
-    
+		
 	<!-- OAuth Providers -->
+	<bean id="dynamicProviders" class="edu.emory.cci.aiw.cvrg.eureka.cas.oauth.provider.OAuthProviders"/>
 	<!--<bean id="facebook" class="org.scribe.up.provider.impl.FacebookProvider">
 		<property name="key" value="the_key_for_facebook" />
 		<property name="secret" value="the_secret_for_facebook" />
 	</bean>-->
 	
-	<bean id="twitter" class="edu.emory.cci.aiw.cvrg.eureka.cas.oauth.provider.SSLTwitterProvider">
-		<property name="key" value="S97zaJGr32CBu9cbGFjTQ" />
-		<property name="secret" value="OLwoTWTUveOucGcTUpsvcg5pB73vLetOBsBy3PmHcmA" />
-	</bean>
+	<!--<bean id="twitter" class="edu.emory.cci.aiw.cvrg.eureka.cas.oauth.provider.SSLTwitterProvider">
+		<property name="key" value="the_key_for_twitter" />
+		<property name="secret" value="the_secret_for_twitter" />
+	</bean>-->
  
 	<!--<bean id="google" class="org.scribe.up.provider.impl.GoogleProvider">
 		<property name="key" value="the_key_for_google" />
 		<property name="secret" value="the_secret_for_google" />
-	</bean>
+	</bean>-->
 	
-	<bean id="google2" class="org.scribe.up.provider.impl.Google2Provider">
+	<!--<bean id="google2" class="edu.emory.cci.aiw.cvrg.eureka.cas.oauth.provider.Google2Provider">
 		<property name="key" value="the_key_for_google" />
 		<property name="secret" value="the_secret_for_google" />
-	</bean>
+	</bean>-->
  
-	<bean id="yahoo" class="org.scribe.up.provider.impl.YahooProvider">
+	<!--<bean id="yahoo" class="org.scribe.up.provider.impl.YahooProvider">
 		<property name="key" value="the_key_for_yahoo" />
 		<property name="secret" value="the_secret_for_yahoo" />
 	</bean>
@@ -138,10 +139,10 @@
 		<property name="secret" value="the_secret_for_linkedin" />
 	</bean>-->
  
-	<bean id="github" class="org.scribe.up.provider.impl.GitHubProvider">
-		<property name="key" value="71249161a87da156e087" />
-		<property name="secret" value="1d8e52bbc0657c35b64704d2128208af0e71fd07" />
-	</bean>
+	<!--<bean id="github" class="org.scribe.up.provider.impl.GitHubProvider">
+		<property name="key" value="the_key_for_github" />
+		<property name="secret" value="the_secret_for_github" />
+	</bean>-->
  
 	<!--<bean id="live" class="org.scribe.up.provider.impl.WindowsLive">
 		<property name="key" value="the_key_for_live" />
@@ -160,20 +161,21 @@
 	</bean>-->
 	
 	<bean id="oauthConfig" class="org.jasig.cas.support.oauth.OAuthConfiguration">
-		<property name="loginUrl" value="https://ubuntu:8443/cas-server/login" />
-		<property name="providers">
-			<list>
-				<!--<ref bean="facebook" />-->
+		<property name="loginUrl" value="${cas.securityContext.casProcessingFilterEntryPoint.loginUrl}"/>
+		<property name="providers" value="#{dynamicProviders.providers}"/>
+		<!--	<list>
+				<ref bean="facebook" />
 				<ref bean="twitter" />
-				<!--<ref bean="google" />
+				<ref bean="google" />
 				<ref bean="google2" />
 				<ref bean="yahoo" />
-				<ref bean="linkedin" />-->
+				<ref bean="linkedin" />
 				<ref bean="github" />
-				<!--<ref bean="caswrapper" />
+				<ref bean="globusnexus"/>
+				<ref bean="caswrapper" />
 				<ref bean="live" />
-				<ref bean="wordpress" />-->
+				<ref bean="wordpress" />
 			</list>
-		</property>
+		</property>-->
 	</bean>
 </beans>

@@ -65,10 +65,6 @@
 							   path="password" accesskey="${passwordAccessKey}" htmlEscape="true"
 							   autocomplete="off"/>
 			</div>
-			<a href="${GoogleProviderUrl}" class="btn btn-social-icon btn-google-plus"/>
-			<a href="${GitHubProviderUrl}" class="btn btn-social-icon btn-github"/>
-			<a href="${SSLTwitterProviderUrl}" class="btn btn-social-icon btn-twitter"/>
-			<!--<a href="${GlobusProviderUrl}">Sign-in with Globus</a><br />-->
 			<input name="submit" id="submit" class="btn btn-primary" accesskey="l" value="Login"
 				   tabindex="4" type="submit"/>
 			<%--<input name="reset" id="submit" class="btn-reset"  accesskey="c" value="Clear" tabindex="5" type="reset" />--%>
@@ -77,6 +73,23 @@
 			<input type="hidden" name="execution" value="${flowExecutionKey}"/>
 			<input type="hidden" name="_eventId" value="submit"/>
 		</form:form>
+		<c:if test="${casProperties.OAuthEnabled}">
+			<div>
+				<span>Or sign in using</span>
+				<c:if test="${casProperties.googleAuthEnabled}">
+					<a href="${Google2ProviderUrl}" class="btn btn-social-icon btn-google-plus" title="Sign in with Google" alt="Sign in with Google"/>
+				</c:if>
+				<c:if test="${casProperties.gitHubAuthEnabled}">
+					<a href="${GitHubProviderUrl}" class="btn btn-social-icon btn-github" title="Sign in with GitHub" alt="Sign in with GitHub"/>
+				</c:if>
+				<c:if test="${casProperties.twitterAuthEnabled}">
+					<a href="${SSLTwitterProviderUrl}" class="btn btn-social-icon btn-twitter" title="Sign in with Twitter" alt="Sign in with Twitter"/>
+				</c:if>
+				<c:if test="${casProperties.globusAuthEnabled}">
+					<a href="${GlobusProviderUrl}"><img src="${pageContext.request.contextPath}/images/globus_32.png" width="32" height="32" title="Sign in with Globus" alt="Sign in with Globus"></a>
+				</c:if>
+			</div>
+		</c:if>
 	</c:otherwise>
 </c:choose>
 <script type="text/javascript">

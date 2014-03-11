@@ -16,8 +16,34 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:sec="http://www.springframework.org/schema/security"
+	   xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
-       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+       http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-3.1.xsd" xmlns:cache="http://www.springframework.org/schema/cache">
+	<bean id="casProperties" class="edu.emory.cci.aiw.cvrg.eureka.cas.CasProperties"/>
+	<bean id="authHandlerList" class="edu.emory.cci.aiw.cvrg.eureka.cas.AuthenticationHandlerListFactory">
+		<constructor-arg>
+			<list>
+				<!--
+					| This is the authentication handler that authenticates services by means of callback via SSL, thereby validating
+					| a server side SSL certificate.
+					+-->
+				<bean class="org.jasig.cas.authentication.handler.support.HttpBasedServiceCredentialsAuthenticationHandler"
+					p:httpClient-ref="httpClient" />
+			</list>
+		</constructor-arg>
+		<constructor-arg>
+			<value>#{authHandlerChooser.selectedAuthHandlers}</value>
+		</constructor-arg>
+		<constructor-arg>
+			<list>
+				<bean class="org.jasig.cas.support.oauth.authentication.handler.support.OAuthAuthenticationHandler">
+					<property name="configuration" ref="oauthConfig" />
+				  </bean>
+			</list>
+		</constructor-arg>
+	</bean>
 	<!--
 		| This bean declares our AuthenticationManager.  The CentralAuthenticationService service bean
 		| declared in applicationContext.xml picks up this AuthenticationManager by reference to its id, 
@@ -65,9 +91,9 @@
 					| receive a proxy callback, you will need to change this bean declaration (or add additional declarations).
 					+-->
 				<bean class="org.jasig.cas.authentication.principal.HttpBasedServiceCredentialsToPrincipalResolver" />
-<!--
+
 				<ref bean="ldapPrincipalResolver" />
--->
+
 				<bean class="org.jasig.cas.support.oauth.authentication.principal.OAuthCredentialsToPrincipalResolver" />
 			</list>
 		</property>
@@ -78,29 +104,7 @@
 			| authenticate the Principals that the CredentialsToPrincipalResolvers identified.  CAS will try these handlers in turn
 			| until it finds one that both supports the Credentials presented and succeeds in authenticating.
 			+-->
-		<property name="authenticationHandlers">
-			<list>
-				<!--
-					| This is the authentication handler that authenticates services by means of callback via SSL, thereby validating
-					| a server side SSL certificate.
-					+-->
-				<bean class="org.jasig.cas.authentication.handler.support.HttpBasedServiceCredentialsAuthenticationHandler"
-					p:httpClient-ref="httpClient" />
-				<!--
-					| This is the authentication handler declaration that every CAS deployer will need to change before deploying CAS 
-					| into production.  The default SimpleTestUsernamePasswordAuthenticationHandler authenticates UsernamePasswordCredentials
-					| where the username equals the password.  You will need to replace this with an AuthenticationHandler that implements your
-					| local authentication strategy.  You might accomplish this by coding a new such handler and declaring
-					| edu.someschool.its.cas.MySpecialHandler here, or you might use one of the handlers provided in the adaptors modules.
-					+-->
-
-				<!-- ref bean="ldapAuthHandler" / -->
-				<ref bean="jdbcAuthHandler" />
-				<bean class="org.jasig.cas.support.oauth.authentication.handler.support.OAuthAuthenticationHandler">
-					<property name="configuration" ref="oauthConfig" />
-				  </bean>
-			</list>
-		</property>
+		<property name="authenticationHandlers" ref="authHandlerList"/>
 		<property name="authenticationMetaDataPopulators">
 			<list>
 				<bean class="org.jasig.cas.authentication.SamlAuthenticationMetaDataPopulator" />
@@ -131,15 +135,47 @@
 		</property>
 	</bean>
 
-	<bean id="ldapAuthHandler"
+	<bean id="fastLdapAuthHandler"
 		  class="org.jasig.cas.adaptors.ldap.FastBindLdapAuthenticationHandler" 
-		  p:filter="uid=%u,ou=People,dc=cci,dc=emory,dc=edu"
+		  p:filter="${ldap.authentication.filter:cn=%u},${ldap.authentication.basedn:cn=users,dc=school,dc=edu}"
 		  p:contextSource-ref="ldapCtxSource" />
+	
+	<bean id="ldapAuthHandler"
+		  class="org.jasig.cas.adaptors.ldap.BindLdapAuthenticationHandler"
+		  p:filter="${ldap.authentication.filter:cn=%u}"
+		  p:searchBase="${ldap.authentication.basedn:cn=users,dc=school,dc=edu}"
+		  p:contextSource-ref="ldapCtxSource"
+		  p:searchContextSource-ref="pooledContextSource"
+		  p:ignorePartialResultException="true" />
+	
+	<bean id="authHandlerChooser"
+		  class="edu.emory.cci.aiw.cvrg.eureka.cas.AuthenticationHandlerChooser">
+		<property name="authHandlersString" value="${eureka.authHandlers}"/>
+		<property name="authHandlers">
+			<map>
+				<entry key="jdbc" value-ref="jdbcAuthHandler"/>
+				<entry key="fastLdap" value-ref="fastLdapAuthHandler"/>
+				<entry key="ldap" value-ref="ldapAuthHandler"/>
+			</map>
+		</property>
+	</bean>
 
 	<bean id="ldapCtxSource"
 		  class="org.springframework.ldap.core.support.LdapContextSource">
 		<property name="pooled" value="false" />
-		<property name="url" value="ldap://storage01.cci.emory.edu/" />
+		<property name="urls" value="${ldap.authentication.server.urls:ldap://1.1.1.1}" />
+		
+		<!-- Only specify username and password for regular bind not fastbind -->
+		<property name="userDn" value="${ldap.authentication.manager.userdn:cn=manager,cn=users,dc=school,dc=edu}"/>
+		<property name="password" value="${ldap.authentication.manager.password:password}"/>
+		<property name="baseEnvironmentProperties">
+			<map>
+				<entry key="com.sun.jndi.ldap.connect.timeout" value="${ldap.authentication.jndi.connect.timeout:3000}"/>
+				<entry key="com.sun.jndi.ldap.read.timeout" value="${ldap.authentication.jndi.read.timeout:3000}"/>
+				<entry key="javax.naming.security.authentication" value="${ldap.authentication.jndi.security.level:simple}"/>
+			</map>
+		</property>
+		
 	</bean>
 
 	<bean id="ldapPrincipalResolver"
@@ -149,9 +185,9 @@
 				class="org.jasig.cas.authentication.principal.UsernamePasswordCredentialsToPrincipalResolver"
 				/>
 		</property>
-		<property name="filter" value="(uid=%u)" />
+		<property name="filter" value="${ldap.authentication.filter:cn=%u}" />
 		<property name="principalAttributeName" value="uid" />
-		<property name="searchBase" value="ou=People,dc=cci,dc=emory,dc=edu" />
+		<property name="searchBase" value="${ldap.authentication.basedn:cn=users,dc=school,dc=edu}" />
 		<property name="contextSource" ref="ldapCtxSource" />
 		<property name="attributeRepository" ref="attributeRepository" />
 	</bean>
@@ -159,31 +195,54 @@
 	<bean id="attributeRepository"
 		  class="org.jasig.services.persondir.support.ldap.LdapPersonRoleAttributeDao">
 		<property name="contextSource" ref="ldapCtxSource" />
-		<property name="baseDN" value="ou=People,dc=cci,dc=emory,dc=edu" />
+		<property name="baseDN" value="${ldap.authentication.basedn:cn=users,dc=school,dc=edu}" />
 		<property name="requireAllQueryAttributes" value="true" />
 		<property name="queryAttributeMapping">
 			<map>
-				<entry key="username" value="uid" />
+				<entry key="username" value="${eureka.ldap.uid.attribute:uid}" />
 			</map>
 		</property>
 		<property name="resultAttributeMapping">
 			<map>
-				<entry key="cn" value="Name" />
-				<entry key="homeDirectory" value="HomeDirectory" />
-				<entry key="uidNumber" value="UidNumber" />
-				<entry key="gidNumber" value="GidNumber" />
-				<entry key="authorities" value="authorities" />
+				<entry key="${eureka.ldap.realname.attribute:cn}" value="Name" />
+				<entry key="${eureka.ldap.email.attribute:mail}" value="Email" />
 			</map>
 		</property>
-		<property name="ldapAuthoritiesPopulator" ref="ldapAuthoritiesPopulator" />
+		<!--<property name="ldapAuthoritiesPopulator" ref="ldapAuthoritiesPopulator" />-->
 	</bean>
 
-	<bean id="ldapAuthoritiesPopulator"
+	<!--<bean id="ldapAuthoritiesPopulator"
 		class="org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator">
 		<constructor-arg ref="ldapCtxSource" />
-		<constructor-arg value="ou=Group,dc=cci,dc=emory,dc=edu" />
+		<constructor-arg value="ou=Group,dc=school,dc=edu" />
 		<property name="groupRoleAttribute" value="cn" />
 		<property name="groupSearchFilter" value="(memberUid={1})" />
+	</bean>-->
+	
+	<bean id="pooledContextSource"
+		  class="org.springframework.ldap.pool.factory.PoolingContextSource"
+		  p:minIdle="${ldap.authentication.pool.minIdle:3}"
+		  p:maxIdle="${ldap.authentication.pool.maxIdle:5}"
+		  p:maxActive="${ldap.authentication.pool.maxSize:10}"
+		  p:maxWait="${ldap.authentication.pool.maxWait:10000}"
+		  p:timeBetweenEvictionRunsMillis="${ldap.authentication.pool.evictionPeriod:600000}"
+		  p:minEvictableIdleTimeMillis="${ldap.authentication.pool.idleTime:1200000}"
+		  p:testOnBorrow="${ldap.authentication.pool.testOnBorrow:false}"
+		  p:testWhileIdle="${ldap.authentication.pool.testWhileIdle:true}"
+		  p:dirContextValidator-ref="dirContextValidator"
+		  p:contextSource-ref="ldapCtxSource" />
+ 
+	<bean id="dirContextValidator"
+	  class="org.springframework.ldap.pool.validation.DefaultDirContextValidator"
+	  p:base=""
+	  p:filter="objectclass=*">
+		<property name="searchControls">
+			<bean class="javax.naming.directory.SearchControls"
+		  p:timeLimit="1000"
+		  p:countLimit="1"
+		  p:searchScope="0"
+		  p:returningAttributes="" />
+		</property>
 	</bean>
 
 	<!--

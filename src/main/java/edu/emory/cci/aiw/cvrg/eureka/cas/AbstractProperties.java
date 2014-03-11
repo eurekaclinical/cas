@@ -31,6 +31,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 /**
  *
@@ -59,12 +62,15 @@ public abstract class AbstractProperties {
 	 * configuration.
 	 */
 	private static final String PROPERTIES_FILE = "/application.properties";
+	
 	/**
 	 * Holds an instance of the properties object which contains all the
 	 * application configuration properties.
 	 */
 	private final Properties properties;
-
+	
+	private final File casDotProperties;
+	
 	/**
 	 * Loads the application configuration.
 	 *
@@ -137,8 +143,12 @@ public abstract class AbstractProperties {
 					PROPERTY_NAME);
 		}
 
-
 		this.properties = temp;
+		this.casDotProperties = new File(getDefaultLocation(), "cas.properties");
+	}
+	
+	public String getCasDotPropertiesPathname() {
+		return this.casDotProperties.exists() ? "file:" + this.casDotProperties.getPath() : "classpath:/cas.properties";
 	}
 
 	/**
@@ -147,7 +157,7 @@ public abstract class AbstractProperties {
 	 *
 	 * @return A String containing the default configuration location.
 	 */
-	private static String getDefaultLocation() {
+	public final String getDefaultLocation() {
 		String os = System.getProperty("os.name");
 		String path;
 		if (os.toLowerCase().contains("windows")) {
@@ -183,7 +193,7 @@ public abstract class AbstractProperties {
 	 * @return Properties object containing the application properties.
 	 * @throws IOException Thrown if the named filed can not be properly read.
 	 */
-	private Properties load(String inFileName, Properties defaults) throws IOException {
+	protected Properties load(String inFileName, Properties defaults) throws IOException {
 		return load(new File(inFileName), defaults);
 	}
 
@@ -197,7 +207,7 @@ public abstract class AbstractProperties {
 	 * that does not exist.
 	 * @throws IOException Thrown if the named file can not be properly read.
 	 */
-	private Properties load(File inFile, Properties defaults) throws IOException {
+	protected Properties load(File inFile, Properties defaults) throws IOException {
 		InputStream inputStream = new FileInputStream(inFile);
 		Properties props;
 		try {
@@ -221,7 +231,7 @@ public abstract class AbstractProperties {
 	 * @return Properties object containing the application properties.
 	 * @throws IOException Thrown if the InputStream can not be properly read.
 	 */
-	private Properties load(InputStream inStream, Properties defaults) throws IOException {
+	protected Properties load(InputStream inStream, Properties defaults) throws IOException {
 		Properties props = new Properties(defaults);
 		props.load(inStream);
 		return props;
@@ -234,7 +244,7 @@ public abstract class AbstractProperties {
 	 * @return A string containing the path to the directory containing Protempa
 	 * INI configuration files.
 	 */
-	public String getConfigDir() {
+	public final String getConfigDir() {
 		return this.getValue("eureka.etl.config.dir", getDefaultLocation());
 	}
 
