@@ -4,7 +4,6 @@ import edu.emory.cci.aiw.cvrg.eureka.cas.CasProperties;
 import java.util.ArrayList;
 import java.util.List;
 import org.scribe.up.provider.OAuthProvider;
-import org.scribe.up.provider.impl.GitHubProvider;
 
 /**
  *

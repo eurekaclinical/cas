@@ -80,7 +80,7 @@
 					| Credentials you are using.
 					+-->
 				<bean class="org.jasig.cas.authentication.principal.UsernamePasswordCredentialsToPrincipalResolver">
-					<property name="attributeRepository" ref="jdbcAttributeRepository" />
+					<property name="attributeRepository" ref="attributeRepository" />
 				</bean>
 				<!--
 					| HttpBasedServiceCredentialsToPrincipalResolver supports HttpBasedCredentials.  It supports the CAS 2.0 approach of
@@ -107,7 +107,7 @@
 		<property name="authenticationHandlers" ref="authHandlerList"/>
 		<property name="authenticationMetaDataPopulators">
 			<list>
-				<bean class="org.jasig.cas.authentication.SamlAuthenticationMetaDataPopulator" />
+				<!--<bean class="org.jasig.cas.authentication.SamlAuthenticationMetaDataPopulator" />-->
 				<bean class="org.jasig.cas.support.oauth.authentication.OAuthAuthenticationMetaDataPopulator" />
 			</list>
 		</property>
@@ -124,13 +124,29 @@
 	<bean id="jndiDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName" value="java:comp/env/jdbc/EurekaService" />
 	</bean>
+	
+	<bean name="attributeRepository" class="org.jasig.services.persondir.support.MergingPersonAttributeDaoImpl">
+		<property name="personAttributeDaos">
+            <list>
+				<ref bean="jdbcAttributeRepository" />
+				<ref bean="ldapAttributeRepository" />
+			</list>
+		</property>
+	</bean>
 
 	<bean name="jdbcAttributeRepository"  class="org.jasig.services.persondir.support.jdbc.SingleRowJdbcPersonAttributeDao">
 		<constructor-arg index="0" ref="jndiDataSource" />
-		<constructor-arg index="1" value="select a.name as authorities from roles a, user_role b, users c where a.id=b.role_id and b.user_id=c.id and c.email=?" />
+		<constructor-arg index="1" value="select c.firstName as firstName, c.lastName as lastName, c.firstName || ' ' || c.lastName as fullName, c.email as email, c.title, c.department as department, c.organization as organization from users c where c.email=?" />
 		<property name="resultAttributeMapping">
 			<map>
-				<entry key="authorities" value="authorities" />
+				<entry key="firstName" value="firstName"/>
+				<entry key="lastName" value="lastName"/>
+				<entry key="fullName" value="fullName" />
+				<!--<entry key="authorities" value="authorities" />-->
+				<entry key="email" value="email"/>
+				<entry key="title" value="title"/>
+				<entry key="department" value="department"/>
+				<entry key="organization" value="organization"/>
 			</map>
 		</property>
 	</bean>
@@ -192,31 +208,42 @@
 		<property name="attributeRepository" ref="attributeRepository" />
 	</bean>
 
-	<bean id="attributeRepository"
-		  class="org.jasig.services.persondir.support.ldap.LdapPersonRoleAttributeDao">
+	<bean id="ldapAttributeRepository"
+		  class="org.jasig.services.persondir.support.ldap.LdapPersonAttributeDao">
 		<property name="contextSource" ref="ldapCtxSource" />
+		<!--<property name="ldapTemplate" ref="ldapTemplate" />-->
 		<property name="baseDN" value="${ldap.authentication.basedn:cn=users,dc=school,dc=edu}" />
 		<property name="requireAllQueryAttributes" value="true" />
 		<property name="queryAttributeMapping">
 			<map>
-				<entry key="username" value="${eureka.ldap.uid.attribute:uid}" />
+				<entry key="username" value="${eureka.ldap.uid.attribute:cn}" />
 			</map>
 		</property>
 		<property name="resultAttributeMapping">
 			<map>
-				<entry key="${eureka.ldap.realname.attribute:cn}" value="Name" />
-				<entry key="${eureka.ldap.email.attribute:mail}" value="Email" />
+				<entry key="${eureka.ldap.firstName.attribute:givenName}" value="firstName" />
+				<entry key="${eureka.ldap.lastName.attribute:sn}" value="lastName" />
+				<entry key="${eureka.ldap.fullName.attribute:cn}" value="fullName" />
+				<entry key="${eureka.ldap.email.attribute:mail}" value="email" />
+				<entry key="${eureka.ldap.title.attribute:title}" value="title" />
+				<entry key="${eureka.ldap.department.attribute:ou}" value="department" />
+				<entry key="${eureka.ldap.company.attribute:o}" value="organization" />
 			</map>
 		</property>
 		<!--<property name="ldapAuthoritiesPopulator" ref="ldapAuthoritiesPopulator" />-->
 	</bean>
-
+	
+	<!--<bean id="ldapTemplate" class="org.springframework.ldap.core.LdapTemplate">
+        <constructor-arg ref="ldapCtxSource" />
+        <property name="ignorePartialResultException" value="true" />
+    </bean> -->
+	
 	<!--<bean id="ldapAuthoritiesPopulator"
 		class="org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator">
 		<constructor-arg ref="ldapCtxSource" />
-		<constructor-arg value="ou=Group,dc=school,dc=edu" />
+		<constructor-arg value="${ldap.authentication.basedn:cn=users,dc=school,dc=edu}" />
 		<property name="groupRoleAttribute" value="cn" />
-		<property name="groupSearchFilter" value="(memberUid={1})" />
+		<property name="groupSearchFilter" value="(memberUid={0})" />
 	</bean>-->
 	
 	<bean id="pooledContextSource"
@@ -297,7 +324,15 @@
 					<property name="serviceId" value="https://**" />
 					<property name="allowedAttributes">
 						<list>
-							<value>authorities</value>
+							<!--<value>authorities</value>-->
+							<value>firstName</value>
+							<value>lastName</value>
+							<value>fullName</value>
+							<value>email</value>
+							<value>title</value>
+							<value>department</value>
+							<value>organization</value>
+							<value>access_token</value>
 						</list>
 					</property>
 				</bean>

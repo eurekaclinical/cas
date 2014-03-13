@@ -2,9 +2,7 @@ package edu.emory.cci.aiw.cvrg.eureka.cas.oauth.provider;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import edu.emory.cci.aiw.cvrg.eureka.cas.oauth.api.GlobusNexusApi;
-import edu.emory.cci.aiw.cvrg.eureka.cas.oauth.profile.OAuthAttributesDefinitions;
-import edu.emory.cci.aiw.cvrg.eureka.cas.oauth.profile.globusnexus.GlobusNexusAttributesDefinition;
-import edu.emory.cci.aiw.cvrg.eureka.cas.oauth.profile.globusnexus.GlobusNexusProfile;
+import edu.emory.cci.aiw.cvrg.eureka.cas.oauth.profile.EurekaProfile;
 import edu.emory.cci.aiw.cvrg.eureka.cas.oauth.service.GlobusNexusOAuth20ServiceImpl;
 import java.util.concurrent.TimeUnit;
 import org.scribe.model.OAuthConfig;
@@ -64,13 +62,11 @@ public class GlobusNexusProvider extends BaseOAuth20Provider {
 	
 	@Override
 	protected UserProfile extractUserProfile(final String body) {
-		GlobusNexusProfile profile = new GlobusNexusProfile();
+		EurekaProfile profile = new EurekaProfile();
 		JsonNode json = JsonHelper.getFirstNode(body);
 		if (json != null) {
-			profile.setId(JsonHelper.get(json, GlobusNexusAttributesDefinition.USERNAME));
-			for (String attribute : OAuthAttributesDefinitions.globusNexusDefinition.getAllAttributes()) {
-                profile.addAttribute(attribute, JsonHelper.get(json, attribute));
-            }
+			//profile.setId(JsonHelper.get(json, EurekaAttributesDefinition.USERNAME));
+			
 		}
 		return profile;
 	}
