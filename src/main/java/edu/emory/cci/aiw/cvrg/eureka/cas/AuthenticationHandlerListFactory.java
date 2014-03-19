@@ -9,27 +9,28 @@ import org.springframework.beans.factory.FactoryBean;
  * @author Andrew Post
  */
 public class AuthenticationHandlerListFactory implements FactoryBean {
-  private List list = new ArrayList();
 
-  public AuthenticationHandlerListFactory(List pre, List middle, List post) {
-    list.addAll(pre);
-	list.addAll(middle);
-	list.addAll(post);
-  }
+	private List list = new ArrayList();
 
-  @Override
-  public Object getObject() throws Exception {
-    return list;
-  }
+	public AuthenticationHandlerListFactory(List pre, List middle, List post) {
+		list.addAll(pre);
+		list.addAll(middle);
+		list.addAll(post);
+	}
 
-  @Override
-  public Class getObjectType() {
-    return list.getClass();
-  }
+	@Override
+	public Object getObject() throws Exception {
+		return list;
+	}
 
-  @Override
-  public boolean isSingleton() {
-    return true;
-  }
+	@Override
+	public Class getObjectType() {
+		return list.getClass();
+	}
+
+	@Override
+	public boolean isSingleton() {
+		return true;
+	}
 
 }

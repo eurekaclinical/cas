@@ -5,6 +5,7 @@ import edu.emory.cci.aiw.cvrg.eureka.cas.oauth.profile.EurekaAttributesDefinitio
 import edu.emory.cci.aiw.cvrg.eureka.cas.oauth.profile.TwitterProfile;
 import org.scribe.up.profile.JsonHelper;
 import org.scribe.up.profile.UserProfile;
+import org.scribe.up.profile.twitter.TwitterAttributesDefinition;
 
 /**
  *
@@ -23,7 +24,8 @@ public class SSLTwitterProvider extends org.scribe.up.provider.impl.TwitterProvi
         final JsonNode json = JsonHelper.getFirstNode(body);
         if (json != null) {
             profile.setId(JsonHelper.get(json, "id"));
-			profile.addAttribute(EurekaAttributesDefinition.FULLNAME, JsonHelper.get(json, "name"));
+			profile.addAttribute(EurekaAttributesDefinition.USERNAME, JsonHelper.get(json, TwitterAttributesDefinition.SCREEN_NAME));
+			profile.addAttribute(EurekaAttributesDefinition.FULLNAME, JsonHelper.get(json, TwitterAttributesDefinition.NAME));
         }
         return profile;
     }

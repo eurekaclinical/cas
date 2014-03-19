@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package edu.emory.cci.aiw.cvrg.eureka.cas.oauth.profile;
 
 import java.util.Locale;
@@ -24,7 +18,7 @@ public class EurekaProfile extends BaseOAuthProfile implements CommonProfile {
     protected AttributesDefinition getAttributesDefinition() {
         return OAuthAttributesDefinitions.eurekaDefinition;
     }
-
+	
 	@Override
 	public String getEmail() {
 		return (String) get(EurekaAttributesDefinition.EMAIL);
@@ -32,12 +26,12 @@ public class EurekaProfile extends BaseOAuthProfile implements CommonProfile {
 
 	@Override
 	public String getFirstName() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		return (String) get(EurekaAttributesDefinition.FIRSTNAME);
 	}
 
 	@Override
 	public String getFamilyName() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		return (String) get(EurekaAttributesDefinition.LASTNAME);
 	}
 
 	@Override
@@ -47,7 +41,7 @@ public class EurekaProfile extends BaseOAuthProfile implements CommonProfile {
 
 	@Override
 	public String getUsername() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		return (String) get(EurekaAttributesDefinition.USERNAME);
 	}
 
 	@Override

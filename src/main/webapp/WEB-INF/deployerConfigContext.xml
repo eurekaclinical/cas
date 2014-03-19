@@ -109,13 +109,14 @@
 			<list>
 				<!--<bean class="org.jasig.cas.authentication.SamlAuthenticationMetaDataPopulator" />-->
 				<bean class="org.jasig.cas.support.oauth.authentication.OAuthAuthenticationMetaDataPopulator" />
+				<bean class="edu.emory.cci.aiw.cvrg.eureka.cas.authentication.AuthenticationMethodMetaDataPopulator" />
 			</list>
 		</property>
 	</bean>
 
 	<bean id="jdbcAuthHandler" class="org.jasig.cas.adaptors.jdbc.QueryDatabaseAuthenticationHandler">
 		<property name="dataSource" ref="jndiDataSource" />
-		<property name="sql" value="select password from users where email=? and active=1" />
+		<property name="sql" value="select a2.password from users a1 join local_users a2 on (a1.id=a2.id) where a1.username=? and a1.active=1" />
 		<property name="passwordEncoder">
 			<bean class="edu.emory.cci.aiw.MD5PasswordEncoder" />
 		</property>
@@ -136,9 +137,10 @@
 
 	<bean name="jdbcAttributeRepository"  class="org.jasig.services.persondir.support.jdbc.SingleRowJdbcPersonAttributeDao">
 		<constructor-arg index="0" ref="jndiDataSource" />
-		<constructor-arg index="1" value="select c.firstName as firstName, c.lastName as lastName, c.firstName || ' ' || c.lastName as fullName, c.email as email, c.title, c.department as department, c.organization as organization from users c where c.email=?" />
+		<constructor-arg index="1" value="select c.username as username, c.firstName as firstName, c.lastName as lastName, c.fullName as fullName, c.email as email, c.title as title, c.department as department, c.organization as organization from users c join local_users c1 on (c.id=c1.id) where c.username=?" />
 		<property name="resultAttributeMapping">
 			<map>
+				<entry key="username" value="username"/>
 				<entry key="firstName" value="firstName"/>
 				<entry key="lastName" value="lastName"/>
 				<entry key="fullName" value="fullName" />
@@ -221,6 +223,7 @@
 		</property>
 		<property name="resultAttributeMapping">
 			<map>
+				<entry key="${eureka.ldap.username.attribute:uid}" value="username" />
 				<entry key="${eureka.ldap.firstName.attribute:givenName}" value="firstName" />
 				<entry key="${eureka.ldap.lastName.attribute:sn}" value="lastName" />
 				<entry key="${eureka.ldap.fullName.attribute:cn}" value="fullName" />
@@ -325,6 +328,9 @@
 					<property name="allowedAttributes">
 						<list>
 							<!--<value>authorities</value>-->
+							<value>authenticationMethod</value>
+							<value>providerType</value>
+							<value>username</value>
 							<value>firstName</value>
 							<value>lastName</value>
 							<value>fullName</value>
