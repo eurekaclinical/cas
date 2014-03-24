@@ -65,7 +65,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container container-big">
 		<div class="content">
 			<div class="row">
 				<div class="col-xs-12">
