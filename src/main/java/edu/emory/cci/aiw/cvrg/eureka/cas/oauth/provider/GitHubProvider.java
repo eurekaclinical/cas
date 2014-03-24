@@ -2,7 +2,6 @@ package edu.emory.cci.aiw.cvrg.eureka.cas.oauth.provider;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import edu.emory.cci.aiw.cvrg.eureka.cas.oauth.profile.EurekaAttributesDefinition;
-import edu.emory.cci.aiw.cvrg.eureka.cas.oauth.profile.EurekaProfile;
 import edu.emory.cci.aiw.cvrg.eureka.cas.oauth.profile.GitHubProfile;
 import org.scribe.up.profile.JsonHelper;
 import org.scribe.up.profile.UserProfile;

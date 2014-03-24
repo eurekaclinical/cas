@@ -33,6 +33,12 @@ public final class OAuthProviders {
 			gitHubProvider.setSecret(casProperties.getGitHubSecret());
 			this.providers.add(gitHubProvider);
 		}
+		if (casProperties.isGlobusAuthEnabled()) {
+			GlobusProvider globusProvider = new GlobusProvider();
+			globusProvider.setKey(casProperties.getGlobusKey());
+			globusProvider.setSecret(casProperties.getGlobusSecret());
+			this.providers.add(globusProvider);
+		}
 	}
 	
 	public List<OAuthProvider> getProviders() {

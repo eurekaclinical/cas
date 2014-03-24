@@ -51,10 +51,23 @@ public class CasProperties extends AbstractProperties {
 	public String getGitHubSecret() {
 		return getValue("cas.auth.oauth.github.secret");
 	}
+	
+	public boolean isGlobusAuthEnabled() {
+		return getGlobusKey() != null || getGlobusSecret() != null;
+	}
+
+	public String getGlobusKey() {
+		return getValue("cas.auth.oauth.globus.key");
+	}
+
+	public String getGlobusSecret() {
+		return getValue("cas.auth.oauth.globus.secret");
+	}
 
 	public boolean isOAuthEnabled() {
 		return isTwitterAuthEnabled()
 				|| isGoogleAuthEnabled()
-				|| isGitHubAuthEnabled();
+				|| isGitHubAuthEnabled()
+				|| isGlobusAuthEnabled();
 	}
 }

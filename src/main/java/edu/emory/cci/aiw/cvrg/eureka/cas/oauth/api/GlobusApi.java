@@ -12,8 +12,8 @@ import org.scribe.utils.Preconditions;
  *
  * @author Andrew Post
  */
-public class GlobusNexusApi extends DefaultApi20 {
-	private static final String AUTHORIZE_URL = "https://www.globusonline.org/OAuth?response_type=code&client_id=%s&redirect_uri=%s";
+public class GlobusApi extends DefaultApi20 {
+	private static final String AUTHORIZE_URL = "https://www.globus.org/OAuth?response_type=code&client_id=%s&redirect_uri=%s";
 	
 	@Override
 	public String getAccessTokenEndpoint() {
