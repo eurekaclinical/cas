@@ -3,7 +3,7 @@
 		</div>
 	</div>
 	<div class="footer">
-			Copyright &copy; 2012-2013 Emory University -- All Rights Reserved
+			Copyright &copy; ${initParam['inception-year']}-${initParam['current-year']} ${initParam['eureka-organization-name']} -- All Rights Reserved
 	</div>
 	</body>
 </html>

@@ -16,7 +16,8 @@
 		<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,400italic,600italic,700italic">
 		<link rel="stylesheet" type="text/css" href="<%= url %>assets/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="<%= url %>assets/css/eureka.css">
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap-social.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/bootstrap-social.css">
 		<script src="<%= url %>assets/js/jquery-1.10.2.min.js"></script>
 		<script src="<%= url %>assets/js/bootstrap.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
@@ -68,5 +69,5 @@
 	</div>
 	<div class="container container-big">
 		<div class="content">
-			<div class="row">
+			<div>
 				<div class="col-xs-12">

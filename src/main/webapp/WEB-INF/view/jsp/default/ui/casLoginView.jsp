@@ -41,6 +41,7 @@
 				*Please note that loading real patient data into the system is strictly prohibited!
 			</p>
 		</c:if>
+		<div class="row col-xs-12 col-sm-6 col-sm-offset-3">
 		<form:form method="post" id="fm1" cssClass="" commandName="${commandName}" htmlEscape="true">
 			<div class="form-group has-error">
 				<div class="help-block">
@@ -65,25 +66,33 @@
 							   path="password" accesskey="${passwordAccessKey}" htmlEscape="true"
 							   autocomplete="off"/>
 			</div>
-			<input name="submit" id="submit" class="btn btn-primary" accesskey="l" value="Login"
+			<input name="submit" id="submit" class="btn btn-primary btn-block" accesskey="l" value="Login"
 				   tabindex="4" type="submit"/>
-			<%--<input name="reset" id="submit" class="btn-reset"  accesskey="c" value="Clear" tabindex="5" type="reset" />--%>
-			<a class="btn btn-primary" href="<%= url %>forgot_password.jsp">Login Help</a>
+			<div style="text-align: right">
+				<a href="<%= url %>forgot_password.jsp">Forgot Password?</a>
+			</div>
 			<input type="hidden" name="lt" value="${loginTicket}"/>
 			<input type="hidden" name="execution" value="${flowExecutionKey}"/>
 			<input type="hidden" name="_eventId" value="submit"/>
 		</form:form>
+		</div>
 		<c:if test="${casProperties.OAuthEnabled}">
-			<div>
-				<span>Or sign in using</span>
+			<div class="row col-xs-12 col-sm-6 col-sm-offset-3 text-center">
+				<h4>or sign in with</h4>
 				<c:if test="${casProperties.googleAuthEnabled}">
-					<a href="${Google2ProviderUrl}" class="btn btn-social-icon btn-google-plus" title="Sign in with Google" alt="Sign in with Google"/>
+					<a href="${Google2ProviderUrl}" class="btn btn-social-icon btn-lg btn-google-plus" title="Sign in with Google" alt="Sign in with Google">
+						<i class="fa fa-google-plus"></i>
+					</a>
 				</c:if>
 				<c:if test="${casProperties.gitHubAuthEnabled}">
-					<a href="${GitHubProviderUrl}" class="btn btn-social-icon btn-github" title="Sign in with GitHub" alt="Sign in with GitHub"/>
+					<a href="${GitHubProviderUrl}" class="btn btn-social-icon btn-lg btn-github" title="Sign in with GitHub" alt="Sign in with GitHub">
+						<i class="fa fa-github"></i>
+					</a>
 				</c:if>
 				<c:if test="${casProperties.twitterAuthEnabled}">
-					<a href="${SSLTwitterProviderUrl}" class="btn btn-social-icon btn-twitter" title="Sign in with Twitter" alt="Sign in with Twitter"/>
+					<a href="${SSLTwitterProviderUrl}" class="btn btn-social-icon btn-lg btn-twitter" title="Sign in with Twitter" alt="Sign in with Twitter">
+						<i class="fa fa-twitter"></i>
+					</a>
 				</c:if>
 				<c:if test="${casProperties.globusAuthEnabled}">
 					<a href="${GlobusProviderUrl}"><img src="${pageContext.request.contextPath}/images/globus_32.png" width="32" height="32" title="Sign in with Globus" alt="Sign in with Globus"></a>
