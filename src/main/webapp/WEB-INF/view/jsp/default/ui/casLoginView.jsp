@@ -94,9 +94,9 @@
 						<i class="fa fa-twitter"></i>
 					</a>
 				</c:if>
-				<c:if test="${casProperties.globusAuthEnabled}">
+				<!--<c:if test="${casProperties.globusAuthEnabled}">
 					<a href="${GlobusProviderUrl}"><img src="${pageContext.request.contextPath}/images/globus_32.png" width="32" height="32" title="Sign in with Globus" alt="Sign in with Globus"></a>
-				</c:if>
+				</c:if>-->
 			</div>
 		</c:if>
 	</c:otherwise>
