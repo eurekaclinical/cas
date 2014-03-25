@@ -66,7 +66,7 @@
 							   path="password" accesskey="${passwordAccessKey}" htmlEscape="true"
 							   autocomplete="off"/>
 			</div>
-			<input name="submit" id="submit" class="btn btn-primary btn-block" accesskey="l" value="Login"
+			<input name="submit" id="submit" class="btn btn-lg btn-primary btn-block" accesskey="l" value="Login"
 				   tabindex="4" type="submit"/>
 			<div style="text-align: right">
 				<a href="<%= url %>forgot_password.jsp">Forgot Password?</a>

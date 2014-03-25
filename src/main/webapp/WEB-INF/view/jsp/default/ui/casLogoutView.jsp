@@ -27,9 +27,8 @@
 <jsp:directive.include file="includes/top.jsp" />
 	<div id="msg" class="success">
 		<h3>Logout</h3>
-		<div id="msg" class="label-success">
-			<p>You have successfully logged out of Eureka! Clinical Analytics.</p>
-			<p>For security reasons, exit your web browser.</p>
+		<div id="msg" class="alert alert-success">
+			<p><strong>You have successfully logged out of Eureka! Clinical Analytics. For security reasons, exit your web browser.</strong></p>
 		</div>
 	</div>
 <jsp:directive.include file="includes/bottom.jsp" />
