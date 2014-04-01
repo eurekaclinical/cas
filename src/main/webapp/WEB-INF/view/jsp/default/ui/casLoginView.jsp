@@ -41,62 +41,66 @@
 				*Please note that loading real patient data into the system is strictly prohibited!
 			</p>
 		</c:if>
-		<div class="row col-xs-12 col-sm-6 col-sm-offset-3">
-		<form:form method="post" id="fm1" cssClass="" commandName="${commandName}" htmlEscape="true">
-			<div class="form-group has-error">
-				<div class="help-block">
-					<form:errors path="*" cssClass="" id="status" element="span"/>
-				</div>
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-3">
+				<form:form method="post" id="fm1" cssClass="" commandName="${commandName}" htmlEscape="true">
+					<div class="form-group has-error">
+						<div class="help-block">
+							<form:errors path="*" cssClass="" id="status" element="span"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="username">Username</label>
+						<form:input cssClass="form-control" cssErrorClass="" id="username" size="25" tabindex="1"
+									accesskey="${userNameAccessKey}" path="username" autocomplete="false"
+									htmlEscape="true"/>
+					</div>
+					<div class="form-group">
+						<label for="password">Password</label>
+							<%--
+							NOTE: Certain browsers will offer the option of caching passwords for a user.  There is a non-standard attribute,
+							"autocomplete" that when set to "off" will tell certain browsers not to prompt to cache credentials.  For more
+							information, see the following web page:
+							http://www.geocities.com/technofundo/tech/web/ie_autocomplete.html
+							--%>
+						<form:password cssClass="form-control" cssErrorClass="" id="password" size="25" tabindex="2"
+									   path="password" accesskey="${passwordAccessKey}" htmlEscape="true"
+									   autocomplete="off"/>
+					</div>
+					<input name="submit" id="submit" class="btn btn-lg btn-primary btn-block" accesskey="l" value="Login"
+						   tabindex="4" type="submit"/>
+					<div style="text-align: right">
+						<a href="<%= url %>forgot_password.jsp">Forgot Password?</a>
+					</div>
+					<input type="hidden" name="lt" value="${loginTicket}"/>
+					<input type="hidden" name="execution" value="${flowExecutionKey}"/>
+					<input type="hidden" name="_eventId" value="submit"/>
+				</form:form>
 			</div>
-			<div class="form-group">
-				<label for="username">Username</label>
-				<form:input cssClass="form-control" cssErrorClass="" id="username" size="25" tabindex="1"
-							accesskey="${userNameAccessKey}" path="username" autocomplete="false"
-							htmlEscape="true"/>
-			</div>
-			<div class="form-group">
-				<label for="password">Password</label>
-					<%--
-					NOTE: Certain browsers will offer the option of caching passwords for a user.  There is a non-standard attribute,
-					"autocomplete" that when set to "off" will tell certain browsers not to prompt to cache credentials.  For more
-					information, see the following web page:
-					http://www.geocities.com/technofundo/tech/web/ie_autocomplete.html
-					--%>
-				<form:password cssClass="form-control" cssErrorClass="" id="password" size="25" tabindex="2"
-							   path="password" accesskey="${passwordAccessKey}" htmlEscape="true"
-							   autocomplete="off"/>
-			</div>
-			<input name="submit" id="submit" class="btn btn-lg btn-primary btn-block" accesskey="l" value="Login"
-				   tabindex="4" type="submit"/>
-			<div style="text-align: right">
-				<a href="<%= url %>forgot_password.jsp">Forgot Password?</a>
-			</div>
-			<input type="hidden" name="lt" value="${loginTicket}"/>
-			<input type="hidden" name="execution" value="${flowExecutionKey}"/>
-			<input type="hidden" name="_eventId" value="submit"/>
-		</form:form>
 		</div>
 		<c:if test="${casProperties.OAuthEnabled}">
-			<div class="row col-xs-12 col-sm-6 col-sm-offset-3 text-center">
-				<h4>or sign in with</h4>
-				<c:if test="${casProperties.googleAuthEnabled}">
-					<a href="${Google2ProviderUrl}" class="btn btn-social-icon btn-lg btn-google-plus" title="Sign in with Google" alt="Sign in with Google">
-						<i class="fa fa-google-plus"></i>
-					</a>
-				</c:if>
-				<c:if test="${casProperties.gitHubAuthEnabled}">
-					<a href="${GitHubProviderUrl}" class="btn btn-social-icon btn-lg btn-github" title="Sign in with GitHub" alt="Sign in with GitHub">
-						<i class="fa fa-github"></i>
-					</a>
-				</c:if>
-				<c:if test="${casProperties.twitterAuthEnabled}">
-					<a href="${SSLTwitterProviderUrl}" class="btn btn-social-icon btn-lg btn-twitter" title="Sign in with Twitter" alt="Sign in with Twitter">
-						<i class="fa fa-twitter"></i>
-					</a>
-				</c:if>
-				<!--<c:if test="${casProperties.globusAuthEnabled}">
-					<a href="${GlobusProviderUrl}"><img src="${pageContext.request.contextPath}/images/globus_32.png" width="32" height="32" title="Sign in with Globus" alt="Sign in with Globus"></a>
-				</c:if>-->
+			<div class="row">
+				<div class="col-sm-6 col-sm-offset-3 text-center">
+					<h4>or sign in with</h4>
+					<c:if test="${casProperties.googleAuthEnabled}">
+						<a href="${Google2ProviderUrl}" class="btn btn-social-icon btn-lg btn-google-plus" title="Sign in with Google" alt="Sign in with Google">
+							<i class="fa fa-google-plus"></i>
+						</a>
+					</c:if>
+					<c:if test="${casProperties.gitHubAuthEnabled}">
+						<a href="${GitHubProviderUrl}" class="btn btn-social-icon btn-lg btn-github" title="Sign in with GitHub" alt="Sign in with GitHub">
+							<i class="fa fa-github"></i>
+						</a>
+					</c:if>
+					<c:if test="${casProperties.twitterAuthEnabled}">
+						<a href="${SSLTwitterProviderUrl}" class="btn btn-social-icon btn-lg btn-twitter" title="Sign in with Twitter" alt="Sign in with Twitter">
+							<i class="fa fa-twitter"></i>
+						</a>
+					</c:if>
+					<!--<c:if test="${casProperties.globusAuthEnabled}">
+						<a href="${GlobusProviderUrl}"><img src="${pageContext.request.contextPath}/images/globus_32.png" width="32" height="32" title="Sign in with Globus" alt="Sign in with Globus"></a>
+					</c:if>-->
+				</div>
 			</div>
 		</c:if>
 	</c:otherwise>
