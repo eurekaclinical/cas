@@ -2,7 +2,7 @@ package edu.emory.cci.aiw.cvrg.eureka.cas.oauth.provider;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import edu.emory.cci.aiw.cvrg.eureka.cas.oauth.profile.EurekaAttributesDefinition;
-import edu.emory.cci.aiw.cvrg.eureka.cas.oauth.profile.TwitterProfile;
+import edu.emory.cci.aiw.cvrg.eureka.cas.oauth.profile.GoogleProfile;
 import org.scribe.up.profile.JsonHelper;
 import org.scribe.up.profile.UserProfile;
 import org.scribe.up.profile.google2.Google2AttributesDefinition;
@@ -19,7 +19,7 @@ public class Google2Provider extends org.scribe.up.provider.impl.Google2Provider
 	
 	@Override
     protected UserProfile extractUserProfile(final String body) {
-        final TwitterProfile profile = new TwitterProfile();
+        final GoogleProfile profile = new GoogleProfile();
         final JsonNode json = JsonHelper.getFirstNode(body);
         if (json != null) {
             profile.setId(JsonHelper.get(json, "id"));
