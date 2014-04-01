@@ -49,13 +49,13 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="username">Username:</label>
+				<label for="username">Username</label>
 				<form:input cssClass="form-control" cssErrorClass="" id="username" size="25" tabindex="1"
 							accesskey="${userNameAccessKey}" path="username" autocomplete="false"
 							htmlEscape="true"/>
 			</div>
 			<div class="form-group">
-				<label for="password">Password:</label>
+				<label for="password">Password</label>
 					<%--
 					NOTE: Certain browsers will offer the option of caching passwords for a user.  There is a non-standard attribute,
 					"autocomplete" that when set to "off" will tell certain browsers not to prompt to cache credentials.  For more
