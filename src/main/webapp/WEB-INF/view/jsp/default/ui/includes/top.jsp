@@ -12,6 +12,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 	<head>
 	    <title>Eureka! Clinical Analytics</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 		<link rel="SHORTCUT ICON" href="<%= url %>favicon.ico">
 		<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,400italic,600italic,700italic">
 		<link rel="stylesheet" type="text/css" href="<%= url %>assets/css/bootstrap.min.css">
