@@ -83,23 +83,23 @@
 				<div class="col-sm-6 col-sm-offset-3 text-center">
 					<h4>or sign in with</h4>
 					<c:if test="${casProperties.googleAuthEnabled}">
-						<a href="${Google2ProviderUrl}" class="btn btn-social-icon btn-lg btn-google-plus" title="Sign in with Google" alt="Sign in with Google">
+						<a href="${Google2ProviderUrl}" class="btn btn-social-icon btn-lg btn-google-plus" title="Sign in with Google">
 							<i class="fa fa-google-plus"></i>
 						</a>
 					</c:if>
 					<c:if test="${casProperties.gitHubAuthEnabled}">
-						<a href="${GitHubProviderUrl}" class="btn btn-social-icon btn-lg btn-github" title="Sign in with GitHub" alt="Sign in with GitHub">
+						<a href="${GitHubProviderUrl}" class="btn btn-social-icon btn-lg btn-github" title="Sign in with GitHub">
 							<i class="fa fa-github"></i>
 						</a>
 					</c:if>
 					<c:if test="${casProperties.twitterAuthEnabled}">
-						<a href="${SSLTwitterProviderUrl}" class="btn btn-social-icon btn-lg btn-twitter" title="Sign in with Twitter" alt="Sign in with Twitter">
+						<a href="${SSLTwitterProviderUrl}" class="btn btn-social-icon btn-lg btn-twitter" title="Sign in with Twitter">
 							<i class="fa fa-twitter"></i>
 						</a>
 					</c:if>
-					<!--<c:if test="${casProperties.globusAuthEnabled}">
-						<a href="${GlobusProviderUrl}"><img src="${pageContext.request.contextPath}/images/globus_32.png" width="32" height="32" title="Sign in with Globus" alt="Sign in with Globus"></a>
-					</c:if>-->
+					<c:if test="${casProperties.globusAuthEnabled}">
+						<a href="${GlobusProviderUrl}"><img src="${pageContext.request.contextPath}/images/globus_45.png" width="45" height="45" title="Sign in with Globus" alt="Globus"></a>
+					</c:if>
 				</div>
 			</div>
 		</c:if>
