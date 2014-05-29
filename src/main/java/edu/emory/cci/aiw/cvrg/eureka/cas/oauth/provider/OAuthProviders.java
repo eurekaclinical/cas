@@ -1,5 +1,9 @@
 package edu.emory.cci.aiw.cvrg.eureka.cas.oauth.provider;
 
+import org.eurekaclinical.scribeupext.provider.SSLTwitterProvider;
+import org.eurekaclinical.scribeupext.provider.Google2Provider;
+import org.eurekaclinical.scribeupext.provider.GitHubProvider;
+import org.eurekaclinical.scribeupext.provider.GlobusProvider;
 import edu.emory.cci.aiw.cvrg.eureka.cas.CasProperties;
 import java.util.ArrayList;
 import java.util.List;
