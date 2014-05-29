@@ -98,7 +98,7 @@
 						</a>
 					</c:if>
 					<c:if test="${casProperties.globusAuthEnabled}">
-						<a href="${GlobusProviderUrl}"><img src="${pageContext.request.contextPath}/images/globus_45.png" width="45" height="45" title="Sign in with Globus" alt="Globus"></a>
+						<a href="${GlobusProviderUrl}"><!--<img src="${pageContext.request.contextPath}/images/globus_45.png" width="45" height="45" title="Sign in with Globus" alt="Globus">-->Globus</a>
 					</c:if>
 				</div>
 			</div>
