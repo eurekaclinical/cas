@@ -6,7 +6,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%--
 <spring:theme code="mobile.custom.css.file" var="mobileCss" text="" />
+--%>
 <% String url = new edu.emory.cci.aiw.cvrg.eureka.cas.CasProperties().getApplicationUrl(request); %>
 <% url = !url.endsWith("/") ? url + "/" : url; %>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
