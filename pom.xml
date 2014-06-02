@@ -24,8 +24,7 @@
 	</properties>
 
 	<scm>
-		<developerConnection>scm:svn:https://scm.cci.emory.edu/svn/aiw/trunk/cvrg/cas</developerConnection>
-		<url>https://scm.cci.emory.edu/svn/aiw/trunk/cvrg/cas</url>
+		<developerConnection>scm:git:ssh://git.cci.emory.edu/opt/git/aiw/cas</developerConnection>
 	</scm>
 
 	<licenses>
