@@ -24,7 +24,8 @@
 	</properties>
 
 	<scm>
-		<developerConnection>scm:git:ssh://git.cci.emory.edu/opt/git/aiw/cas</developerConnection>
+		<developerConnection>scm:git:ssh://git.cci.emory.edu/opt/git/aiw/cas.git</developerConnection>
+		<tag>HEAD</tag>
 	</scm>
 
 	<licenses>
