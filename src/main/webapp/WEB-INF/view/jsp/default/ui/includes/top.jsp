@@ -44,12 +44,6 @@
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right menu-text">
 					<li>
-						<a href="<%= url %>register.jsp">
-							<span class="glyphicon glyphicon-user"></span>
-							Register
-						</a>
-					</li>
-					<li>
 						<a href="<%= url %>help.jsp">
 							<span class="glyphicon glyphicon-question-sign"></span>
 							Help
