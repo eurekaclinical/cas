@@ -67,6 +67,10 @@
 			<id>aiw</id>
 			<url>http://maven.cci.emory.edu/nexus/content/repositories/aiw/</url>
 		</repository>
+		<repository>
+			<id>aiw-snapshots</id>
+			<url>http://maven.cci.emory.edu/nexus/content/repositories/aiw-snapshots/</url>
+		</repository>
 	</repositories>
 
 	<build>
