@@ -37,6 +37,10 @@
 		<param-name>current-year</param-name>
 		<param-value>${currentYear}</param-value>
 	</context-param>
+	<context-param>
+		<param-name>eureka-build-timestamp</param-name>
+		<param-value>${eureka.build.timestamp}</param-value>
+	</context-param>
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>

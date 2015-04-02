@@ -21,6 +21,8 @@
 		<spring.version>3.1.0.RELEASE</spring.version>
 		<tomcat-plugin-version>1.1</tomcat-plugin-version>
 		<apache.commons.pool.version>1.6</apache.commons.pool.version>
+		<maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
+		<eureka.build.timestamp>${maven.build.timestamp}</eureka.build.timestamp>
 	</properties>
 
 	<scm>
@@ -76,11 +78,32 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>net.alchim31.maven</groupId>
+				<artifactId>yuicompressor-maven-plugin</artifactId>
+				<version>1.5.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compress</goal>
+						</goals>
+					</execution>
+				</executions>  
+				<configuration>
+					<suffix>${maven.build.timestamp}</suffix>
+					<includes>
+						<include>assets/css/eureka.css</include>
+					</includes>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.4</version>
 				<configuration>
 					<filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
+					<packagingExcludes>
+						assets/css/eureka.css
+					</packagingExcludes>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -186,15 +209,10 @@
 			<version>${cas.version}</version>
 		</dependency>
 		<dependency>
-      <groupId>commons-pool</groupId>
-      <artifactId>commons-pool</artifactId>
-      <version>${apache.commons.pool.version}</version>
-  </dependency>
-		<!--<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-cas-client</artifactId>
-			<version>${spring.version}</version>
-		</dependency>-->
+			<groupId>commons-pool</groupId>
+			<artifactId>commons-pool</artifactId>
+			<version>${apache.commons.pool.version}</version>
+		</dependency>
 	</dependencies>
 
 	<profiles>
