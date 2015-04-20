@@ -29,7 +29,7 @@
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/eureka${initParam['eureka-build-timestamp']}.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/font-awesome-4.3.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/bootstrap-social-20150401.css">
-		<script src="${pageContext.request.contextPath}/assets/js/jquery-1.10.2.min.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/jquery-2.1.3.min.js" type="text/javascript"></script>
 		<script src="${pageContext.request.contextPath}/assets/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
 		<title>Eureka! Clinical Analytics</title>
