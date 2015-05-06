@@ -6,11 +6,11 @@
       This default ConsoleAppender is used to log all NON perf4j messages
       to System.out
     -->
-    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+    <!--<appender name="console" class="org.apache.log4j.ConsoleAppender">
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d %p [%c] - &lt;%m&gt;%n"/>
         </layout>
-    </appender>
+    </appender>-->
 
     <appender name="cas" class="org.apache.log4j.RollingFileAppender">
         <param name="File" value="${catalina.home}/logs/cas.log" />
@@ -105,8 +105,8 @@
       The root logger sends all log statements EXCEPT those sent to the perf4j
       logger to System.out.
     -->
-    <root>
+    <!--<root>
         <level value="ERROR"/>
         <appender-ref ref="console"/>
-    </root>
+    </root>-->
 </log4j:configuration>
