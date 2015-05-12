@@ -21,7 +21,6 @@ package edu.emory.cci.aiw.cvrg.eureka.cas;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -44,194 +43,118 @@ public abstract class AbstractProperties {
 	private static final Logger LOGGER = LoggerFactory.getLogger(
 			AbstractProperties.class);
 	/**
-	 * Name of the system property that points to the configuration file.
+	 * Name of the system property containing a pathname to the configuration
+	 * file.
 	 */
-	private static final String PROPERTY_NAME = "eureka.config.file";
+	private static final String CONFIG_DIR_SYS_PROP = "eureka.config.dir";
+
+	private static final String PROPERTIES_FILENAME = "application.properties";
+
 	/**
-	 * If the configuration file is not specified by the user, search this
-	 * default location.
+	 * Fallback properties file for application configuration as a resource.
 	 */
-	private static final String DEFAULT_UNIX_LOCATION = "/etc/eureka";
-	private static final String DEFAULT_WIN_LOCATION = "C:\\Program "
-			+ "Files\\eureka";
-	/**
-	 * Name of the properties file that is required for application
-	 * configuration.
-	 */
-	private static final String PROPERTIES_FILE = "/application.properties";
-	
+	private static final String FALLBACK_CONFIG_FILE = '/' + PROPERTIES_FILENAME;
+
 	/**
 	 * Holds an instance of the properties object which contains all the
 	 * application configuration properties.
 	 */
 	private final Properties properties;
-	
+
 	private final File casDotProperties;
-	
+
+	private String configDir;
+
 	/**
 	 * Loads the application configuration.
 	 *
-	 * There are three potential sources of application configuration. The
+	 * There are two potential sources of application configuration. The
 	 * fallback configuration should always be there. The default configuration
-	 * file is created by the application's administrator and overrides the
-	 * fallback configuration for each configuration property that is specified.
-	 * It is searched for in the
-	 * <code>/etc/eureka</code> directory for Unix/Linux/Mac installations, and
-	 * <code>C:\Program Files\eureka</code> for Windows installations. It is
-	 * optional, though highly recommended. Finally, the pathname of a
-	 * configuration file may be specified in the
-	 * <code>eureka.config.file</code> system property, the property values in
-	 * which override those in the default configuration above.
+	 * directory, <code>/etc/eureka</code>, may optionally have an
+	 * application.properties file within it that overrides the fallback
+	 * configuration for each configuration property that is specified. The
+	 * <code>eureka.config.dir</code> system property allows specifying an
+	 * alternative configuration directory.
+	 *
+	 * @throws java.io.IOException if an error occurs reading the default
+	 * configuration directory's application.properties file (if one exists).
 	 */
 	public AbstractProperties() {
-		String userConfig = System.getProperty(PROPERTY_NAME);
-		String defaultConfig = getDefaultLocation() + PROPERTIES_FILE;
-		InputStream fallbackConfig = this.getFallBackConfig();
-		Properties temp = null;
+		this.properties = new Properties();
+		loadFallbackConfig();
+		loadDefaultConfig();
+		this.casDotProperties = new File(this.configDir, "cas.properties");
+	}
 
-		try {
-			temp = this.load(fallbackConfig, null);
-			fallbackConfig.close();
-			fallbackConfig = null;
-		} catch (IOException ex) {
-			throw new AssertionError("Fallback configuration not found: "
-					+ ex.getMessage());
-		} finally {
-			if (fallbackConfig != null) {
-				try {
-					fallbackConfig.close();
-				} catch (IOException ignore) {}
-			}
+	private void loadDefaultConfig() {
+		this.configDir = System.getProperty(CONFIG_DIR_SYS_PROP);
+		if (this.configDir == null) {
+			this.configDir = getDefaultConfigDir();
 		}
-
-		LOGGER.info("Trying to load default configuration from {}",
-				defaultConfig);
-		try {
-			temp = this.load(defaultConfig, temp);
-			LOGGER.info("Successfully loaded configuration from {}",
-					defaultConfig);
-		} catch (FileNotFoundException ex) {
-			if (userConfig != null) {
-				LOGGER.info("No default configuration file found at {}.",
-						defaultConfig);
-			} else {
-				LOGGER.warn("No default configuration file found at {}. "
-						+ "Unless you specify a configuration file with the "
-						+ "{} property, built-in defaults will be used, some "
-						+ "of which are unlikely to be what you want.",
-						defaultConfig, PROPERTY_NAME);
-			}
-		} catch (IOException ioe) {
-			LOGGER.warn("Failed to load configuration from file {}: "
-					+ "{}", defaultConfig, ioe.getMessage());
+		if (this.configDir == null) {
+			throw new AssertionError("eureka.config.dir not specified in " + FALLBACK_CONFIG_FILE);
 		}
-
-		if (userConfig != null) {
-			LOGGER.info("Trying to load user configuration from {}",
-					userConfig);
+		File configFile = new File(this.configDir, PROPERTIES_FILENAME);
+		if (configFile.exists()) {
+			LOGGER.info("Trying to load default configuration from {}",
+					configFile.getAbsolutePath());
+			InputStream inputStream = null;
 			try {
-				temp = this.load(userConfig, temp);
+				inputStream = new FileInputStream(configFile);
+				this.properties.load(inputStream);
+				inputStream.close();
+				inputStream = null;
 			} catch (IOException ex) {
-				LOGGER.warn("Failed to load configuration from file {}: "
-						+ "{}", userConfig, ex.getMessage());
+				LOGGER.error("Error reading application.properties file {}: {}. "
+						+ "Built-in defaults will be used, some "
+						+ "of which are unlikely to be what you want.",
+						configFile.getAbsolutePath(), ex.getMessage());
+			} finally {
+				if (inputStream != null) {
+					try {
+						inputStream.close();
+					} catch (IOException ignore) {
+					}
+				}
 			}
 		} else {
-			LOGGER.debug("User configuration property {} not specified",
-					PROPERTY_NAME);
+			LOGGER.warn("No configuration directory found at {0}. "
+					+ "Built-in defaults will be used, some "
+					+ "of which are unlikely to be what you want.",
+					configFile.getAbsolutePath());
 		}
-
-		this.properties = temp;
-		this.casDotProperties = new File(getDefaultLocation(), "cas.properties");
 	}
 	
-	public String getCasDotPropertiesPathname() {
-		return this.casDotProperties.exists() ? "file:" + this.casDotProperties.getPath() : "classpath:/cas.properties";
-	}
-
 	/**
 	 * Gets the default location of configuration file, based on the operating
 	 * system.
 	 *
 	 * @return A String containing the default configuration location.
 	 */
-	public final String getDefaultLocation() {
-		String os = System.getProperty("os.name");
-		String path;
-		if (os.toLowerCase().contains("windows")) {
-			path = DEFAULT_WIN_LOCATION;
-		} else {
-			path = DEFAULT_UNIX_LOCATION;
-		}
-		return path;
+	private static String getDefaultConfigDir() {
+		return "/etc/eureka";
 	}
 
-	/**
-	 * Gets the location of the fallback configuration file, in case the user
-	 * specified location and the default location do not contain a
-	 * configuration file.
-	 *
-	 * @return The location of the fallback configuration, guaranteed not null.
-	 */
-	private InputStream getFallBackConfig() {
-		InputStream in = this.getClass().getResourceAsStream(PROPERTIES_FILE);
-		if (in == null) {
-			throw new AssertionError(
-					"Could not locate fallback configuration.");
-		}
-		return in;
-	}
-
-	/**
-	 * Loads the application properties from the file named by the given file
-	 * name. The filename should be an absolute path to the configuration file.
-	 *
-	 * @param inFileName The absolute path to the configuration file.
-	 * @param defaults the default values for the properties.
-	 * @return Properties object containing the application properties.
-	 * @throws IOException Thrown if the named filed can not be properly read.
-	 */
-	protected Properties load(String inFileName, Properties defaults) throws IOException {
-		return load(new File(inFileName), defaults);
-	}
-
-	/**
-	 * Loads the application properties from the given File object. The File
-	 * object should point to a file with an absolute path.
-	 *
-	 * @param inFile The File object pointing to a configuration file.
-	 * @param defaults the default values for the properties.
-	 * @return Properties object containing the application properties. location
-	 * that does not exist.
-	 * @throws IOException Thrown if the named file can not be properly read.
-	 */
-	protected Properties load(File inFile, Properties defaults) throws IOException {
-		InputStream inputStream = new FileInputStream(inFile);
-		Properties props;
+	private void loadFallbackConfig() {
+		InputStream inputStream = getClass().getResourceAsStream(FALLBACK_CONFIG_FILE);
 		try {
-			props = load(inputStream, defaults);
-		} finally {
-			try {
-				inputStream.close();
-			} catch (IOException ioe) {
-				// do nothing here
+			this.properties.load(inputStream);
+			inputStream.close();
+			inputStream = null;
+		} catch (IOException ioe) {
+			if (inputStream != null) {
+				try {
+					inputStream.close();
+				} catch (IOException ignore) {
+				}
 			}
+			throw new AssertionError("Fallback configuration is unavailable: " + ioe.getMessage());
 		}
-		return props;
+		this.properties.remove(CONFIG_DIR_SYS_PROP);
 	}
 
-	/**
-	 * Loads the application properties from the given input stream.
-	 *
-	 * @param inStream InputStream containing the application configuration
-	 * data.
-	 * @param defaults the default values for the properties.
-	 * @return Properties object containing the application properties.
-	 * @throws IOException Thrown if the InputStream can not be properly read.
-	 */
-	protected Properties load(InputStream inStream, Properties defaults) throws IOException {
-		Properties props = new Properties(defaults);
-		props.load(inStream);
-		return props;
+	public String getCasDotPropertiesPathname() {
+		return this.casDotProperties.exists() ? "file:" + this.casDotProperties.getPath() : "classpath:/cas.properties";
 	}
 
 	/**
@@ -242,7 +165,7 @@ public abstract class AbstractProperties {
 	 * INI configuration files.
 	 */
 	public final String getConfigDir() {
-		return this.getValue("eureka.config.dir", getDefaultLocation());
+		return this.configDir;
 	}
 
 	/**
