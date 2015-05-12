@@ -100,6 +100,11 @@
         <level value="INFO" />
         <appender-ref ref="cas" />
     </logger>
+	
+	<logger name="edu.emory.cci.aiw.cvrg.eureka.cas" additivity="true">
+        <level value="INFO" />
+        <appender-ref ref="cas" />
+    </logger>
 
     <!--
       The root logger sends all log statements EXCEPT those sent to the perf4j
