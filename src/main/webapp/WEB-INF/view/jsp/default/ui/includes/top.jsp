@@ -6,11 +6,10 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<jsp:useBean id="casProperties" scope="application" class="edu.emory.cci.aiw.cvrg.eureka.cas.CasProperties"/>
 <%--
 <spring:theme code="mobile.custom.css.file" var="mobileCss" text="" />
 --%>
-<% String url = new edu.emory.cci.aiw.cvrg.eureka.cas.CasProperties().getApplicationUrl(request); %>
-<% url = !url.endsWith("/") ? url + "/" : url; %>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 	<head>
 		<meta charset="utf-8"/>
@@ -45,14 +44,14 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a href="<%= url %>" class="navbar-brand">
+				<a href="${casProperties.applicationUrl}" class="navbar-brand">
 					<span class="brand-text">Eureka!</span>
 				</a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right menu-text">
 					<li>
-						<a href="<%= url %>help.jsp">
+						<a href="${casProperties.applicationUrl}help.jsp">
 							<span class="glyphicon glyphicon-question-sign"></span>
 							Help
 						</a>

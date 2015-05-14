@@ -25,10 +25,26 @@
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <jsp:directive.include file="includes/top.jsp" />
-	<div id="msg" class="success">
-		<h3>Logout</h3>
-		<div id="msg" class="alert alert-success">
-			<p><strong>You have successfully logged out of Eureka! Clinical Analytics. For security reasons, exit your web browser.</strong></p>
-		</div>
-	</div>
+<div id="msg" class="success">
+	<c:choose>
+		<c:when test="${param.notRegistered}">
+			<h3>Not Registered</h3>
+			<div id="msg" class="alert alert-danger" role="alert">
+				<strong>Login failed</strong> because you are not registered to use Eureka!. Go to <a href="${casProperties.applicationUrl}chooseaccounttype" class="alert-link">the registration page</a> to begin. 
+			</div>
+		</c:when>
+		<c:when test="${param.awaitingActivation}">
+			<h3>Account Awaiting Activation</h3>
+			<div id="msg" class="alert alert-danger" role="alert">
+				<strong>Login failed</strong> because your account is awaiting activation.
+			</div>
+		</c:when>
+		<c:otherwise>
+			<h3>Logout</h3>
+			<div id="msg" class="alert alert-success" role="alert">
+				<p><strong>You are logged out of Eureka! Clinical Analytics. For security reasons, exit your web browser.</strong></p>
+			</div>
+		</c:otherwise>
+	</c:choose>
+</div>
 <jsp:directive.include file="includes/bottom.jsp" />

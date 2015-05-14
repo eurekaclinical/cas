@@ -25,7 +25,16 @@
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <jsp:directive.include file="includes/top.jsp"/>
-<jsp:useBean id="casProperties" scope="page" class="edu.emory.cci.aiw.cvrg.eureka.cas.CasProperties"/>
+<%--
+	The oauth_provider parameter appears to be found only when the user
+	rejects the OAuth authorization request. This provider information throws
+	this page into an invalid state where none of the OAuth provider URLs
+	get populated. To avoid this problem, we watch for the presence of 
+	the oauth_provider parameter and redirect to the Eureka main page.
+--%>
+<c:if test="${param.oauth_provider != null}">
+	<c:redirect url="${casProperties.applicationUrl}"/>
+</c:if>
 <h3>Login</h3>
 <c:choose>
 	<c:when test="${not pageContext.request.secure}">
@@ -70,7 +79,7 @@
 					<input name="submit" id="submit" class="btn btn-lg btn-primary btn-block" accesskey="l" value="Login"
 						   tabindex="4" type="submit"/>
 					<div style="text-align: right">
-						<a href="<%= url %>forgot_password.jsp">Forgot Password?</a>
+						<a href="${casProperties.applicationUrl}forgot_password.jsp">Forgot Password?</a>
 					</div>
 					<input type="hidden" name="lt" value="${loginTicket}"/>
 					<input type="hidden" name="execution" value="${flowExecutionKey}"/>
