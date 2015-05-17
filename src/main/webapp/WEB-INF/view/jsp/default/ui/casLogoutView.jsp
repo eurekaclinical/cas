@@ -39,6 +39,9 @@
 				<strong>Login failed</strong> because your account is awaiting activation.
 			</div>
 		</c:when>
+		<c:when test="${param.goHome}">
+			<c:redirect url="${casProperties.applicationUrl}"/>
+		</c:when>
 		<c:otherwise>
 			<h3>Logout</h3>
 			<div id="msg" class="alert alert-success" role="alert">
