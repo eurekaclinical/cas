@@ -45,7 +45,7 @@
 		<c:otherwise>
 			<h3>Logout</h3>
 			<div id="msg" class="alert alert-success" role="alert">
-				<p><strong>You are logged out of Eureka! Clinical Analytics. For security reasons, exit your web browser.</strong></p>
+				<p><strong>You are logged out. For security reasons, exit your web browser.</strong></p>
 			</div>
 		</c:otherwise>
 	</c:choose>
