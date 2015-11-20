@@ -4,7 +4,7 @@
 	<groupId>edu.emory.cci.cas</groupId>
 	<artifactId>cas-server</artifactId>
 	<packaging>war</packaging>
-	<version>1.0.3-SNAPSHOT</version>
+	<version>2.0-Alpha-1</version>
 	<name>CAS Server</name>
 	<description>A customized instance of CAS to work with Eureka!</description>
 	<inceptionYear>2012</inceptionYear>
@@ -27,7 +27,7 @@
 
 	<scm>
 		<developerConnection>scm:git:ssh://git.cci.emory.edu/opt/git/aiw/cas.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>cas-server-2.0-Alpha-1</tag>
 	</scm>
 
 	<licenses>
