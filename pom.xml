@@ -4,7 +4,7 @@
 	<groupId>org.eurekaclinical</groupId>
 	<artifactId>cas-server</artifactId>
 	<packaging>war</packaging>
-	<version>2.0-Alpha-2-SNAPSHOT</version>
+	<version>2.0-Alpha-2</version>
 	<name>CAS Server</name>
 	<description>A customized instance of CAS to work with Eureka!</description>
 	<inceptionYear>2012</inceptionYear>
@@ -29,7 +29,7 @@
         <connection>scm:git:https://github.com/eurekaclinical/cas.git</connection>
         <developerConnection>scm:git:https://github.com/eurekaclinical/cas.git</developerConnection>
         <url>https://github.com/eurekaclinical/cas.git</url>
-        <tag>HEAD</tag>
+        <tag>cas-server-2.0-Alpha-2</tag>
     </scm>
 
     <issueManagement>
