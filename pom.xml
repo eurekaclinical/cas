@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd ">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>edu.emory.cci.cas</groupId>
+	<groupId>org.eurekaclinical</groupId>
 	<artifactId>cas-server</artifactId>
 	<packaging>war</packaging>
 	<version>2.0-Alpha-2-SNAPSHOT</version>
@@ -9,85 +9,47 @@
 	<description>A customized instance of CAS to work with Eureka!</description>
 	<inceptionYear>2012</inceptionYear>
 
-	<organization>
-		<name>Emory University</name>
-		<url>http://www.emory.edu</url>
-	</organization>
+	<parent>
+        <groupId>org.eurekaclinical</groupId>
+        <artifactId>eurekaclinical-parent</artifactId>
+        <version>1-Alpha-4</version>
+    </parent>
 
-	<url>http://aiw.sourceforge.net/dev/{$project.build.finalName}</url>
+	<url>https://github.com/eurekaclinical/cas.git</url>
 
 	<properties>
 		<cas.version>3.5.2</cas.version>
 		<spring.version>3.1.0.RELEASE</spring.version>
-		<tomcat-plugin-version>1.1</tomcat-plugin-version>
 		<apache.commons.pool.version>1.6</apache.commons.pool.version>
 		<maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
 		<eureka.build.timestamp>${maven.build.timestamp}</eureka.build.timestamp>
 	</properties>
 
 	<scm>
-		<developerConnection>scm:git:ssh://git.cci.emory.edu/opt/git/aiw/cas.git</developerConnection>
-		<tag>HEAD</tag>
-	</scm>
+        <connection>scm:git:https://github.com/eurekaclinical/cas.git</connection>
+        <developerConnection>scm:git:https://github.com/eurekaclinical/cas.git</developerConnection>
+        <url>https://github.com/eurekaclinical/cas.git</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/eurekaclinical/cas/issues</url>
+    </issueManagement>
 
 	<licenses>
 		<license>
 			<name>Apache License, Version 2.0</name>
 			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
-			<distribution>manual</distribution>
+			<distribution>repo</distribution>
 		</license>
 	</licenses>
-
-	<issueManagement>
-		<system>JIRA</system>
-		<url>http://jira.cci.emory.edu:8080/jira/secure/Dashboard.jspa</url>
-	</issueManagement>
-
-	<distributionManagement>
-		<site>
-			<id>aiw.sourceforge.net</id>
-			<url>scp://shell.sourceforge.net/home/project-web/aiw/htdocs/dev/${project.build.finalName}</url>
-		</site>
-		<repository>
-			<id>aiw</id>
-			<name>AIW Repo</name>
-			<url>http://maven.cci.emory.edu/nexus/content/repositories/aiw/</url>
-		</repository>
-		<snapshotRepository>
-			<id>aiw-snapshots</id>
-			<name>AIW Snapshots Repo</name>
-			<url>http://maven.cci.emory.edu/nexus/content/repositories/aiw-snapshots/</url>
-		</snapshotRepository>
-	</distributionManagement>
-        
-	<repositories>
-		<repository>
-			<id>maven.cci</id>
-			<url>http://maven.cci.emory.edu/nexus/content/repositories/public</url>
-		</repository>
-		<repository>
-			<id>aiw</id>
-			<url>http://maven.cci.emory.edu/nexus/content/repositories/aiw/</url>
-		</repository>
-		<repository>
-			<id>aiw-snapshots</id>
-			<url>http://maven.cci.emory.edu/nexus/content/repositories/aiw-snapshots/</url>
-		</repository>
-	</repositories>
 
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>net.alchim31.maven</groupId>
 				<artifactId>yuicompressor-maven-plugin</artifactId>
-				<version>1.5.1</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>compress</goal>
-						</goals>
-					</execution>
-				</executions>  
 				<configuration>
 					<suffix>${maven.build.timestamp}</suffix>
 					<includes>
@@ -98,7 +60,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>2.4</version>
 				<configuration>
 					<filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
 					<packagingExcludes>
@@ -109,58 +70,19 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<version>2.5</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.1</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-site-plugin</artifactId>
-				<version>3.3</version>
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.maven.wagon</groupId>
-						<artifactId>wagon-ssh</artifactId>
-						<version>2.2</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.8</version>
-				<executions>
-					<execution>
-						<id>parse-version</id>
-						<goals>
-							<goal>parse-version</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>timestamp-property</id>
-						<goals>
-							<goal>timestamp-property</goal>
-						</goals>
-						<configuration>
-							<name>currentYear</name>
-							<pattern>yyyy</pattern>
-							<units>year</units>
-							<offset>0</offset>
-						</configuration>
-					</execution>
-				</executions>
+                <groupId>org.jasig.maven</groupId>
+				<artifactId>maven-notice-plugin</artifactId>
+				<configuration>
+					<licenseMapping>
+                        <param>etc/license-mappings.xml</param>
+                    </licenseMapping>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -201,7 +123,7 @@
 		<dependency>
 			<groupId>org.eurekaclinical</groupId>
 			<artifactId>scribe-up-ext</artifactId>
-			<version>1.0-Alpha-2</version>
+			<version>1.0-Alpha-3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jasig.cas</groupId>
