@@ -64,6 +64,13 @@ public abstract class AbstractProperties {
 
 	private String configDir;
 
+
+	public AbstractProperties() {
+		this.properties = new Properties();
+		loadFallbackConfig();
+		loadDefaultConfig();
+		this.casDotProperties = new File(this.configDir, "cas.properties");
+	}
 	/**
 	 * Loads the application configuration.
 	 *
@@ -75,16 +82,10 @@ public abstract class AbstractProperties {
 	 * <code>eureka.config.dir</code> system property allows specifying an
 	 * alternative configuration directory.
 	 *
-	 * @throws java.io.IOException if an error occurs reading the default
-	 * configuration directory's application.properties file (if one exists).
+	 * @throws IOException if an error occurs reading the default
+	 *                     configuration directory's application.properties file 
+         *                     (if one exists).
 	 */
-	public AbstractProperties() {
-		this.properties = new Properties();
-		loadFallbackConfig();
-		loadDefaultConfig();
-		this.casDotProperties = new File(this.configDir, "cas.properties");
-	}
-
 	private void loadDefaultConfig() {
 		this.configDir = System.getProperty(CONFIG_DIR_SYS_PROP);
 		if (this.configDir == null) {
