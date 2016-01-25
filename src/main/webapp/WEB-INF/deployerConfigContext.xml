@@ -114,17 +114,16 @@
 		</property>
 	</bean>
         
-        <bean id="sqlStringGenerator" class="edu.emory.cci.aiw.cvrg.eureka.cas.SQLStringGenerator">
-                <property name="jndiName" value ="java:comp/env/jdbc/EurekaService"/>
-        </bean>
-
 	<bean id="jndiDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName" value="java:comp/env/jdbc/EurekaService" />
-	</bean>
+		<property name="jndiName" value="${jndi.name}" />
+	</bean>        
         
+        <bean id="sqlStringGenerator" class="edu.emory.cci.aiw.cvrg.eureka.cas.SQLStringGenerator">
+                <property name="jndiName" value="${jndi.name}"/>
+        </bean>
 	<bean id="jdbcAuthHandler" class="org.jasig.cas.adaptors.jdbc.QueryDatabaseAuthenticationHandler">
                 <property name="sql">
-                    <value>#{sqlStringGenerator.getUserVerficationSQLString()}</value>
+                    <value>#{sqlStringGenerator.userVerficationSQLString}</value>
                 </property>
                 <property name="dataSource" ref="jndiDataSource" />
 		<property name="passwordEncoder">
