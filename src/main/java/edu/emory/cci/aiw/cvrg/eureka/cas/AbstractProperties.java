@@ -71,6 +71,7 @@ public abstract class AbstractProperties {
 		loadDefaultConfig();
 		this.casDotProperties = new File(this.configDir, "cas.properties");
 	}
+	
 	/**
 	 * Loads the application configuration.
 	 *
@@ -81,10 +82,6 @@ public abstract class AbstractProperties {
 	 * configuration for each configuration property that is specified. The
 	 * <code>eureka.config.dir</code> system property allows specifying an
 	 * alternative configuration directory.
-	 *
-	 * @throws IOException if an error occurs reading the default
-	 *                     configuration directory's application.properties file 
-         *                     (if one exists).
 	 */
 	private void loadDefaultConfig() {
 		this.configDir = System.getProperty(CONFIG_DIR_SYS_PROP);
