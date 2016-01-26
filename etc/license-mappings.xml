@@ -98,4 +98,10 @@
         <version>2.3.0.RELEASE</version>
 		<license>Apache License, Version 2.0</license>
     </artifact>
+    <artifact>
+        <groupId>javax.xml.bind</groupId>
+        <artifactId>jsr173_api</artifactId>
+        <version>1.0</version>
+                <license>Commons Development and Distribution License, Version 1.0</license>
+    </artifact>
 </license-lookup>
