@@ -55,29 +55,29 @@ public class SQLStringGenerator {
                         }
                 } catch (AuthenticationException ex) {
                         LOGGER.error("Error authenticating user: "
-                                        +"user credentials is invalid or naming/directory service failed.",
-                                        ex.getMessage());
+                                        +"user credentials is invalid or naming/directory service failed. ",
+                                        ex);
                 } catch ( NamingException ex) {
-                        LOGGER.error("NamingException in initializing context.",
-                                        ex.getMessage());
+                        LOGGER.error("NamingException in initializing context. ",
+                                        ex);
                 } catch (SQLException ex) {
-                        LOGGER.error("SQLException in getting data source connetion or driver name.",
-                                        ex.getMessage());
+                        LOGGER.error("SQLException in getting data source connetion or driver name. ",
+                                        ex);
                 } finally {
                         if (initContext != null) {
                                 try {
                                     initContext.close();
                                 } catch (NamingException ex) {
-                                    LOGGER.error("NamingException in closing context.",
-                                                    ex.getMessage());
+                                    LOGGER.error("NamingException in closing context. ",
+                                                    ex);
                                 }
                         }  
                         if (connection != null) {
                                 try {
                                     connection.close();
                                 } catch (SQLException ex) {
-                                    LOGGER.error("SQLException in closing connection.",
-                                                    ex.getMessage());
+                                    LOGGER.error("SQLException in closing connection. ",
+                                                    ex);
                                 }
                         }
                 }
