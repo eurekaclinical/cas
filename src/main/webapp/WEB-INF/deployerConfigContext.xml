@@ -115,11 +115,11 @@
 	</bean>
         
 	<bean id="jndiDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName" value="${jndi.name}" />
+		<property name="jndiName" value="java:comp/env/jdbc/EurekaService" />
 	</bean>        
         
         <bean id="sqlStringGenerator" class="edu.emory.cci.aiw.cvrg.eureka.cas.SQLStringGenerator">
-                <property name="jndiName" value="${jndi.name}"/>
+                <property name="jndiName" value="java:comp/env/jdbc/EurekaService"/>
         </bean>
 	<bean id="jdbcAuthHandler" class="org.jasig.cas.adaptors.jdbc.QueryDatabaseAuthenticationHandler">
                 <property name="sql">
@@ -129,8 +129,19 @@
 		<property name="passwordEncoder">
 			<bean class="edu.emory.cci.aiw.MD5PasswordEncoder" />
 		</property>
-	</bean> 
-        
+	</bean>
+
+	<bean id="authHandlerChooser"
+		  class="edu.emory.cci.aiw.cvrg.eureka.cas.AuthenticationHandlerChooser">
+		<property name="authHandlersString" value="${eureka.authHandlers}"/>
+		<property name="authHandlers">
+			<map>
+				<entry key="jdbc" value-ref="jdbcAuthHandler"/>
+				<entry key="fastLdap" value-ref="fastLdapAuthHandler"/>
+				<entry key="ldap" value-ref="ldapAuthHandler"/>
+			</map>
+		</property>
+	</bean>                
         
 	<bean name="attributeRepository" class="org.jasig.services.persondir.support.MergingPersonAttributeDaoImpl">
 		<property name="personAttributeDaos">
@@ -172,17 +183,6 @@
 		  p:searchContextSource-ref="pooledContextSource"
 		  p:ignorePartialResultException="true" />
 	
-	<bean id="authHandlerChooser"
-		  class="edu.emory.cci.aiw.cvrg.eureka.cas.AuthenticationHandlerChooser">
-		<property name="authHandlersString" value="${eureka.authHandlers}"/>
-		<property name="authHandlers">
-			<map>
-				<entry key="jdbc" value-ref="jdbcAuthHandler"/>
-				<entry key="fastLdap" value-ref="fastLdapAuthHandler"/>
-				<entry key="ldap" value-ref="ldapAuthHandler"/>
-			</map>
-		</property>
-	</bean>
 
 	<bean id="ldapCtxSource"
 		  class="org.springframework.ldap.core.support.LdapContextSource">
@@ -205,9 +205,7 @@
 	<bean id="ldapPrincipalResolver"
 		  class="org.jasig.cas.authentication.principal.CredentialsToLDAPAttributePrincipalResolver">
 		<property name="credentialsToPrincipalResolver">
-			<bean
-				class="org.jasig.cas.authentication.principal.UsernamePasswordCredentialsToPrincipalResolver"
-				/>
+			<bean class="org.jasig.cas.authentication.principal.UsernamePasswordCredentialsToPrincipalResolver"/>
 		</property>
 		<property name="filter" value="${ldap.authentication.filter:cn=%u}" />
 		<property name="principalAttributeName" value="uid" />
