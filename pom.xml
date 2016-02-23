@@ -123,7 +123,7 @@
 		<dependency>
 			<groupId>org.eurekaclinical</groupId>
 			<artifactId>scribe-up-ext</artifactId>
-			<version>1.0-Alpha-3</version>
+			<version>1.0-Alpha-4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jasig.cas</groupId>
