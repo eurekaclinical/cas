@@ -10,10 +10,10 @@
 	<inceptionYear>2012</inceptionYear>
 
 	<parent>
-        <groupId>org.eurekaclinical</groupId>
-        <artifactId>eurekaclinical-parent</artifactId>
-        <version>1-Alpha-13</version>
-    </parent>
+		<groupId>org.eurekaclinical</groupId>
+		<artifactId>eurekaclinical-parent</artifactId>
+		<version>1-Alpha-13</version>
+	</parent>
 
 	<url>https://github.com/eurekaclinical/cas.git</url>
 
@@ -26,16 +26,16 @@
 	</properties>
 
 	<scm>
-        <connection>scm:git:https://github.com/eurekaclinical/cas.git</connection>
-        <developerConnection>scm:git:https://github.com/eurekaclinical/cas.git</developerConnection>
-        <url>https://github.com/eurekaclinical/cas.git</url>
-        <tag>HEAD</tag>
-    </scm>
+		<connection>scm:git:https://github.com/eurekaclinical/cas.git</connection>
+		<developerConnection>scm:git:https://github.com/eurekaclinical/cas.git</developerConnection>
+		<url>https://github.com/eurekaclinical/cas.git</url>
+		<tag>HEAD</tag>
+	</scm>
 
-    <issueManagement>
-        <system>GitHub</system>
-        <url>https://github.com/eurekaclinical/cas/issues</url>
-    </issueManagement>
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/eurekaclinical/cas/issues</url>
+	</issueManagement>
 
 	<licenses>
 		<license>
@@ -76,13 +76,13 @@
 				</configuration>
 			</plugin>
 			<plugin>
-                <groupId>org.jasig.maven</groupId>
+				<groupId>org.jasig.maven</groupId>
 				<artifactId>maven-notice-plugin</artifactId>
 				<configuration>
 					<noticeTemplate>etc/NOTICE.template</noticeTemplate>
 					<licenseMapping>
-                        <param>etc/license-mappings.xml</param>
-                    </licenseMapping>
+						<param>etc/license-mappings.xml</param>
+					</licenseMapping>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -139,6 +139,12 @@
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jasig.cas</groupId>
+			<artifactId>cas-server-integration-restlet</artifactId>
+			<version>${cas.version}</version>
+			<type>jar</type>
 		</dependency>
 	</dependencies>
 </project>
