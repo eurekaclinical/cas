@@ -145,7 +145,7 @@
         
 	<bean name="attributeRepository" class="org.jasig.services.persondir.support.MergingPersonAttributeDaoImpl">
 		<property name="personAttributeDaos">
-                        <list>
+			<list>
 				<ref bean="jdbcAttributeRepository" />
 				<ref bean="ldapAttributeRepository" />
 			</list>
