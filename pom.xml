@@ -11,16 +11,13 @@
 
 	<parent>
 		<groupId>org.eurekaclinical</groupId>
-		<artifactId>eurekaclinical-parent</artifactId>
-		<version>1-Alpha-13</version>
+		<artifactId>eurekaclinical-parent-cas</artifactId>
+		<version>1-Alpha-1</version>
 	</parent>
 
 	<url>https://github.com/eurekaclinical/cas.git</url>
 
 	<properties>
-		<cas.version>3.5.2</cas.version>
-		<spring.version>3.1.0.RELEASE</spring.version>
-		<apache.commons.pool.version>1.6</apache.commons.pool.version>
 		<maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
 		<eureka.build.timestamp>${maven.build.timestamp}</eureka.build.timestamp>
 	</properties>
@@ -36,14 +33,6 @@
 		<system>GitHub</system>
 		<url>https://github.com/eurekaclinical/cas/issues</url>
 	</issueManagement>
-
-	<licenses>
-		<license>
-			<name>Apache License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
 
 	<build>
 		<plugins>
@@ -92,33 +81,23 @@
 		<dependency>
 			<groupId>org.jasig.cas</groupId>
 			<artifactId>cas-server-core</artifactId>
-			<version>${cas.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jasig.cas</groupId>
 			<artifactId>cas-server-webapp</artifactId>
-			<version>${cas.version}</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>org.jasig.cas</groupId>
 			<artifactId>cas-server-support-jdbc</artifactId>
-			<version>${cas.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jasig.cas</groupId>
 			<artifactId>cas-server-support-ldap</artifactId>
-			<version>${cas.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-ldap</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.eurekaclinical</groupId>
@@ -128,22 +107,18 @@
 		<dependency>
 			<groupId>org.jasig.cas</groupId>
 			<artifactId>cas-server-support-oauth</artifactId>
-			<version>${cas.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-pool</groupId>
 			<artifactId>commons-pool</artifactId>
-			<version>${apache.commons.pool.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
-			<version>1.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jasig.cas</groupId>
 			<artifactId>cas-server-integration-restlet</artifactId>
-			<version>${cas.version}</version>
 			<type>jar</type>
 		</dependency>
 	</dependencies>
