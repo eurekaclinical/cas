@@ -115,11 +115,11 @@
 	</bean>
         
 	<bean id="jndiDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName" value="java:comp/env/jdbc/EurekaService" />
+		<property name="jndiName" value="java:comp/env/jdbc/UserServices" />
 	</bean>        
         
         <bean id="sqlStringGenerator" class="edu.emory.cci.aiw.cvrg.eureka.cas.SQLStringGenerator">
-                <property name="jndiName" value="java:comp/env/jdbc/EurekaService"/>
+                <property name="jndiName" value="java:comp/env/jdbc/UserServices"/>
         </bean>
 	<bean id="jdbcAuthHandler" class="org.jasig.cas.adaptors.jdbc.QueryDatabaseAuthenticationHandler">
                 <property name="sql">
