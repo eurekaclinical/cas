@@ -25,7 +25,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<jsp:useBean id="casProperties" scope="application" class="edu.emory.cci.aiw.cvrg.eureka.cas.CasProperties"/>
+<jsp:useBean id="applicationProperties" scope="application" class="edu.emory.cci.aiw.cvrg.eureka.cas.ApplicationProperties"/>
 <%--
 <spring:theme code="mobile.custom.css.file" var="mobileCss" text="" />
 --%>
@@ -63,14 +63,14 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a href="${casProperties.applicationUrl}" class="navbar-brand">
+				<a href="${applicationProperties.applicationUrl}" class="navbar-brand">
 					<span class="brand-text">Eureka!</span>
 				</a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right menu-text">
 					<li>
-						<a href="${casProperties.applicationUrl}help.jsp">
+						<a href="${applicationProperties.applicationUrl}help.jsp">
 							<span class="glyphicon glyphicon-question-sign"></span>
 							Help
 						</a>

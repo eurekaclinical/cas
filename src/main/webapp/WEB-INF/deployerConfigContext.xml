@@ -41,7 +41,6 @@
        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-3.1.xsd" xmlns:cache="http://www.springframework.org/schema/cache">
-	<bean id="casProperties" class="edu.emory.cci.aiw.cvrg.eureka.cas.CasProperties"/>
 	<bean id="authHandlerList" class="edu.emory.cci.aiw.cvrg.eureka.cas.AuthenticationHandlerListFactory">
 		<constructor-arg>
 			<list>

@@ -52,7 +52,7 @@
 	the oauth_provider parameter and redirect to the Eureka main page.
 --%>
 <c:if test="${param.oauth_provider != null}">
-	<c:redirect url="${casProperties.applicationUrl}"/>
+	<c:redirect url="${applicationProperties.applicationUrl}"/>
 </c:if>
 <h3>Login</h3>
 <c:choose>
@@ -64,7 +64,7 @@
 		</div>
 	</c:when>
 	<c:otherwise>
-		<c:if test="${casProperties.demoMode or casProperties.ephiProhibited}">
+		<c:if test="${applicationProperties.demoMode or applicationProperties.ephiProhibited}">
 			<p>
 				*Please note that loading real patient data into the system is strictly prohibited!
 			</p>
@@ -98,7 +98,7 @@
 					<input name="submit" id="submit" class="btn btn-lg btn-primary btn-block" accesskey="l" value="Login"
 						   tabindex="4" type="submit"/>
 					<div style="text-align: right">
-						<a href="${casProperties.applicationUrl}forgot_password.jsp">Forgot Password?</a>
+						<a href="${applicationProperties.applicationUrl}forgot_password.jsp">Forgot Password?</a>
 					</div>
 					<input type="hidden" name="lt" value="${loginTicket}"/>
 					<input type="hidden" name="execution" value="${flowExecutionKey}"/>
@@ -106,26 +106,26 @@
 				</form:form>
 			</div>
 		</div>
-		<c:if test="${casProperties.OAuthEnabled}">
+		<c:if test="${applicationProperties.OAuthEnabled}">
 			<div class="row">
 				<div class="col-sm-6 col-sm-offset-3 text-center">
 					<h4>or sign in with</h4>
-					<c:if test="${casProperties.googleAuthEnabled}">
+					<c:if test="${applicationProperties.googleAuthEnabled}">
 						<a href="${Google2ProviderUrl}" class="btn btn-social-icon btn-lg btn-google-plus" title="Sign in with Google">
 							<i class="fa fa-google-plus"></i>
 						</a>
 					</c:if>
-					<c:if test="${casProperties.gitHubAuthEnabled}">
+					<c:if test="${applicationProperties.gitHubAuthEnabled}">
 						<a href="${GitHubProviderUrl}" class="btn btn-social-icon btn-lg btn-github" title="Sign in with GitHub">
 							<i class="fa fa-github"></i>
 						</a>
 					</c:if>
-					<c:if test="${casProperties.twitterAuthEnabled}">
+					<c:if test="${applicationProperties.twitterAuthEnabled}">
 						<a href="${SSLTwitterProviderUrl}" class="btn btn-social-icon btn-lg btn-twitter" title="Sign in with Twitter">
 							<i class="fa fa-twitter"></i>
 						</a>
 					</c:if>
-					<c:if test="${casProperties.globusAuthEnabled}">
+					<c:if test="${applicationProperties.globusAuthEnabled}">
 						<a href="${GlobusProviderUrl}"><!--<img src="${pageContext.request.contextPath}/images/globus_45.png" width="45" height="45" title="Sign in with Globus" alt="Globus">-->Globus</a>
 					</c:if>
 				</div>

@@ -50,11 +50,9 @@
 		can be moved between tiers without modification.
 	</description>
 	
-	<bean id="casProperties" class="edu.emory.cci.aiw.cvrg.eureka.cas.CasProperties"/>
-       
-	<!--<bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-		p:location="#{casProperties.casDotPropertiesPathname}" />-->
+	<bean id="applicationProperties" class="edu.emory.cci.aiw.cvrg.eureka.cas.ApplicationProperties"/>
+
 	<bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="#{casProperties.casDotPropertiesPathname}"/>
+		<property name="location" value="#{applicationProperties.casDotPropertiesPathname}"/>
 	</bean>
 </beans>

@@ -49,7 +49,7 @@
 		<c:when test="${param.notRegistered}">
 			<h3>Not Registered</h3>
 			<div id="msg" class="alert alert-danger" role="alert">
-				<strong>Login failed</strong> because you are not registered to use Eureka!. Go to <a href="${casProperties.applicationUrl}chooseaccounttype" class="alert-link">the registration page</a> to begin. 
+				<strong>Login failed</strong> because you are not registered to use Eureka!. Go to <a href="${applicationProperties.applicationUrl}chooseaccounttype" class="alert-link">the registration page</a> to begin.
 			</div>
 		</c:when>
 		<c:when test="${param.awaitingActivation}">
@@ -59,7 +59,7 @@
 			</div>
 		</c:when>
 		<c:when test="${param.goHome}">
-			<c:redirect url="${casProperties.applicationUrl}"/>
+			<c:redirect url="${applicationProperties.applicationUrl}"/>
 		</c:when>
 		<c:otherwise>
 			<h3>Logout</h3>

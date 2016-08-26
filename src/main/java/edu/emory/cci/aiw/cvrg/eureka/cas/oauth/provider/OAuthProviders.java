@@ -24,7 +24,7 @@ import org.eurekaclinical.scribeupext.provider.SSLTwitterProvider;
 import org.eurekaclinical.scribeupext.provider.Google2Provider;
 import org.eurekaclinical.scribeupext.provider.GitHubProvider;
 import org.eurekaclinical.scribeupext.provider.GlobusProvider;
-import edu.emory.cci.aiw.cvrg.eureka.cas.CasProperties;
+import edu.emory.cci.aiw.cvrg.eureka.cas.ApplicationProperties;
 import java.util.ArrayList;
 import java.util.List;
 import org.scribe.up.provider.OAuthProvider;
@@ -38,29 +38,29 @@ public final class OAuthProviders {
 
 	public OAuthProviders() {
 		this.providers = new ArrayList<OAuthProvider>();
-		CasProperties casProperties = new CasProperties();
-		if (casProperties.isTwitterAuthEnabled()) {
+		ApplicationProperties applicationProperties = new ApplicationProperties();
+		if (applicationProperties.isTwitterAuthEnabled()) {
 			SSLTwitterProvider twitterProvider = new SSLTwitterProvider();
-			twitterProvider.setKey(casProperties.getTwitterKey());
-			twitterProvider.setSecret(casProperties.getTwitterSecret());
+			twitterProvider.setKey(applicationProperties.getTwitterKey());
+			twitterProvider.setSecret(applicationProperties.getTwitterSecret());
 			this.providers.add(twitterProvider);
 		}
-		if (casProperties.isGoogleAuthEnabled()) {
+		if (applicationProperties.isGoogleAuthEnabled()) {
 			Google2Provider googleProvider = new Google2Provider();
-			googleProvider.setKey(casProperties.getGoogleKey());
-			googleProvider.setSecret(casProperties.getGoogleSecret());
+			googleProvider.setKey(applicationProperties.getGoogleKey());
+			googleProvider.setSecret(applicationProperties.getGoogleSecret());
 			this.providers.add(googleProvider);
 		}
-		if (casProperties.isGitHubAuthEnabled()) {
+		if (applicationProperties.isGitHubAuthEnabled()) {
 			GitHubProvider gitHubProvider = new GitHubProvider();
-			gitHubProvider.setKey(casProperties.getGitHubKey());
-			gitHubProvider.setSecret(casProperties.getGitHubSecret());
+			gitHubProvider.setKey(applicationProperties.getGitHubKey());
+			gitHubProvider.setSecret(applicationProperties.getGitHubSecret());
 			this.providers.add(gitHubProvider);
 		}
-		if (casProperties.isGlobusAuthEnabled()) {
+		if (applicationProperties.isGlobusAuthEnabled()) {
 			GlobusProvider globusProvider = new GlobusProvider();
-			globusProvider.setKey(casProperties.getGlobusKey());
-			globusProvider.setSecret(casProperties.getGlobusSecret());
+			globusProvider.setKey(applicationProperties.getGlobusKey());
+			globusProvider.setSecret(applicationProperties.getGlobusSecret());
 			this.providers.add(globusProvider);
 		}
 	}
