@@ -55,4 +55,12 @@
 	<bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="#{applicationProperties.casDotPropertiesPathname}"/>
 	</bean>
+	<bean id="casProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="singleton" value="true" />
+		<property name="properties">
+			<props>
+				<prop key="eureka.authHandlers">${eureka.authHandlers}</prop>
+			</props>
+		</property>
+	</bean>
 </beans>
