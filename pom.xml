@@ -12,7 +12,7 @@
 	<parent>
 		<groupId>org.eurekaclinical</groupId>
 		<artifactId>eurekaclinical-parent-cas</artifactId>
-		<version>1-Alpha-1</version>
+		<version>1</version>
 	</parent>
 
 	<url>https://github.com/eurekaclinical/cas.git</url>
@@ -102,7 +102,7 @@
 		<dependency>
 			<groupId>org.eurekaclinical</groupId>
 			<artifactId>scribe-up-ext</artifactId>
-			<version>1.0-Alpha-4</version>
+			<version>1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jasig.cas</groupId>
