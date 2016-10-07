@@ -134,4 +134,10 @@
 		<version>1.1.1</version>
 		<license>LGPL, v2.1</license>
 	</artifact>
+    <artifact>
+        <groupId>javax.servlet</groupId>
+        <artifactId>jsp-api</artifactId>
+        <version>2.0</version>
+        <license>Apache License, Version 2.0</license>
+    </artifact>        
 </license-lookup>

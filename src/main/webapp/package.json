@@ -1,0 +1,24 @@
+{
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "bower": "^1.5.3",
+    "browser-sync": "^2.9.3",
+    "event-stream": "^3.3.1",
+    "jasmine-core": "^2.3.4",
+    "jshint-stylish": "^2.0.1",
+    "map-stream": "0.0.6",
+    "phantomjs": "^1.9.18",
+    "proxy-middleware": "^0.14.0",
+    "url": "^0.11.0",
+    "wiredep": "^2.2.2"
+  },
+  "dependencies": {
+    "opn": "^3.0.2"
+  }
+}

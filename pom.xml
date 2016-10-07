@@ -40,8 +40,8 @@
 				<groupId>net.alchim31.maven</groupId>
 				<artifactId>yuicompressor-maven-plugin</artifactId>
 				<configuration>
-					<suffix>${maven.build.timestamp}</suffix>
 					<includes>
+						<include>assets/js/eureka.*.js</include>                                            
 						<include>assets/css/eureka.css</include>
 					</includes>
 				</configuration>
@@ -51,8 +51,14 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
 					<filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
-					<packagingExcludes>
+					<packagingIncludes>
+						<!--%regex[assets/js/eureka.*${maven.build.timestamp}.js],-->
+						%regex[assets/js/eureka.*.js],
+						%regex[^(?!assets/js/eureka).*$],
 						assets/css/eureka.css
+					</packagingIncludes>                                    
+					<packagingExcludes>
+						node_modules/**
 					</packagingExcludes>
 				</configuration>
 			</plugin>
@@ -75,10 +81,10 @@
 				</configuration>
 			</plugin>
 			<plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>license-maven-plugin</artifactId>
-                <configuration>
-                    <licenseName>apache_v2</licenseName>
+                                <groupId>org.codehaus.mojo</groupId>
+                                <artifactId>license-maven-plugin</artifactId>
+                                <configuration>
+					<licenseName>apache_v2</licenseName>
 					<excludes>
 						<exclude>**/*.htm</exclude>
 						<exclude>**/*.html</exclude>
@@ -86,8 +92,47 @@
 						<exclude>**/*.css</exclude>
 						<exclude>**/*.json</exclude>
 					</excludes>
-                </configuration>
-            </plugin>
+                                </configuration>
+                        </plugin>
+                        <plugin>
+                                <groupId>com.github.eirslett</groupId>
+                                <artifactId>frontend-maven-plugin</artifactId>
+                                <version>1.0</version>
+                                <configuration>
+                                        <workingDirectory>src/main/webapp</workingDirectory>
+                                        <installDirectory>${user.home}/.cas/dev</installDirectory>
+                                </configuration>
+                                <executions>
+                                        <execution>
+                                                <id>install node and npm</id>
+                                                <goals>
+                                                        <goal>install-node-and-npm</goal>
+                                                </goals>
+                                                <configuration>
+                                                        <nodeVersion>v4.4.3</nodeVersion>
+                                                        <npmVersion>2.15.1</npmVersion>
+                                                </configuration>
+                                        </execution>
+                                        <execution>
+                                                <id>npm install</id>
+                                                <goals>
+                                                        <goal>npm</goal>
+                                                </goals>
+                                                <configuration>
+                                                        <arguments>install</arguments>
+                                                </configuration>
+                                        </execution>                                        
+                                        <execution>
+                                                <id>bower install</id>
+                                                <goals>
+                                                        <goal>bower</goal>
+                                                </goals>
+                                                <configuration>
+                                                        <arguments>install</arguments>
+                                                </configuration>
+                                        </execution>
+                                </executions>
+                        </plugin>                          
 		</plugins>
 	</build>
 
@@ -135,5 +180,23 @@
 			<artifactId>cas-server-integration-restlet</artifactId>
 			<type>jar</type>
 		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.0</version>                
+			<scope>provided</scope>
+			<exclusions>
+                            <exclusion>
+                                <groupId>javax.servlet</groupId>
+                                <artifactId>servlet-api</artifactId>
+                            </exclusion>
+			</exclusions>
+		</dependency>   
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
+			<version>3.0.1</version>
+		</dependency>                          
 	</dependencies>
 </project>
