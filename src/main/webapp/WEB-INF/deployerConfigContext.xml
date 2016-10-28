@@ -262,7 +262,7 @@
 	<!--<bean id="ldapTemplate" class="org.springframework.ldap.core.LdapTemplate">
         <constructor-arg ref="ldapCtxSource" />
         <property name="ignorePartialResultException" value="true" />
-    </bean> -->
+        </bean> -->
 	
 	<!--<bean id="ldapAuthoritiesPopulator"
 		class="org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator">
@@ -303,7 +303,7 @@
 	More robust deployments will want to use another option, such as the Jdbc version.
 	
   	The name of this should remain "userDetailsService" in order for Spring Security to find it.
- -->
+        -->
 	<!-- <sec:user name="@@THIS SHOULD BE REPLACED@@" password="notused" authorities="ROLE_ADMIN" />-->
 
 	<sec:user-service id="userDetailsService">
@@ -313,7 +313,7 @@
 	<!-- 
   	Bean that defines the attributes that a service may return.  This example uses the Stub/Mock version.  A real implementation
   	may go against a database or LDAP server.  The id should remain "attributeRepository" though.
- -->
+        -->
 	<!--
 	<bean id="attributeRepository"
 		class="org.jasig.services.persondir.support.StubPersonAttributeDao">
@@ -330,7 +330,7 @@
   	Sample, in-memory data store for the ServiceRegistry. A real implementation
   	would probably want to replace this with the JPA-backed ServiceRegistry DAO
   	The name of this bean should remain "serviceRegistryDao".
- -->
+        -->
 	<bean
 		id="serviceRegistryDao"
 		class="org.jasig.cas.services.InMemoryServiceRegistryDaoImpl">
@@ -399,4 +399,25 @@
 			</list>
 		</property>
 	</bean>
+        
+        <!--
+            |   Get jdbc template via jndiName bean   |   Check password expiration date bean   |   Update expirted password bean   |
+            |   jdbcTemplateGenerator                 |   expirationCheckAction                 |   updateExpiredPasswordAction     |
+            |                                         |                                                                             |
+            |                                         |             inject jdbcTemplate into these two beans                        |
+        --> 
+        <bean id="jdbcTemplateGenerator" class="edu.emory.cci.aiw.cvrg.eureka.cas.JdbcTemplateGenerator">
+                <property name="jndiName" value="java:comp/env/jdbc/UserService"/>                                                                  
+        </bean>         
+        <bean id="expirationCheckAction" class="edu.emory.cci.aiw.cvrg.eureka.cas.ExpirationCheckAction">
+                <property name="jdbcTemplate">
+                    <value>#{jdbcTemplateGenerator.jdbcTemplateFromJndiName}</value>
+                </property>
+        </bean>    
+        <bean id="updateExpiredPasswordAction" class="edu.emory.cci.aiw.cvrg.eureka.cas.UpdateExpiredPasswordAction">
+                <property name="jdbcTemplate">
+                    <value>#{jdbcTemplateGenerator.jdbcTemplateFromJndiName}</value>
+                </property>                                                                
+        </bean>                  
+
 </beans>

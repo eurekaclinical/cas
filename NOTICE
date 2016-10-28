@@ -24,9 +24,6 @@ This project includes:
   Bean Validation API under Apache License, Version 2.0
   Bouncy Castle Provider under Bouncy Castle Licence
   CAS Server under Apache License, Version 2.0
-  com.noelios.restlet:com.noelios.restlet under LGPL, v2.1
-  com.noelios.restlet:com.noelios.restlet.ext.servlet under LGPL, v2.1
-  com.noelios.restlet:com.noelios.restlet.ext.spring under LGPL, v2.1
   Commons Codec under The Apache Software License, Version 2.0
   Commons Collections under The Apache Software License, Version 2.0
   Commons IO under The Apache Software License, Version 2.0
@@ -36,6 +33,7 @@ This project includes:
   dom4j under BSD License
   ESAPI 2.0 under BSD or Creative Commons 3.0 BY-SA
   Hibernate Commons Annotations under GNU LESSER GENERAL PUBLIC LICENSE
+  HTTP server connector under LGPL, v2.1
   HttpClient under Apache License
   Inspektr - Auditing API under Apache 2.0 License
   Inspektr - Common API under Apache 2.0 License
@@ -66,11 +64,11 @@ This project includes:
   Not Yet Commons SSL under Apache License v2
   OpenSAML-J under Apache 2
   OpenWS under Apache 2
-  org.restlet:org.restlet under LGPL, v2.1
-  org.restlet:org.restlet.ext.spring under LGPL, v2.1
   Perf4J under Apache 2
   Person Directory API under Apache License Version 2.0
   Person Directory Implementations under Apache License Version 2.0
+  Reference Implementation under LGPL, v2.1
+  Restlet API under LGPL, v2.1
   Scribe OAuth Library under MIT
   Scribe UP under The Apache Software License, Version 2.0
   ScribeUP Extensions under Apache License, Version 2.0
@@ -82,6 +80,7 @@ This project includes:
   Spring JavaScript Resources under Apache License, Version 2.0
   Spring LDAP Core under Apache License, Version 2.0
   Spring LDAP Java 5 support under Apache License, Version 2.0
+  Spring support under LGPL, v2.1
   Spring Web Flow under Apache License, Version 2.0
   spring-aop under The Apache Software License, Version 2.0
   spring-asm under The Apache Software License, Version 2.0

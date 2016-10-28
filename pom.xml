@@ -4,7 +4,7 @@
 	<groupId>org.eurekaclinical</groupId>
 	<artifactId>cas-server</artifactId>
 	<packaging>war</packaging>
-	<version>3.0-Alpha-3-SNAPSHOT</version>
+	<version>3.0-Alpha-4</version>
 	<name>CAS Server</name>
 	<description>A customized instance of CAS to work with Eureka!</description>
 	<inceptionYear>2012</inceptionYear>
@@ -56,10 +56,7 @@
 						%regex[assets/js/eureka.*.js],
 						%regex[^(?!assets/js/eureka).*$],
 						assets/css/eureka.css
-					</packagingIncludes>                                    
-					<packagingExcludes>
-						node_modules/**
-					</packagingExcludes>
+					</packagingIncludes> 
 				</configuration>
 			</plugin>
 			<plugin>
@@ -93,46 +90,7 @@
 						<exclude>**/*.json</exclude>
 					</excludes>
                                 </configuration>
-                        </plugin>
-                        <plugin>
-                                <groupId>com.github.eirslett</groupId>
-                                <artifactId>frontend-maven-plugin</artifactId>
-                                <version>1.0</version>
-                                <configuration>
-                                        <workingDirectory>src/main/webapp</workingDirectory>
-                                        <installDirectory>${user.home}/.cas/dev</installDirectory>
-                                </configuration>
-                                <executions>
-                                        <execution>
-                                                <id>install node and npm</id>
-                                                <goals>
-                                                        <goal>install-node-and-npm</goal>
-                                                </goals>
-                                                <configuration>
-                                                        <nodeVersion>v4.4.3</nodeVersion>
-                                                        <npmVersion>2.15.1</npmVersion>
-                                                </configuration>
-                                        </execution>
-                                        <execution>
-                                                <id>npm install</id>
-                                                <goals>
-                                                        <goal>npm</goal>
-                                                </goals>
-                                                <configuration>
-                                                        <arguments>install</arguments>
-                                                </configuration>
-                                        </execution>                                        
-                                        <execution>
-                                                <id>bower install</id>
-                                                <goals>
-                                                        <goal>bower</goal>
-                                                </goals>
-                                                <configuration>
-                                                        <arguments>install</arguments>
-                                                </configuration>
-                                        </execution>
-                                </executions>
-                        </plugin>                          
+                        </plugin>                         
 		</plugins>
 	</build>
 
