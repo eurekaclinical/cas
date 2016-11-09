@@ -4,7 +4,7 @@
 	<groupId>org.eurekaclinical</groupId>
 	<artifactId>cas-server</artifactId>
 	<packaging>war</packaging>
-	<version>3.0-Alpha-4</version>
+	<version>3.0-Alpha-3-SNAPSHOT</version>
 	<name>CAS Server</name>
 	<description>A customized instance of CAS to work with Eureka!</description>
 	<inceptionYear>2012</inceptionYear>
