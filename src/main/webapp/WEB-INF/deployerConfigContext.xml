@@ -418,6 +418,12 @@
                 <property name="jdbcTemplate">
                     <value>#{jdbcTemplateGenerator.jdbcTemplateFromJndiName}</value>
                 </property>                                                                
-        </bean>                  
-
+        </bean>
+                          
+        <bean id="resetForgotPasswordAction" class="edu.emory.cci.aiw.cvrg.eureka.cas.ResetForgotPasswordAction">
+                <property name="jdbcTemplate">
+                    <value>#{jdbcTemplateGenerator.jdbcTemplateFromJndiName}</value>
+                </property>                                                                
+        </bean> 
+         
 </beans>

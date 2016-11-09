@@ -19,37 +19,26 @@ package edu.emory.cci.aiw.cvrg.eureka.cas;
  * #L%
  */
 
-import java.util.ArrayList;
-import java.util.List;
-import org.springframework.beans.factory.FactoryBean;
+import java.math.BigInteger;
+import java.security.SecureRandom;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author Andrew Post
+ * @author miaoai
  */
-public class AuthenticationHandlerListFactory implements FactoryBean {
-
-	private List list = new ArrayList();
-
-	public AuthenticationHandlerListFactory(List pre, List middle, List post) {
-		list.addAll(pre);
-		list.addAll(middle);
-		list.addAll(post);
-	}
-
-	@Override
-	public Object getObject() throws Exception {
-		return list;
-	}
-
-	@Override
-	public Class getObjectType() {
-		return list.getClass();
-	}
-
-	@Override
-	public boolean isSingleton() {
-		return true;
-	}
-
+public class RandomPasswordGenerator {
+        /**
+         * The class level logger.
+         */
+        private static final Logger LOGGER = LoggerFactory.getLogger(RandomPasswordGenerator.class);       
+	/**
+	 * A secure random number generator to be used to create passwords.
+	 */
+	private static final SecureRandom RANDOM = new SecureRandom();    
+	public String generatePassword() {
+		final int length = 15 + RANDOM.nextInt(10);
+		return new BigInteger(130, RANDOM).toString(32).substring(0, length);
+	}        
 }

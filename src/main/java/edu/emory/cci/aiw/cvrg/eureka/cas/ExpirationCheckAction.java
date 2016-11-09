@@ -20,7 +20,6 @@ package edu.emory.cci.aiw.cvrg.eureka.cas;
  * #L%
  */
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

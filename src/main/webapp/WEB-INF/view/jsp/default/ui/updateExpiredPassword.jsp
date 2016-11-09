@@ -32,21 +32,21 @@
                         <div class="form-group">
                                 <label for="oldPassword" class="control-label col-sm-3">Old Password</label>
                                 <div class="col-sm-3">
-                                        <form:input name="oldPassword" type="password" id="oldPassword" path="oldPassword" class="form-control"/>
+                                        <form:password name="oldPassword" id="oldPassword" path="oldPassword" class="form-control"/>
                                 </div>
                                 <span class="col-sm-6 help-inline"></span>                               
                         </div>
                         <div class="form-group">
                                 <label for="newPassword" class="control-label col-sm-3">New Password</label>
                                 <div class="col-sm-3">
-                                        <form:input name="newPassword" type="password" id="newPassword" path="newPassword" class="form-control"/>
+                                        <form:password name="newPassword" id="newPassword" path="newPassword" class="form-control"/>
                                 </div>
                                 <span class="col-sm-6 help-inline"></span>
                         </div>
                         <div class="form-group">
                                 <label for="verifiedNewPassword" class="control-label col-sm-3">Re-enter New Password</label>
                                 <div class="col-sm-3">
-                                        <form:input name="verifiedNewPassword" type="password" id="verifiedNewPassword" path="verifiedNewPassword" class="form-control"/>
+                                        <form:password name="verifiedNewPassword" id="verifiedNewPassword" path="verifiedNewPassword" class="form-control"/>
                                 </div>
                                 <span class="col-sm-6 help-inline"></span>
                         </div>
@@ -58,11 +58,11 @@
                         </div>
                         <input type="hidden" name="lt" value="${loginTicket}" />
                         <input type="hidden" name="execution" value="${flowExecutionKey}" />
-                        <input type="hidden" name="_eventId" value="submitUpdatedPassword" />                                
+                        <input type="hidden" name="_eventId" value="submitUpdatedExpiredPassword" />                                
 
                 </form:form>
                 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery.validate.js"></script>
-                <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/eureka.password.js"></script>
+                <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/cas.updateExpiredPassword.js"></script>
                 <script type="text/javascript">
                         eureka.password.setup('#updateExpiredPasswordForm');
                 </script>
