@@ -9,7 +9,6 @@ window.eureka.password = new function () {
 
 	self.setup = function (formElem) {
 		self.pwValidator = self.setupPasswordValidator(formElem);
-		self.setupSubmitCallback(formElem);
 		$.validator.addMethod("passwordCheck",
 			function (value, element) {
 				return value.length >= 8 && /[0-9]+/.test(value) && /[a-zA-Z]+/.test(value);
@@ -21,27 +20,27 @@ window.eureka.password = new function () {
 	self.setupPasswordValidator = function (formElem) {
 		return $(formElem).validate({
 			rules: {
-				oldExpPassword: {
+				oldPassword: {
 					required: true
 				},
-				newExpPassword: {
+				newPassword: {
 					required: true,
 					minlength: 8,
 					passwordCheck: true
 				},
-				verifyExpPassword: {
+				verifiedNewPassword: {
 					required: true,
 					minlength: 8,
-					equalTo: "#newExpPassword"
+					equalTo: "#newPassword"
 				}
 			},
 			messages: {
-				oldExpPassword: "Please enter your old password.",
-				newExpPassword: {
+				oldPassword: "Please enter your old password.",
+				newPassword: {
 					required: "Provide a password.",
 					rangelength: $.validator.format("Please enter at least {0} characters.")
 				},
-				verifyExpPassword: {
+				verifiedNewPassword: {
 					required: "Repeat your password.",
 					minlength: $.validator.format("Please enter at least {0} characters."),
 					equalTo: "Enter the same password as above."
@@ -62,43 +61,6 @@ window.eureka.password = new function () {
 				// set &nbsp; as text for IE
 				label.html("&nbsp;").addClass("checked");
 			}
-		});
-	};
-
-	self.setupSubmitCallback = function (formElem) {
-		$(formElem).submit(function () {
-			var oldPassword = $('#oldExpPassword').val();
-			var newPassword = $('#newExpPassword').val();
-			var verifyPassword = $('#verifyExpPassword').val();
-			var userId = '';
-			var targetURL = $('#targetURL').val();
-
-			var dataString = 'action=savepassword' +
-				'&id=' + userId +
-				'&oldPassword=' + oldPassword +
-				'&newPassword=' + newPassword +
-				'&verifyPassword=' + verifyPassword;
-
-			if (self.pwValidator.valid()) {
-                            console.log("user_acct:"+dataString);
-				$.ajax({
-					type: 'GET',
-					url: ctx+'/protected/user_acct?'+dataString,
-					success: function () {
-						window.location.href = targetURL;
-					},
-					error: function (xhr /*, status, error*/) {
-						$('#passwordChangeComplete').show();
-						$('#passwordChangeComplete').text(xhr.responseText);
-						$('#passwordChangeComplete').css({
-							'font-weight': 'bold',
-							'font-size': 16
-						});
-
-					}
-				});
-			}
-			return false;
 		});
 	};
 
