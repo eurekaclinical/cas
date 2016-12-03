@@ -44,6 +44,7 @@
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <jsp:directive.include file="includes/top.jsp"/>
+<c:url var="formActionUrl" value="/login" />
 <jsp:useBean id="OAuthProviders" scope="page" class="edu.emory.cci.aiw.cvrg.eureka.cas.oauth.provider.OAuthProviders"/>
 <%--
 	The oauth_provider parameter appears to be found only when the user
@@ -105,24 +106,20 @@
 							</div>
 							<div class="form-group">
 								<label for="password">Password</label>
-								<%--
-								NOTE: Certain browsers will offer the option of caching passwords for a user.  There is a non-standard attribute,
-								"autocomplete" that when set to "off" will tell certain browsers not to prompt to cache credentials.  For more
-								information, see the following web page:
-								http://www.geocities.com/technofundo/tech/web/ie_autocomplete.html
-								--%>
 								<form:password cssClass="form-control" cssErrorClass="" id="password" size="25" tabindex="2"
-											path="password" accesskey="${passwordAccessKey}" htmlEscape="true"
-											autocomplete="off"/>
+										accesskey="${passwordAccessKey}" path="password" autocomplete="off"
+										htmlEscape="true"/>
 							</div>
-							<input name="submit" id="submit" class="btn btn-lg btn-primary btn-block" accesskey="l" value="Login"
-							   tabindex="4" type="submit"/>
-							<div style="text-align: right">
-								<a href="${applicationProperties.applicationUrl}forgot_password.jsp">Forgot Password?</a>
+							<div class="form-group">
+								<a href="<c:url value="login"/>?execution=${flowExecutionKey}&_eventId=forgotPassword">Forgot Password?</a>
 							</div>
-							<input type="hidden" name="lt" value="${loginTicket}"/>
-							<input type="hidden" name="execution" value="${flowExecutionKey}"/>
-							<input type="hidden" name="_eventId" value="submit"/>
+                                                        <div class="form-group">
+                                                                <input name="submit" id="submit" class="btn btn-lg btn-primary btn-block" accesskey="l" value="Login"
+                                                                   tabindex="3" type="submit"/>
+                                                                <input type="hidden" name="lt" value="${loginTicket}"/>
+                                                                <input type="hidden" name="execution" value="${flowExecutionKey}"/>
+                                                                <input type="hidden" name="_eventId" value="submit"/>                                                            
+                                                        </div> 
 						</form:form>
 					</div>
 				</div>

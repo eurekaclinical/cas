@@ -19,37 +19,30 @@ package edu.emory.cci.aiw.cvrg.eureka.cas;
  * #L%
  */
 
-import java.util.ArrayList;
-import java.util.List;
-import org.springframework.beans.factory.FactoryBean;
+import java.io.Serializable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author Andrew Post
+ * @author miaoai
  */
-public class AuthenticationHandlerListFactory implements FactoryBean {
+public class Email implements Serializable{
+        /**
+         * The class level logger.
+         */
+        private static final Logger LOGGER = LoggerFactory.getLogger(Email.class);
 
-	private List list = new ArrayList();
+        private static final long serialVersionUID = 1L;        
+        private String emailAddress; 
+        
+        public String getEmailAddress() {
+                return emailAddress;	
+        }
 
-	public AuthenticationHandlerListFactory(List pre, List middle, List post) {
-		list.addAll(pre);
-		list.addAll(middle);
-		list.addAll(post);
-	}
-
-	@Override
-	public Object getObject() throws Exception {
-		return list;
-	}
-
-	@Override
-	public Class getObjectType() {
-		return list.getClass();
-	}
-
-	@Override
-	public boolean isSingleton() {
-		return true;
-	}
-
+        public void setEmailAddress(String emailAddress){           
+                this.emailAddress  = emailAddress;        
+        }        
 }
+
+

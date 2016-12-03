@@ -45,7 +45,9 @@
                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 		
         <var name="credentials" class="org.jasig.cas.authentication.principal.UsernamePasswordCredentials" />
-        <var name="passwords" class="edu.emory.cci.aiw.cvrg.eureka.cas.Passwords"/>
+        <var name="passwords" class="edu.emory.cci.aiw.cvrg.eureka.cas.Passwords" />
+        <var name="email" class="edu.emory.cci.aiw.cvrg.eureka.cas.Email" />         
+         
         <on-start>
                 <evaluate expression="initialFlowSetupAction" />
         </on-start>
@@ -104,28 +106,47 @@
         <action-state id="expirationCheck">
                 <evaluate expression="expirationCheckAction" /> 
                 <transition on="success" to="sendTicketGrantingTicket" />
-                <transition on="error" to="updateExpirtedPasswordView" />
+                <transition on="error" to="updateExpiredPasswordView" />
         </action-state>   
-        <view-state id="updateExpirtedPasswordView" view="updateExpirtedPasswordView" model="passwords">
+        <view-state id="updateExpiredPasswordView" view="updateExpiredPasswordView" model="passwords">
                 <binder>
                         <binding property="oldPassword" />
                         <binding property="newPassword" />    
                         <binding property="verifiedNewPassword" />                                                                     
                 </binder>
-                <transition on="submitUpdatedPassword" to="updateExpiredPassword" />
+                <transition on="submitUpdatedExpiredPassword" to="updateExpiredPassword" />
         </view-state>
         <action-state id="updateExpiredPassword">       
                 <evaluate expression="updateExpiredPasswordAction.update(flowRequestContext, flowScope.passwords, flowScope.credentials)" /> 
                 <transition on="success" to="realSubmit" />
-                <transition on="oldpasswordincorrect" to="updateExpirtedPasswordView" >
-                </transition>   
-                <transition on="newpasswordNotSame" to="updateExpirtedPasswordView" >
-                </transition>                             
-                <transition on="error" to="updateExpirtedPasswordErrorView" />                        
+                <transition on="oldpasswordincorrect" to="updateExpiredPasswordView" /> 
+                <transition on="newpasswordNotSame" to="updateExpiredPasswordView" />                            
+                <transition on="error" to="updateExpiredPasswordErrorView" />                        
         </action-state>
-        <end-state id="updateExpirtedPasswordErrorView" view="updateExpirtedPasswordErrorView" />
-        <!-- update expired password transition ends here... -->
-
+        <end-state id="updateExpiredPasswordErrorView" view="updateExpiredPasswordErrorView" />
+        <!--   update expired password transition ends here... -->
+        
+        
+        <!--
+               reset forgot password transition begins here:
+               resetForgotPasswordAction is the bean name in deployerConfigContext.xml
+        -->  
+        <view-state id="resetForgotPasswordView" view="resetForgotPasswordView" model="email">
+                <binder>
+                        <binding property="emailAddress" />                                                                    
+                </binder>
+                <transition on="submitResetForgotPassword" to="resetForgotPassword" />
+        </view-state>
+        <action-state id="resetForgotPassword">       
+                <evaluate expression="resetForgotPasswordAction.reset(flowRequestContext, flowScope.email)" /> 
+                <transition on="success" to="resetForgotPasswordSuccessView" />                         
+                <transition on="error" to="resetForgotPasswordErrorView" />                        
+        </action-state>
+        <end-state id="resetForgotPasswordSuccessView" view="resetForgotPasswordSuccessView" />         
+        <end-state id="resetForgotPasswordErrorView" view="resetForgotPasswordErrorView" />                      
+        <!--   reset forgot password transition ends here... -->   
+        
+                  
         <!--
                 LPPE transitions begin here: You will also need to
                 move over the 'lppe-configuration.xml' file from the
@@ -176,16 +197,17 @@
         </action-state>
 
         <view-state id="viewLoginForm" view="casLoginView" model="credentials">
-        <binder>
-                <binding property="username" />
-                <binding property="password" />
-        </binder>
-        <on-entry>
-                <set name="viewScope.commandName" value="'credentials'" />
-        </on-entry>
-        <transition on="submit" bind="true" validate="true" to="realSubmit">
-                <evaluate expression="authenticationViaFormAction.doBind(flowRequestContext, flowScope.credentials)" />
-        </transition>
+                <binder>
+                        <binding property="username" />
+                        <binding property="password" />
+                </binder>
+                <on-entry>
+                        <set name="viewScope.commandName" value="'credentials'" />
+                </on-entry>
+                <transition on="submit" bind="true" validate="true" to="realSubmit">
+                        <evaluate expression="authenticationViaFormAction.doBind(flowRequestContext, flowScope.credentials)" />
+                </transition>
+                <transition on="forgotPassword" bind="false" validate="false" to="resetForgotPasswordView"/>
         </view-state>
 
         <action-state id="realSubmit">

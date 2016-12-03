@@ -1,5 +1,4 @@
 package edu.emory.cci.aiw.cvrg.eureka.cas;
-
 /*-
  * #%L
  * CAS Server

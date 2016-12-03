@@ -1,5 +1,4 @@
 package edu.emory.cci.aiw.cvrg.eureka.cas;
-
 /*-
  * #%L
  * CAS Server
@@ -19,7 +18,6 @@ package edu.emory.cci.aiw.cvrg.eureka.cas;
  * limitations under the License.
  * #L%
  */
-
 /**
  *
  * @author Andrew Post
@@ -88,4 +86,8 @@ public class ApplicationProperties extends AbstractProperties {
 				|| isGitHubAuthEnabled()
 				|| isGlobusAuthEnabled();
 	}
+
+	public String getFromEmailAddress() {
+		return this.getValue("cas.services.email.from");
+	}        
 }

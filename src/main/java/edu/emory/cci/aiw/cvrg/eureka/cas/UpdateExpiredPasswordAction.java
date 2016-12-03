@@ -1,5 +1,4 @@
 package edu.emory.cci.aiw.cvrg.eureka.cas;
-
 /*-
  * #%L
  * CAS Server
@@ -19,7 +18,6 @@ package edu.emory.cci.aiw.cvrg.eureka.cas;
  * limitations under the License.
  * #L%
  */
-
 
 import edu.emory.cci.aiw.MD5PasswordEncoder;
 import java.sql.Timestamp;
