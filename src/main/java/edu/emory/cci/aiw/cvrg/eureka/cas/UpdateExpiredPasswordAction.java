@@ -20,7 +20,6 @@ package edu.emory.cci.aiw.cvrg.eureka.cas;
  */
 
 import edu.emory.cci.aiw.MD5PasswordEncoder;
-import java.sql.Timestamp;
 import java.util.Calendar;
 import org.jasig.cas.authentication.principal.UsernamePasswordCredentials;
 import org.slf4j.Logger;
@@ -66,10 +65,15 @@ public class UpdateExpiredPasswordAction {
         public void updateExpirationDate(long id) {
                 Calendar calendar = Calendar.getInstance();
                 calendar.add(Calendar.DATE, 90);
-                Timestamp newExpirationDate = new Timestamp(calendar.getTime().getTime());
-                String sqlUpdate= "update local_users set passwordexpiration='"+newExpirationDate+"' where id="+id;
-
-                this.jdbcTemplate.update(sqlUpdate);
+                
+                String sqlUpdate= "update local_users set passwordexpiration=? where id=?";
+                
+                Object[] param ={
+                        new java.sql.Timestamp(calendar.getTime().getTime()),
+                        id
+                };
+                
+                this.jdbcTemplate.update(sqlUpdate, param);
 
         }
 
