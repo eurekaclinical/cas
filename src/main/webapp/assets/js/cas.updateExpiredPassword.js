@@ -35,15 +35,17 @@ window.eureka.password = new function () {
 				}
 			},
 			messages: {
-				oldPassword: "Please enter your old password.",
+				oldPassword: {
+                                        required: "Please enter your old password."
+                                },
 				newPassword: {
-					required: "Provide a password.",
+					required: "Provide a new password.",
 					rangelength: $.validator.format("Please enter at least {0} characters.")
 				},
 				verifiedNewPassword: {
-					required: "Repeat your password.",
+					required: "Repeat your new password.",
 					minlength: $.validator.format("Please enter at least {0} characters."),
-					equalTo: "Enter the same password as above."
+					equalTo: "Enter the same new password as above."
 				}
 			},
 			errorPlacement: function (error, element) {

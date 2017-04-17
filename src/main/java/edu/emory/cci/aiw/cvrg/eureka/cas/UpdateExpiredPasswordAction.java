@@ -24,6 +24,7 @@ import java.util.Calendar;
 import org.jasig.cas.authentication.principal.UsernamePasswordCredentials;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.binding.message.MessageBuilder;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.webflow.execution.RequestContext;
 
@@ -77,41 +78,52 @@ public class UpdateExpiredPasswordAction {
 
         }
 
-        public String update(RequestContext rc, Passwords passwords, UsernamePasswordCredentials inCredentials) throws Exception {  
+        public boolean update(RequestContext rc, Passwords passwords, UsernamePasswordCredentials inCredentials) throws Exception {  
 
                 String cUsername = inCredentials.getUsername();
                 String cPassword = inCredentials.getPassword();
 
-                String inOldPassword = passwords.getOldPassword();
-                String inNewPassword = passwords.getNewPassword();
-                String inVerifiedNewPassword = passwords.getVerifiedNewPassword();
+                String oldPassword = passwords.getOldPassword();
+                String newPassword = passwords.getNewPassword();
+                String verifiedNewPassword = passwords.getVerifiedNewPassword();
 
                 long userId = getUpdateUserId(cUsername);
 
                 MD5PasswordEncoder encoder = new MD5PasswordEncoder(); 
-                String encodedNewPassword = encoder.encode(inNewPassword);
+                String encodedNewPassword = encoder.encode(newPassword);
 
-                if(inNewPassword!=null && inOldPassword!=null){
-                        if(inOldPassword.equals(cPassword) && inNewPassword.equals(inVerifiedNewPassword)){
+                
+                if(oldPassword!=null && newPassword!=null && verifiedNewPassword!=null ){
+                        if(oldPassword.equals(cPassword) && newPassword.equals(verifiedNewPassword)){
                                 updateExpiredPassword(encodedNewPassword, userId);
                                 updateExpirationDate(userId);
                                 UsernamePasswordCredentials outCredentials = new UsernamePasswordCredentials();
                                 outCredentials.setUsername(cUsername);                        
-                                outCredentials.setPassword(inNewPassword);
+                                outCredentials.setPassword(newPassword);
 
                                 rc.getFlowScope().put("credentials", outCredentials);
-                                return "success"; 
-                        }else if(!inOldPassword.equals(cPassword)) {
-                                return "oldpasswordincorrect"; 
-                        }else if(!inNewPassword.equals(inVerifiedNewPassword)){
-                                return "newpasswordNotSame";                    
+                                
+                                return true; 
+                        }else if(!oldPassword.equals(cPassword)) {
+                                rc.getMessageContext().addMessage(new MessageBuilder().error().source("oldPassword")
+                                        .code("cas.oldPassword.invalid")
+                                        .defaultText("Old password is incorrect.")
+                                        .build());
+                                            
+                                return false; 
+                        }else if(!newPassword.equals(verifiedNewPassword)){
+                                rc.getMessageContext().addMessage(new MessageBuilder().error().source("newPassword")
+                                        .code("cas.newPassword.invalid")
+                                        .defaultText("New passwords do not match.")
+                                        .build());  
+                                
+                                return false;
                         }else{
-                                return "error";
+                                return false;
                         }
                 }else{
-                        return "error";                     
+                        return false;                     
                 }
         }
 }
-
 
