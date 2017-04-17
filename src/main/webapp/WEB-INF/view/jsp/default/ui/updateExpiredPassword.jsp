@@ -29,17 +29,27 @@
 
 
                 <form:form modelAttribute="passwords" id="updateExpiredPasswordForm" method="post" class="form-horizontal">
+                    
+                            <c:if test="${not empty updateExpiredPasswordValidationError}">
+                            <div class="errors" style="width:250px; color: #b94a48;">
+                                <spring:message code="updateExpiredPassword.generic-error" />
+                            </div>
+                            </c:if>
+                    
                         <div class="form-group">
                                 <label for="oldPassword" class="control-label col-sm-3">Old Password</label>
                                 <div class="col-sm-3">
                                         <form:password name="oldPassword" id="oldPassword" path="oldPassword" class="form-control"/>
+                                        <form:errors path="oldPassword" style="color: #b94a48;"/>
                                 </div>
-                                <span class="col-sm-6 help-inline"></span>                               
+                                <span class="col-sm-6 help-inline"></span> 
+
                         </div>
                         <div class="form-group">
                                 <label for="newPassword" class="control-label col-sm-3">New Password</label>
                                 <div class="col-sm-3">
                                         <form:password name="newPassword" id="newPassword" path="newPassword" class="form-control"/>
+                                        <form:errors path="newPassword" style="color: #b94a48;"/>
                                 </div>
                                 <span class="col-sm-6 help-inline"></span>
                         </div>

@@ -114,16 +114,15 @@
                         <binding property="newPassword" />    
                         <binding property="verifiedNewPassword" />                                                                     
                 </binder>
-                <transition on="submitUpdatedExpiredPassword" to="updateExpiredPassword" />
+                <transition on="submitUpdatedExpiredPassword" to="realSubmit">
+                
+                        <!-- Presume error. This will cause an error message to be displayed
+                        if the following evaluate expression returns false. -->
+                        <set name="requestScope.updateExpiredPasswordValidationError" value="true"/>     
+
+                        <evaluate expression="updateExpiredPasswordAction.update(flowRequestContext, flowScope.passwords, flowScope.credentials)" />    
+                </transition>
         </view-state>
-        <action-state id="updateExpiredPassword">       
-                <evaluate expression="updateExpiredPasswordAction.update(flowRequestContext, flowScope.passwords, flowScope.credentials)" /> 
-                <transition on="success" to="realSubmit" />
-                <transition on="oldpasswordincorrect" to="updateExpiredPasswordView" /> 
-                <transition on="newpasswordNotSame" to="updateExpiredPasswordView" />                            
-                <transition on="error" to="updateExpiredPasswordErrorView" />                        
-        </action-state>
-        <end-state id="updateExpiredPasswordErrorView" view="updateExpiredPasswordErrorView" />
         <!--   update expired password transition ends here... -->
         
         
