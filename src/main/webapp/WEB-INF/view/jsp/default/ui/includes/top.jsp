@@ -36,19 +36,17 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<link rel="SHORTCUT ICON" href="${pageContext.request.contextPath}/favicon.ico">
 		<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,400italic,600italic,700italic">
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/bootstrap-3.3.4-dist/css/bootstrap.min.css">
-		<!--<link rel="stylesheet" type="text/css"
-		  href="${pageContext.request.contextPath}/assets/bootstrap-3.3.4-dist/css/bootstrap-theme.min.css"/>-->
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
 		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/eureka${initParam['eureka-build-timestamp']}.css">
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/font-awesome-4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="https://assets.eurekaclinical.org/v1.0/css/eurekaclinical.css">
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/bootstrap-social-20150401.css">
-		<script src="${pageContext.request.contextPath}/assets/js/jquery-2.1.3.min.js" type="text/javascript"></script>
-		<script src="${pageContext.request.contextPath}/assets/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
 		<title>Eureka! Clinical Analytics</title>
 	</head>
