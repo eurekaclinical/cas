@@ -51,7 +51,7 @@
                         <input type="hidden" name="execution" value="${flowExecutionKey}" />
                         <input type="hidden" name="_eventId" value="submitResetForgotPassword" />   
 		</form:form>
-                <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery.validate.js"></script>
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
                 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/cas.resetForgotPassword.js"></script>
                 <script type="text/javascript">
                         eureka.password.setup('#resetForgotPasswordResetForm');
