@@ -32,6 +32,9 @@ The project uses the maven build tool. Typically, you build it by invoking `mvn 
 </dependency>
 ```
 
+## Developer documentation
+* [Javadoc for latest development release](http://javadoc.io/doc/org.eurekaclinical/cas-server) [![Javadocs](http://javadoc.io/badge/org.eurekaclinical/cas-server.svg)](http://javadoc.io/doc/org.eurekaclinical/cas-server)
+
 ## Getting help
 Feel free to contact us at help@eurekaclinical.org.
 
