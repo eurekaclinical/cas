@@ -1,5 +1,5 @@
 # Eureka! Clinical Central Authentication Service
-Patched JASIG CAS server used for authentication by Eureka! Clinical projects.
+Patched [JASIG (now Apereo) CAS](https://www.apereo.org/projects/cas/) server used for authentication by Eureka! Clinical projects.
 
 ## Version 3.0 development series
 Latest release: [![Latest release](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/cas-server/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/cas-server)
@@ -16,7 +16,7 @@ Initial version supported version 1 of Eureka! Clinical Analytics.
 ## What does it do?
 It provides single sign on across all Eureka! Clinical microservices, thus allowing microservices to be composed into a single integrated application. It can provide its own screens for the user to enter credentials, which are checked against a local database provided by [eurekaclinical-user-service](https://github.com/eurekaclinical/eurekaclinical-user-service) or an LDAP server. Alternatively, it can delegate that function to an OAuth or other CAS server.
 
-This project currently implements support for versions 1 and 2 of the CAS protocol.
+This project depends on version 3.5.3 of CAS server, which implements support for versions 1 and 2 of the CAS protocol.
 
 This project does not provide user authorization. Eureka! Clinical microservices are responsible for providing their own authorization.
 
