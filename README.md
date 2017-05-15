@@ -1,4 +1,4 @@
-# Eureka! Clinical Central Authentication Service
+# Eureka! Clinical Central Authentication Service (CAS)
 Patched [JASIG (now Apereo) CAS](https://www.apereo.org/projects/cas/) server used for authentication by Eureka! Clinical projects.
 
 ## Version 3.0 development series
