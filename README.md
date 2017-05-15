@@ -36,6 +36,28 @@ The project uses the maven build tool. Typically, you build it by invoking `mvn 
 * [Javadoc for latest development release](http://javadoc.io/doc/org.eurekaclinical/cas-server) [![Javadocs](http://javadoc.io/badge/org.eurekaclinical/cas-server.svg)](http://javadoc.io/doc/org.eurekaclinical/cas-server)
 * [JASIG CAS wiki](https://wiki.jasig.org/display/CASUM/Home)
 
+## Configuration
+Eureka! Clinical CAS is configured via a properties file located at `/etc/eureka/cas.properties`. In addition to the properties described in the [JASIG CAS documentation](https://wiki.jasig.org/display/casum/configuring), it supports the following properties:
+* `eureka.authHandlers`: comma-separated list of handlers for checking credentials entered on the built-in login screen, which may be `jdbc` (check with eurekaclinical-user-service) or `ldap` (check with a specified LDAP directory); default is `jdbc`.
+* `eureka.ldap.uid.attribute`: for specifying the UID attribute for an LDAP directory; default is `cn`.
+* `eureka.ldap.email.attribute1`: for specifying the email attribute for an LDAP directory; default is `mail`.
+* `eureka.ldap.firstName.attribute1`: for specifying the first name attribute for an LDAP directory; default is `firstName`.
+* `eureka.ldap.lastName.attribute1`: for specifying the last name attribute for an LDAP directory; default is `lastName`.
+* `eureka.ldap.title.attribute1`: for specifying the title attribute for an LDAP directory; default is `title`.
+* `eureka.ldap.department.attribute1`: for specifying the department attribute for an LDAP directory; default is `ou`.
+* `eureka.ldap.organization.attribute1`: for specifying the organization attribute for an LDAP directory; default is `o`.
+
+A typical `cas.properties` file looks like the following:
+```
+server.name=https://hostname.running.cas
+server.prefix=${server.name}/cas-server
+host.name=hostname.running.cas
+eureka.authHandlers=jdbc
+
+# Whitelist the services that may access this CAS server.
+cas.services.filter=https://(hostname1\\.edu|hostname2\\.edu|localhost).*
+```
+
 ## Getting help
 Feel free to contact us at help@eurekaclinical.org.
 
