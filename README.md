@@ -11,7 +11,7 @@ This project does not provide user authorization. Eureka! Clinical microservices
 ## Version 3.0 development series
 Latest release: [![Latest release](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/cas-server/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/cas-server)
 
-The version 3.0 series has integrated password resets and password changes into this project (they previously were in Eureka! Clinical Analytics).
+The version 3.0 series has integrated password resets and password changes into this project (they previously were in [Eureka! Clinical Analytics](https://github.com/eurekaclinical/eureka)).
 
 ## Version history
 ### Version 2.0
