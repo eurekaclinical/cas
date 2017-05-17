@@ -32,20 +32,8 @@ Initial version supported version 1 of Eureka! Clinical Analytics.
 ## Building it
 The project uses the maven build tool. Typically, you build it by invoking `mvn clean install` at the command line. For simple file changes, not additions or deletions, you can usually use `mvn install`. See https://github.com/eurekaclinical/dev-wiki/wiki/Building-Eureka!-Clinical-projects for more details.
 
-## Maven dependency
-```
-<dependency>
-    <groupId>org.eurekaclinical</groupId>
-    <artifactId>cas-server</artifactId>
-    <version>version</version>
-</dependency>
-```
-
-## Developer documentation
-* [Javadoc for latest development release](http://javadoc.io/doc/org.eurekaclinical/cas-server) [![Javadocs](http://javadoc.io/badge/org.eurekaclinical/cas-server.svg)](http://javadoc.io/doc/org.eurekaclinical/cas-server)
-* [JASIG CAS wiki](https://wiki.jasig.org/display/CASUM/Home)
-
-## Configuration
+## Installation
+### Configuration
 Eureka! Clinical CAS is configured via a properties file located at `/etc/eureka/cas.properties`. In addition to the properties described in the [JASIG CAS documentation](https://wiki.jasig.org/display/casum/configuring), it supports the following properties:
 * `eureka.authHandlers`: comma-separated list of handlers for checking credentials entered on the built-in login screen, which may be `jdbc` (check with eurekaclinical-user-service) or `ldap` (check with a specified LDAP directory); default is `jdbc`.
 * `eureka.ldap.uid.attribute`: for specifying the UID attribute for an LDAP directory; default is `cn`.
@@ -66,6 +54,27 @@ eureka.authHandlers=jdbc
 # Whitelist the services that may access this CAS server.
 cas.services.filter=https://(hostname1\\.edu|hostname2\\.edu|localhost).*
 ```
+
+A Tomcat restart is required to detect any changes to the configuration file.
+
+### WAR installation
+1) Stop Tomcat.
+2) Remove any old copies of the unpacked war from Tomcat's webapps directory.
+3) Copy the warfile into the Tomcat webapps directory, renaming it to remove the version. For example, rename `cas-server-1.0.war` to `cas-server.war`.
+4) Start Tomcat.
+
+## Maven dependency
+```
+<dependency>
+    <groupId>org.eurekaclinical</groupId>
+    <artifactId>cas-server</artifactId>
+    <version>version</version>
+</dependency>
+```
+
+## Developer documentation
+* [Javadoc for latest development release](http://javadoc.io/doc/org.eurekaclinical/cas-server) [![Javadocs](http://javadoc.io/badge/org.eurekaclinical/cas-server.svg)](http://javadoc.io/doc/org.eurekaclinical/cas-server)
+* [JASIG CAS wiki](https://wiki.jasig.org/display/CASUM/Home)
 
 ## Getting help
 Feel free to contact us at help@eurekaclinical.org.
