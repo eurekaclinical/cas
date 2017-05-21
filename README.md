@@ -4,7 +4,7 @@
 ## What does it do?
 It is a patched [JASIG (now Apereo) CAS](https://www.apereo.org/projects/cas/) server used for authentication by Eureka! Clinical projects. It provides single sign on across all Eureka! Clinical microservices, thus allowing microservices to be composed into a single integrated application. It can provide its own screens for the user to enter credentials, which are checked against a local database provided by [eurekaclinical-user-service](https://github.com/eurekaclinical/eurekaclinical-user-service) or an LDAP server. Alternatively, it can delegate that function to an OAuth or other CAS server.
 
-This project depends on [version 3.5.3](https://github.com/apereo/cas/releases/tag/v3.5.3) of CAS server, which implements support for versions 1 and 2 of the [CAS protocol](https://apereo.github.io/cas/5.0.x/protocol/CAS-Protocol.html).
+This project depends on [version 3.5.2](https://github.com/apereo/cas/releases/tag/v3.5.2) of CAS server, which implements support for versions 1 and 2 of the [CAS protocol](https://apereo.github.io/cas/5.0.x/protocol/CAS-Protocol.html).
 
 This project does not provide user authorization. Eureka! Clinical microservices are responsible for providing their own authorization.
 
