@@ -16,7 +16,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
   #L%
-  --%>
+--%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -24,8 +24,8 @@
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <jsp:directive.include file="includes/top.jsp"/>
-		<h3>We did not recognize your email address.</h3>
-                <p>
-                    Please check the information you typed and try again.
-                </p>                
+<h1>We did not recognize your email address.</h1>
+<p>
+	Please check the information you typed and try again.
+</p>                
 <jsp:directive.include file="includes/bottom.jsp"/>

@@ -16,7 +16,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
   #L%
-  --%>
+--%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -73,7 +73,7 @@
 		</c:otherwise>
 	</c:choose>
 </c:if>
-<h3>Login</h3>
+<h1>Login</h1>
 <c:choose>
 	<c:when test="${not pageContext.request.secure}">
 		<div class="label label-danger">
@@ -101,25 +101,25 @@
 							<div class="form-group">
 								<label for="username">Username</label>
 								<form:input cssClass="form-control" cssErrorClass="" id="username" size="25" tabindex="1"
-										accesskey="${userNameAccessKey}" path="username" autocomplete="false"
-										htmlEscape="true"/>
+											accesskey="${userNameAccessKey}" path="username" autocomplete="false"
+											htmlEscape="true"/>
 							</div>
 							<div class="form-group">
 								<label for="password">Password</label>
 								<form:password cssClass="form-control" cssErrorClass="" id="password" size="25" tabindex="2"
-										accesskey="${passwordAccessKey}" path="password" autocomplete="off"
-										htmlEscape="true"/>
+											   accesskey="${passwordAccessKey}" path="password" autocomplete="off"
+											   htmlEscape="true"/>
 							</div>
 							<div class="form-group">
 								<a href="<c:url value="login"/>?execution=${flowExecutionKey}&_eventId=forgotPassword">Forgot Password?</a>
 							</div>
-                                                        <div class="form-group">
-                                                                <input name="submit" id="submit" class="btn btn-lg btn-primary btn-block" accesskey="l" value="Login"
-                                                                   tabindex="3" type="submit"/>
-                                                                <input type="hidden" name="lt" value="${loginTicket}"/>
-                                                                <input type="hidden" name="execution" value="${flowExecutionKey}"/>
-                                                                <input type="hidden" name="_eventId" value="submit"/>                                                            
-                                                        </div> 
+							<div class="form-group">
+								<input name="submit" id="submit" class="btn btn-lg btn-primary btn-block" accesskey="l" value="Login"
+									   tabindex="3" type="submit"/>
+								<input type="hidden" name="lt" value="${loginTicket}"/>
+								<input type="hidden" name="execution" value="${flowExecutionKey}"/>
+								<input type="hidden" name="_eventId" value="submit"/>                                                            
+							</div> 
 						</form:form>
 					</div>
 				</div>
@@ -173,8 +173,8 @@
 							</c:if>
 							<c:if test="${applicationProperties.globusAuthEnabled}">
 								<a href="${GlobusProviderUrl}"
-									class="btn btn-block btn-primary btn-lg"
-									title="Sign in with Globus">Sign in with Globus account
+								   class="btn btn-block btn-primary btn-lg"
+								   title="Sign in with Globus">Sign in with Globus account
 								</a>
 							</c:if>
 						</div>

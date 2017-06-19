@@ -16,7 +16,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
   #L%
-  --%>
+--%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -24,8 +24,8 @@
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <jsp:directive.include file="includes/top.jsp"/>
-		<h3>Your password has been reset successfully!</h3>
-                <p>
-                    Your new password has been sent to your email address.
-                </p>                
+<h1>Your password has been reset successfully!</h1>
+<p>
+	Your new password has been sent to your email address.
+</p>                
 <jsp:directive.include file="includes/bottom.jsp"/>
