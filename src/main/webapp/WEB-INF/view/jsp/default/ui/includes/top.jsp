@@ -42,7 +42,7 @@
 		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
 		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-		<link rel="stylesheet" type="text/css" href="https://assets.eurekaclinical.org/v1.1/css/eurekaclinical.css">
+		<link rel="stylesheet" type="text/css" href="https://assets.eurekaclinical.org/v2.0a1/css/eurekaclinical.css">
 		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css">
 		<script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
