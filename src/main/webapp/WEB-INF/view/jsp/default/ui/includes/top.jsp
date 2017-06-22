@@ -65,16 +65,6 @@
 					<span class="brand-text">Eureka!</span>
 				</a>
 			</div>
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-right menu-text">
-					<li>
-						<a href="${applicationProperties.applicationUrl}help.jsp">
-							<span class="glyphicon glyphicon-question-sign"></span>
-							Help
-						</a>
-					</li>
-				</ul>
-			</div>
 		</div>
 	</div>
 	<div class="container container-big content">
