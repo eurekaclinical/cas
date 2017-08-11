@@ -17,6 +17,7 @@ This project includes:
   A Hibernate Core Module under GNU Lesser General Public License
   AntLR Parser Generator under BSD License
   AOP alliance under Public Domain
+  Apache FreeMarker under Apache License, Version 2.0
   Apache Log4j under The Apache Software License, Version 2.0
   Apache Velocity under The Apache Software License, Version 2.0
   AspectJ runtime under Eclipse Public License - v 1.0
@@ -35,7 +36,6 @@ This project includes:
   Commons Pool under The Apache Software License, Version 2.0
   dom4j under BSD License
   ESAPI 2.0 under BSD or Creative Commons 3.0 BY-SA
-  FreeMarker under Apache License, Version 2.0
   Hibernate Commons Annotations under GNU LESSER GENERAL PUBLIC LICENSE
   HttpClient under Apache License
   Inspektr - Auditing API under Apache 2.0 License
