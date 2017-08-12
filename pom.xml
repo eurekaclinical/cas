@@ -12,7 +12,7 @@
 	<parent>
 		<groupId>org.eurekaclinical</groupId>
 		<artifactId>eurekaclinical-parent-cas</artifactId>
-		<version>2-Beta-2</version>
+		<version>2-Beta-3</version>
 	</parent>
 
 	<url>https://github.com/eurekaclinical/cas.git</url>
@@ -37,33 +37,19 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>net.alchim31.maven</groupId>
-				<artifactId>yuicompressor-maven-plugin</artifactId>
-				<configuration>
-					<includes>
-						<include>assets/js/eureka.*.js</include>                                            
-						<include>assets/css/eureka.css</include>
-					</includes>
-				</configuration>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
 					<filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
-					<packagingIncludes>
-						<!--%regex[assets/js/eureka.*${maven.build.timestamp}.js],-->
-						%regex[assets/js/eureka.*.js],
-						%regex[^(?!assets/js/eureka).*$],
-						assets/css/eureka.css
-					</packagingIncludes>
+					<packagingExcludes>
+						WEB-INF/lib/stax-api-1.0-2.jar
+					</packagingExcludes>
 					<overlays>
 						<overlay>
 							<groupId>org.jasig.cas</groupId>
                             <artifactId>cas-server-webapp</artifactId>
                             <excludes>
                                 <exclude>WEB-INF/lib/commons-collections-3.2.jar</exclude>
-								<exclude>WEB-INF/lib/stax-api-1.0-2.jar</exclude>
 								<exclude>WEB-INF/lib/javassist-3.7.ga.jar</exclude>
                             </excludes>
 						</overlay>
@@ -109,6 +95,12 @@
 		<dependency>
 			<groupId>org.jasig.cas</groupId>
 			<artifactId>cas-server-core</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.xml.stream</groupId>
+					<artifactId>stax-api</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.jasig.cas</groupId>
