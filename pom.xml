@@ -12,7 +12,7 @@
 	<parent>
 		<groupId>org.eurekaclinical</groupId>
 		<artifactId>eurekaclinical-parent-cas</artifactId>
-		<version>2-Beta-1</version>
+		<version>2-Beta-2</version>
 	</parent>
 
 	<url>https://github.com/eurekaclinical/cas.git</url>
@@ -56,7 +56,18 @@
 						%regex[assets/js/eureka.*.js],
 						%regex[^(?!assets/js/eureka).*$],
 						assets/css/eureka.css
-					</packagingIncludes> 
+					</packagingIncludes>
+					<overlays>
+						<overlay>
+							<groupId>org.jasig.cas</groupId>
+                            <artifactId>cas-server-webapp</artifactId>
+                            <excludes>
+                                <exclude>WEB-INF/lib/commons-collections-3.2.jar</exclude>
+								<exclude>WEB-INF/lib/stax-api-1.0-2.jar</exclude>
+								<exclude>WEB-INF/lib/javassist-3.7.ga.jar</exclude>
+                            </excludes>
+						</overlay>
+					</overlays>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -130,10 +141,6 @@
 			<artifactId>commons-pool</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>jstl</groupId>
-			<artifactId>jstl</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.jasig.cas</groupId>
 			<artifactId>cas-server-integration-restlet</artifactId>
 			<type>jar</type>
@@ -149,12 +156,6 @@
 					<artifactId>servlet-api</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>   
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<scope>provided</scope>
-			<version>3.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.sun.mail</groupId>
