@@ -83,7 +83,7 @@
       upstream loggers.
     -->
     <logger name="org.perf4j.TimingLogger" additivity="false">
-        <level value="INFO"/>
+        <level value="WARN"/>
         <appender-ref ref="CoalescingStatistics"/>
     </logger>
 
@@ -102,12 +102,12 @@
     </logger>
 
     <logger name="org.jasig" additivity="true">
-        <level value="INFO" />
+        <level value="WARN" />
         <appender-ref ref="cas" />
     </logger>
 
     <logger name="com.github.inspektr.audit.support.Slf4jLoggingAuditTrailManager">
-        <level value="INFO" />
+        <level value="WARN" />
         <appender-ref ref="cas" />
     </logger>
 
@@ -117,12 +117,12 @@
         cleartext authentication credentials
     -->
     <logger name="org.jasig.cas.web.flow" additivity="true">
-        <level value="INFO" />
+        <level value="WARN" />
         <appender-ref ref="cas" />
     </logger>
 	
 	<logger name="edu.emory.cci.aiw.cvrg.eureka.cas" additivity="true">
-        <level value="INFO" />
+        <level value="WARN" />
         <appender-ref ref="cas" />
     </logger>
 
