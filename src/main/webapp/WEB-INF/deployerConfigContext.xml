@@ -338,19 +338,15 @@
 			<list>
 				<bean class="org.jasig.cas.services.RegexRegisteredService">
 					<property name="id" value="0" />
-					<property name="name" value="HTTP and IMAP" />
-					<property name="description" value="Allows HTTP(S) and IMAP(S) protocols for Eureka and I2b2" />
-					<property name="serviceId" value="${cas.services.filter}" />
-					<property name="evaluationOrder" value="10000001" />
-				</bean>
-				<bean class="org.jasig.cas.services.RegisteredServiceImpl">
-					<property name="id" value="1" />
 					<property name="name" value="HTTPS" />
 					<property name="description" value="Only Allows HTTPS Urls" />
 					<property name="serviceId" value="${cas.services.filter}" />
+					<property name="enabled" value="true"/>
+					<property name="ssoEnabled" value="true"/>
+					<property name="allowedToProxy" value="true"/>
+					<property name="evaluationOrder" value="10000001" />
 					<property name="allowedAttributes">
 						<list>
-							<!--<value>authorities</value>-->
 							<value>authenticationMethod</value>
 							<value>providerType</value>
 							<value>username</value>
@@ -364,20 +360,6 @@
 							<value>access_token</value>
 						</list>
 					</property>
-				</bean>
-
-				<bean class="org.jasig.cas.services.RegisteredServiceImpl">
-					<property name="id" value="2" />
-					<property name="name" value="IMAPS" />
-					<property name="description" value="Only Allows HTTPS Urls" />
-					<property name="serviceId" value="imaps://**" />
-				</bean>
-
-				<bean class="org.jasig.cas.services.RegisteredServiceImpl">
-					<property name="id" value="3" />
-					<property name="name" value="IMAP" />
-					<property name="description" value="Only Allows IMAP Urls" />
-					<property name="serviceId" value="imap://**" />
 				</bean>
 			</list>
 		</property>
