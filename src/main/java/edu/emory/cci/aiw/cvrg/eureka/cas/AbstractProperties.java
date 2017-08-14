@@ -115,7 +115,7 @@ public abstract class AbstractProperties {
 				}
 			}
 		} else {
-			LOGGER.warn("No configuration directory found at {0}. "
+			LOGGER.warn("No configuration file found at {}. "
 					+ "Built-in defaults will be used, some "
 					+ "of which are unlikely to be what you want.",
 					configFile.getAbsolutePath());
