@@ -77,7 +77,7 @@ public abstract class AbstractProperties {
 	 *
 	 * There are two potential sources of application configuration. The
 	 * fallback configuration should always be there. The default configuration
-	 * directory, <code>/etc/eureka</code>, may optionally have an
+	 * directory, <code>/etc/ec-cas-server</code>, may optionally have an
 	 * application.properties file within it that overrides the fallback
 	 * configuration for each configuration property that is specified. The
 	 * <code>eureka.config.dir</code> system property allows specifying an
@@ -129,7 +129,7 @@ public abstract class AbstractProperties {
 	 * @return A String containing the default configuration location.
 	 */
 	private static String getDefaultConfigDir() {
-		return "/etc/eureka";
+		return "/etc/ec-cas-server";
 	}
 
 	private void loadFallbackConfig() {

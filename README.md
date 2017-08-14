@@ -34,7 +34,7 @@ The project uses the maven build tool. Typically, you build it by invoking `mvn 
 
 ## Installation
 ### Configuration
-Eureka! Clinical CAS is configured via a properties file located at `/etc/eureka/cas.properties`. In addition to the properties described in the [JASIG CAS documentation](https://wiki.jasig.org/display/casum/configuring), it supports the following properties:
+Eureka! Clinical CAS is configured via a properties file located at `/etc/ec-cas-server/cas.properties`. In addition to the properties described in the [JASIG CAS documentation](https://wiki.jasig.org/display/casum/configuring), it supports the following properties:
 * `eureka.authHandlers`: comma-separated list of handlers for checking credentials entered on the built-in login screen, which may be `jdbc` (check with eurekaclinical-user-service) or `ldap` (check with a specified LDAP directory); default is `jdbc`.
 * `eureka.ldap.uid.attribute`: for specifying the UID attribute for an LDAP directory; default is `cn`.
 * `eureka.ldap.email.attribute1`: for specifying the email attribute for an LDAP directory; default is `mail`.
