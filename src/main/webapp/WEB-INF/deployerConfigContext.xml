@@ -99,7 +99,7 @@
 					| Credentials you are using.
 					+-->
 				<bean class="org.jasig.cas.authentication.principal.UsernamePasswordCredentialsToPrincipalResolver">
-					<property name="attributeRepository" ref="attributeRepository" />
+					<property name="attributeRepository" ref="jdbcAttributeRepository" />
 				</bean>
 				<!--
 					| HttpBasedServiceCredentialsToPrincipalResolver supports HttpBasedCredentials.  It supports the CAS 2.0 approach of
@@ -116,7 +116,7 @@
 				<bean class="org.jasig.cas.support.oauth.authentication.principal.OAuthCredentialsToPrincipalResolver" />
 			</list>
 		</property>
-
+		
 		<!--
 			| Whereas CredentialsToPrincipalResolvers identify who it is some Credentials might authenticate, 
 			| AuthenticationHandlers actually authenticate credentials.  Here we declare the AuthenticationHandlers that
@@ -230,7 +230,7 @@
 		<property name="principalAttributeName" value="uid" />
 		<property name="searchBase" value="${ldap.authentication.basedn:cn=users,dc=school,dc=edu}" />
 		<property name="contextSource" ref="ldapCtxSource" />
-		<property name="attributeRepository" ref="attributeRepository" />
+		<property name="attributeRepository" ref="ldapAttributeRepository" />
 	</bean>
 
 	<bean id="ldapAttributeRepository"
@@ -306,9 +306,12 @@
         -->
 	<!-- <sec:user name="@@THIS SHOULD BE REPLACED@@" password="notused" authorities="ROLE_ADMIN" />-->
 
-	<sec:user-service id="userDetailsService">
+	<bean id="userDetailsService"
+		class="edu.emory.cci.aiw.cvrg.eureka.cas.authentication.EmptyUserDetailsManager" />
+
+	<!--<sec:user-service id="userDetailsService">
 		<sec:user name="super.user@emory.edu" password="notused" authorities="ROLE_ADMIN" />
-	</sec:user-service>
+	</sec:user-service>-->
 	
 	<!-- 
   	Bean that defines the attributes that a service may return.  This example uses the Stub/Mock version.  A real implementation
