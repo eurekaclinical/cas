@@ -44,7 +44,7 @@ public class AuthenticationMethodMetaDataPopulator implements AuthenticationMeta
 
 	@Override
 	public Authentication populateAttributes(Authentication authentication, Credentials credentials) {
-		Map<String, Object> attrs = new HashMap<String, Object>();
+		Map<String, Object> attrs = new HashMap<>();
 		attrs.putAll(authentication.getPrincipal().getAttributes());
 		Map<String, Object> authenticationAttributes = authentication.getAttributes();
 		Object authenticationMethod = authenticationAttributes.get(AuthenticationManager.AUTHENTICATION_METHOD_ATTRIBUTE);
