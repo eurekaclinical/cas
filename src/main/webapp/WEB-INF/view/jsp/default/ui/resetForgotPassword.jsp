@@ -25,28 +25,19 @@
 <jsp:directive.include file="includes/top.jsp"/>
 <c:url value="/login" var="formActionUrl" />
 <h1>Having trouble logging in?</h1>
-
-<form:form modelAttribute="email" id="resetForgotPasswordResetForm" method="post" action="${formActionUrl}" class="form-horizontal">
-	<p>
-		Remember, your user name is the email address that you used when you registered.
-	</p>
-	<p>
-		If you cannot remember your password, please enter your email address and click the Reset Password
-		button below. You will receive an email with a temporary password. You will be asked to change the
-		password the next time you login.
-	</p>
+<p>
+	If you cannot remember your password, please enter your email address and click the Reset Password
+	button below. You will receive an email with a temporary password. You will be asked to change the
+	password the next time you login.
+</p>
+<form:form modelAttribute="email" id="resetForgotPasswordResetForm" method="post" action="${formActionUrl}" role="form" class="vert-offset">
 	<div class="form-group">
-		<label for="emailAddress" class="control-label col-sm-3">Email Address</label>
-		<div class="col-sm-3">
-			<form:input name="emailAddress" type="text" id="emailAddress" path="emailAddress" class="form-control"/>
-		</div>
-		<span class="col-sm-6 help-inline"></span>
+		<label for="emailAddress" class="control-label">Email Address</label>
+		<form:input name="emailAddress" type="text" id="emailAddress" path="emailAddress" class="form-control"/>
+		<span class="help-block"></span>
 	</div>
-	<div class="form-group">
-		<div class="col-sm-1 col-sm-offset-3 text-center">
-			<input name="submit" id="submit" type="submit" value="Reset Password" class="btn btn-primary"/>
-		</div>
-	</div>                               
+	<button name="cancelButton" id="cancelButton" type="button" class="btn" onclick="location.href='${formActionUrl}?service=${param.service}'">Return to Login Screen</button>
+	<button name="submit" id="submit" type="submit" class="btn btn-primary">Reset Password</button>
 	<input type="hidden" name="lt" value="${loginTicket}" />
 	<input type="hidden" name="execution" value="${flowExecutionKey}" />
 	<input type="hidden" name="_eventId" value="submitResetForgotPassword" />   

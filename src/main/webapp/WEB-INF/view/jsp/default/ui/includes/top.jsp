@@ -48,7 +48,7 @@
 		<script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
-		<title>Eureka! Clinical Analytics</title>
+		<title>Eureka! Clinical Login</title>
 	</head>
 	<body>
 	<div class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -61,8 +61,8 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a href="${applicationProperties.applicationUrl}" class="navbar-brand">
-					<span class="brand-text">Eureka!</span>
+				<a href="#" class="navbar-brand">
+					<span class="brand-text">Login</span>
 				</a>
 			</div>
 		</div>

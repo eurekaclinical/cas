@@ -31,8 +31,8 @@ window.eureka.password = new function () {
 				}
 			},
 			errorPlacement: function (error, element) {
-				error.appendTo($(element).closest('.form-group').find('.help-inline'));
-                                $('.help-inline').css("color", "#b94a48");
+				error.appendTo($(element).closest('.form-group').find('.help-block'));
+                                $('.help-block').css("color", "#b94a48");
 			},
 			highlight: function (element) {
 				$(element).closest('.form-group').addClass('has-error');

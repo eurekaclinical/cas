@@ -409,6 +409,12 @@
                 <property name="jdbcTemplate">
                     <value>#{jdbcTemplateGenerator.jdbcTemplateFromJndiName}</value>
                 </property>                                                                
+        </bean>
+		
+		<bean id="registeredCheckAction" class="edu.emory.cci.aiw.cvrg.eureka.cas.RegisteredCheckAction">
+                <property name="jdbcTemplate">
+                    <value>#{jdbcTemplateGenerator.jdbcTemplateFromJndiName}</value>
+                </property>                                                                
         </bean> 
          
 </beans>

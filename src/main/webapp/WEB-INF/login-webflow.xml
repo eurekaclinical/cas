@@ -52,12 +52,17 @@
                 <evaluate expression="initialFlowSetupAction" />
         </on-start>
 
-
         <action-state id="oauthAction">
                 <evaluate expression="oauthAction" />
-                <transition on="success" to="sendTicketGrantingTicket" />
+                <transition on="success" to="registeredCheckAction" />
                 <transition on="error" to="ticketGrantingTicketExistsCheck" />
         </action-state>
+		
+		<action-state id="registeredCheckAction">
+			<evaluate expression="registeredCheckAction" />
+			<transition on="success" to="sendTicketGrantingTicket" />
+            <transition on="error" to="viewNotRegisteredView" />
+		</action-state>
 
         <decision-state id="ticketGrantingTicketExistsCheck">
                 <if test="flowScope.ticketGrantingTicketId != null" then="hasServiceCheck" else="gatewayRequestCheck" />
@@ -215,114 +220,113 @@
                 To enable LPPE on the 'warn' replace the below transition with:
                 <transition on="warn" to="passwordPolicyCheck" />
 
-                CAS will attempt to transition to the 'warn' when there's a 'renew' parameter
-                and there exists a ticketGrantingId and a service for the incoming request.
-                -->
-                <transition on="warn" to="warn" />
-                <!--
-                To enable LPPE on the 'success' replace the below transition with:
-                <transition on="success" to="passwordPolicyCheck" />
-                 -->
-                <transition on="success" to="expirationCheck" />
-                <transition on="error" to="generateLoginTicket" />
-                <transition on="accountDisabled" to="casAccountDisabledView" />
-                <transition on="mustChangePassword" to="casMustChangePassView" />
-                <transition on="accountLocked" to="casAccountLockedView" />
-                <transition on="badHours" to="casBadHoursView" />
-                <transition on="badWorkstation" to="casBadWorkstationView" />
-                <transition on="passwordExpired" to="casExpiredPassView" />
-        </action-state>
+		CAS will attempt to transition to the 'warn' when there's a 'renew' parameter
+		and there exists a ticketGrantingId and a service for the incoming request.
+		-->
+		<transition on="warn" to="warn" />
+		<!--
+	   To enable LPPE on the 'success' replace the below transition with:
+	   <transition on="success" to="passwordPolicyCheck" />
+		-->
+		<transition on="success" to="expirationCheck" />
+		<transition on="error" to="generateLoginTicket" />
+		<transition on="accountDisabled" to="casAccountDisabledView" />
+		<transition on="mustChangePassword" to="casMustChangePassView" />
+		<transition on="accountLocked" to="casAccountLockedView" />
+		<transition on="badHours" to="casBadHoursView" />
+		<transition on="badWorkstation" to="casBadWorkstationView" />
+		<transition on="passwordExpired" to="casExpiredPassView" />
+	</action-state>
 
-        <action-state id="sendTicketGrantingTicket">
-        <evaluate expression="sendTicketGrantingTicketAction" />
-                <transition to="serviceCheck" />
-        </action-state>
+	<action-state id="sendTicketGrantingTicket">
+		<evaluate expression="sendTicketGrantingTicketAction" />
+		<transition to="serviceCheck" />
+	</action-state>
 
-        <decision-state id="serviceCheck">
-                <if test="flowScope.service != null" then="generateServiceTicket" else="viewGenericLoginSuccess" />
-        </decision-state>
-
-
-
-
-
-
-        <action-state id="generateServiceTicket">
-        <evaluate expression="generateServiceTicketAction" />
-                <transition on="success" to ="warn" />
-                <transition on="error" to="generateLoginTicket" />
-                <transition on="gateway" to="gatewayServicesManagementCheck" />
-        </action-state>
-
-        <action-state id="gatewayServicesManagementCheck">
-            <evaluate expression="gatewayServicesManagementCheck" />
-            <transition on="success" to="redirect" />
-        </action-state>
-
-
-
-        <action-state id="redirect">
-            <evaluate expression="flowScope.service.getResponse(requestScope.serviceTicketId)" result-type="org.jasig.cas.authentication.principal.Response" result="requestScope.response" />
-            <transition to="postRedirectDecision" />
-        </action-state>
-
-        <decision-state id="postRedirectDecision">
-            <if test="requestScope.response.responseType.name() == 'POST'" then="postView" else="redirectView" />
-        </decision-state>
+	<decision-state id="serviceCheck">
+		<if test="flowScope.service != null" then="generateServiceTicket" else="viewGenericLoginSuccess" />
+	</decision-state>
 
 
 
 
 
-        <!-- 
-                the "viewGenericLogin" is the end state for when a user attempts to login without coming directly from a service.
-                They have only initialized their single-sign on session.
-        -->
-        <end-state id="viewGenericLoginSuccess" view="casLoginGenericSuccessView" />
+
+	<action-state id="generateServiceTicket">
+		<evaluate expression="generateServiceTicketAction" />
+		<transition on="success" to ="warn" />
+		<transition on="error" to="generateLoginTicket" />
+		<transition on="gateway" to="gatewayServicesManagementCheck" />
+	</action-state>
+
+	<action-state id="gatewayServicesManagementCheck">
+		<evaluate expression="gatewayServicesManagementCheck" />
+		<transition on="success" to="redirect" />
+	</action-state>
+
+
+
+	<action-state id="redirect">
+		<evaluate expression="flowScope.service.getResponse(requestScope.serviceTicketId)" result-type="org.jasig.cas.authentication.principal.Response" result="requestScope.response" />
+		<transition to="postRedirectDecision" />
+	</action-state>
+
+	<decision-state id="postRedirectDecision">
+		<if test="requestScope.response.responseType.name() == 'POST'" then="postView" else="redirectView" />
+	</decision-state>
 
 
 
 
 
-        <!-- 
-                The "showWarningView" end state is the end state for when the user has requested privacy settings (to be "warned") to be turned on.  It delegates to a 
-                view defines in default_views.properties that display the "Please click here to go to the service." message.
-        -->
-        <end-state id="showWarningView" view="casLoginConfirmView" />
-
-
-
-
-        <end-state id="postView" view="postResponseView">
-            <on-entry>
-                <set name="requestScope.parameters" value="requestScope.response.attributes" />
-                <set name="requestScope.originalUrl" value="flowScope.service.id" />
-            </on-entry>
-        </end-state>
+	<!-- 
+			the "viewGenericLogin" is the end state for when a user attempts to login without coming directly from a service.
+			They have only initialized their single-sign on session.
+	-->
+	<end-state id="viewGenericLoginSuccess" view="casLoginGenericSuccessView" />
 
 
 
 
 
-        <!-- 
-                The "redirect" end state allows CAS to properly end the workflow while still redirecting
-                the user back to the service required.
-        -->
-        <end-state id="redirectView" view="externalRedirect:${requestScope.response.url}" />
-
-        <end-state id="viewServiceErrorView" view="viewServiceErrorView" />
-
-        <end-state id="viewServiceSsoErrorView" view="viewServiceSsoErrorView" />
+	<!-- 
+			The "showWarningView" end state is the end state for when the user has requested privacy settings (to be "warned") to be turned on.  It delegates to a 
+			view defines in default_views.properties that display the "Please click here to go to the service." message.
+	-->
+	<end-state id="showWarningView" view="casLoginConfirmView" />
 
 
 
 
+	<end-state id="postView" view="postResponseView">
+		<on-entry>
+			<set name="requestScope.parameters" value="requestScope.response.attributes" />
+			<set name="requestScope.originalUrl" value="flowScope.service.id" />
+		</on-entry>
+	</end-state>
 
-        <global-transitions>
-        <!-- CAS-1023 This one is simple - redirects to a login page (same as renew) when 'ssoEnabled' flag is unchecked
-             instead of showing an intermediate unauthorized view with a link to login page -->
-        <transition to="viewLoginForm" on-exception="org.jasig.cas.services.UnauthorizedSsoServiceException"/>
-        <transition to="viewServiceErrorView" on-exception="org.springframework.webflow.execution.repository.NoSuchFlowExecutionException" />
-                <transition to="viewServiceErrorView" on-exception="org.jasig.cas.services.UnauthorizedServiceException" />
-        </global-transitions>
+
+
+
+
+	<!-- 
+			The "redirect" end state allows CAS to properly end the workflow while still redirecting
+			the user back to the service required.
+	-->
+	<end-state id="redirectView" view="externalRedirect:${requestScope.response.url}" />
+
+	<end-state id="viewServiceErrorView" view="viewServiceErrorView" />
+
+	<end-state id="viewServiceSsoErrorView" view="viewServiceSsoErrorView" />
+
+	<end-state id="viewNotRegisteredView" view="notRegisteredView" />
+
+
+	<global-transitions>
+		<!-- CAS-1023 This one is simple - redirects to a login page (same as renew) when 'ssoEnabled' flag is unchecked
+		instead of showing an intermediate unauthorized view with a link to login page -->
+		<transition to="viewLoginForm" on-exception="org.jasig.cas.services.UnauthorizedSsoServiceException"/>
+		<transition to="viewServiceErrorView" on-exception="org.springframework.webflow.execution.repository.NoSuchFlowExecutionException" />
+		<transition to="viewServiceErrorView" on-exception="org.jasig.cas.services.UnauthorizedServiceException" />
+	</global-transitions>
 </flow>
