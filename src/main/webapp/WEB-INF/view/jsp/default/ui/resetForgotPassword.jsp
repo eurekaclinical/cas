@@ -36,7 +36,7 @@
 		<form:input name="emailAddress" type="text" id="emailAddress" path="emailAddress" class="form-control"/>
 		<span class="help-block"></span>
 	</div>
-	<button name="cancelButton" id="cancelButton" type="button" class="btn" onclick="location.href='${formActionUrl}?service=${param.service}'">Return to Login Screen</button>
+	<button name="cancelButton" id="cancelButton" type="button" class="btn" onclick="location.href='${formActionUrl}?service=${service}'">Return to Login Screen</button>
 	<button name="submit" id="submit" type="submit" class="btn btn-primary">Reset Password</button>
 	<input type="hidden" name="lt" value="${loginTicket}" />
 	<input type="hidden" name="execution" value="${flowExecutionKey}" />

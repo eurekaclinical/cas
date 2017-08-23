@@ -111,7 +111,7 @@
 											   htmlEscape="true"/>
 							</div>
 							<div class="form-group">
-								<a href="<c:url value="login"/>?execution=${flowExecutionKey}&_eventId=forgotPassword&service=${param.service}">Forgot Password?</a>
+								<a href="<c:url value="login"/>?execution=${flowExecutionKey}&_eventId=forgotPassword">Forgot Password?</a>
 							</div>
 							<div class="form-group">
 								<input name="submit" id="submit" class="btn btn-lg btn-primary btn-block" accesskey="l" value="Login"
