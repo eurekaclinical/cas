@@ -161,9 +161,12 @@
       <webflow:always-redirect-on-pause value="false"/>
       <webflow:redirect-in-same-state value="false" />
     </webflow:flow-execution-attributes>
-    <webflow:flow-execution-listeners>
+	<!-- Disable the listener. It resets the session timeout to 2 seconds, which
+	can leave you with only 2 seconds to type in your username and password in
+	the login screen. -->
+    <!--<webflow:flow-execution-listeners>
       <webflow:listener ref="terminateWebSessionListener" />
-    </webflow:flow-execution-listeners>
+    </webflow:flow-execution-listeners>-->
   </webflow:flow-executor>
 
   <webflow:flow-registry id="flowRegistry" flow-builder-services="builder">
@@ -173,8 +176,8 @@
   <webflow:flow-builder-services id="builder" view-factory-creator="viewFactoryCreator"
                                  expression-parser="expressionParser"/>
 
-  <bean id="terminateWebSessionListener" class="org.jasig.cas.web.flow.TerminateWebSessionListener"
-      p:serviceManagerUrl="${cas.securityContext.serviceProperties.service}" />
+  <!--<bean id="terminateWebSessionListener" class="org.jasig.cas.web.flow.TerminateWebSessionListener"
+      p:serviceManagerUrl="${cas.securityContext.serviceProperties.service}" />-->
 
   <bean id="expressionParser" class="org.springframework.webflow.expression.WebFlowOgnlExpressionParser"/>
 
