@@ -54,15 +54,9 @@
 
         <action-state id="oauthAction">
                 <evaluate expression="oauthAction" />
-                <transition on="success" to="registeredCheckAction" />
+                <transition on="success" to="sendTicketGrantingTicket" />
                 <transition on="error" to="ticketGrantingTicketExistsCheck" />
         </action-state>
-		
-		<action-state id="registeredCheckAction">
-			<evaluate expression="registeredCheckAction" />
-			<transition on="success" to="sendTicketGrantingTicket" />
-            <transition on="error" to="viewNotRegisteredView" />
-		</action-state>
 
         <decision-state id="ticketGrantingTicketExistsCheck">
                 <if test="flowScope.ticketGrantingTicketId != null" then="hasServiceCheck" else="gatewayRequestCheck" />
@@ -318,9 +312,6 @@
 	<end-state id="viewServiceErrorView" view="viewServiceErrorView" />
 
 	<end-state id="viewServiceSsoErrorView" view="viewServiceSsoErrorView" />
-
-	<end-state id="viewNotRegisteredView" view="notRegisteredView" />
-
 
 	<global-transitions>
 		<!-- CAS-1023 This one is simple - redirects to a login page (same as renew) when 'ssoEnabled' flag is unchecked

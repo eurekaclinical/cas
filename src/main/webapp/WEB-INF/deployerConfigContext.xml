@@ -113,7 +113,11 @@
 
 				<ref bean="ldapPrincipalResolver" />
 
-				<bean class="org.jasig.cas.support.oauth.authentication.principal.OAuthCredentialsToPrincipalResolver" />
+				<bean class="edu.emory.cci.aiw.cvrg.eureka.cas.authentication.OAuthCredentialsToPrincipalResolver">
+					<property name="jdbcTemplate">
+						<value>#{jdbcTemplateGenerator.jdbcTemplateFromJndiName}</value>
+					</property>  
+				</bean>
 			</list>
 		</property>
 		
@@ -302,21 +306,21 @@
 	This bean defines the security roles for the Services Management application.  Simple deployments can use the in-memory version.
 	More robust deployments will want to use another option, such as the Jdbc version.
 	
-  	The name of this should remain "userDetailsService" in order for Spring Security to find it.
-        -->
+The name of this should remain "userDetailsService" in order for Spring Security to find it.
+	-->
 	<!-- <sec:user name="@@THIS SHOULD BE REPLACED@@" password="notused" authorities="ROLE_ADMIN" />-->
 
 	<bean id="userDetailsService"
-		class="edu.emory.cci.aiw.cvrg.eureka.cas.authentication.EmptyUserDetailsManager" />
+		  class="edu.emory.cci.aiw.cvrg.eureka.cas.authentication.EmptyUserDetailsManager" />
 
 	<!--<sec:user-service id="userDetailsService">
 		<sec:user name="super.user@emory.edu" password="notused" authorities="ROLE_ADMIN" />
 	</sec:user-service>-->
 	
 	<!-- 
-  	Bean that defines the attributes that a service may return.  This example uses the Stub/Mock version.  A real implementation
-  	may go against a database or LDAP server.  The id should remain "attributeRepository" though.
-        -->
+Bean that defines the attributes that a service may return.  This example uses the Stub/Mock version.  A real implementation
+may go against a database or LDAP server.  The id should remain "attributeRepository" though.
+	-->
 	<!--
 	<bean id="attributeRepository"
 		class="org.jasig.services.persondir.support.StubPersonAttributeDao">
@@ -330,10 +334,10 @@
 	</bean>
 	-->	
 	<!-- 
-  	Sample, in-memory data store for the ServiceRegistry. A real implementation
-  	would probably want to replace this with the JPA-backed ServiceRegistry DAO
-  	The name of this bean should remain "serviceRegistryDao".
-        -->
+Sample, in-memory data store for the ServiceRegistry. A real implementation
+would probably want to replace this with the JPA-backed ServiceRegistry DAO
+The name of this bean should remain "serviceRegistryDao".
+	-->
 	<bean
 		id="serviceRegistryDao"
 		class="org.jasig.cas.services.InMemoryServiceRegistryDaoImpl">
@@ -375,46 +379,40 @@
 		<property name="monitors">
 			<list>
 				<bean class="org.jasig.cas.monitor.MemoryMonitor"
-			  p:freeMemoryWarnThreshold="10" />
+					  p:freeMemoryWarnThreshold="10" />
        
 				<bean class="org.jasig.cas.monitor.SessionMonitor"
-			  p:ticketRegistry-ref="ticketRegistry"
-			  p:serviceTicketCountWarnThreshold="5000"
-			  p:sessionCountWarnThreshold="100000" />
+					  p:ticketRegistry-ref="ticketRegistry"
+					  p:serviceTicketCountWarnThreshold="5000"
+					  p:sessionCountWarnThreshold="100000" />
 			</list>
 		</property>
 	</bean>
         
-        <!--
-            |   Get jdbc template via jndiName bean   |   Check password expiration date bean   |   Update expirted password bean   |
-            |   jdbcTemplateGenerator                 |   expirationCheckAction                 |   updateExpiredPasswordAction     |
-            |                                         |                                                                             |
-            |                                         |             inject jdbcTemplate into these two beans                        |
-        --> 
-        <bean id="jdbcTemplateGenerator" class="edu.emory.cci.aiw.cvrg.eureka.cas.JdbcTemplateGenerator">
-                <property name="jndiName" value="java:comp/env/jdbc/UserService"/>                                                                  
-        </bean>         
-        <bean id="expirationCheckAction" class="edu.emory.cci.aiw.cvrg.eureka.cas.ExpirationCheckAction">
-                <property name="jdbcTemplate">
-                    <value>#{jdbcTemplateGenerator.jdbcTemplateFromJndiName}</value>
-                </property>
-        </bean>    
-        <bean id="updateExpiredPasswordAction" class="edu.emory.cci.aiw.cvrg.eureka.cas.UpdateExpiredPasswordAction">
-                <property name="jdbcTemplate">
-                    <value>#{jdbcTemplateGenerator.jdbcTemplateFromJndiName}</value>
-                </property>                                                                
-        </bean>
+	<!--
+		|   Get jdbc template via jndiName bean   |   Check password expiration date bean   |   Update expirted password bean   |
+		|   jdbcTemplateGenerator                 |   expirationCheckAction                 |   updateExpiredPasswordAction     |
+		|                                         |                                                                             |
+		|                                         |             inject jdbcTemplate into these two beans                        |
+	--> 
+	<bean id="jdbcTemplateGenerator" class="edu.emory.cci.aiw.cvrg.eureka.cas.JdbcTemplateGenerator">
+		<property name="jndiName" value="java:comp/env/jdbc/UserService"/>                                                                  
+	</bean>         
+	<bean id="expirationCheckAction" class="edu.emory.cci.aiw.cvrg.eureka.cas.ExpirationCheckAction">
+		<property name="jdbcTemplate">
+			<value>#{jdbcTemplateGenerator.jdbcTemplateFromJndiName}</value>
+		</property>
+	</bean>    
+	<bean id="updateExpiredPasswordAction" class="edu.emory.cci.aiw.cvrg.eureka.cas.UpdateExpiredPasswordAction">
+		<property name="jdbcTemplate">
+			<value>#{jdbcTemplateGenerator.jdbcTemplateFromJndiName}</value>
+		</property>                                                                
+	</bean>
                           
-        <bean id="resetForgotPasswordAction" class="edu.emory.cci.aiw.cvrg.eureka.cas.ResetForgotPasswordAction">
-                <property name="jdbcTemplate">
-                    <value>#{jdbcTemplateGenerator.jdbcTemplateFromJndiName}</value>
-                </property>                                                                
-        </bean>
+	<bean id="resetForgotPasswordAction" class="edu.emory.cci.aiw.cvrg.eureka.cas.ResetForgotPasswordAction">
+		<property name="jdbcTemplate">
+			<value>#{jdbcTemplateGenerator.jdbcTemplateFromJndiName}</value>
+		</property>                                                                
+	</bean>
 		
-		<bean id="registeredCheckAction" class="edu.emory.cci.aiw.cvrg.eureka.cas.RegisteredCheckAction">
-                <property name="jdbcTemplate">
-                    <value>#{jdbcTemplateGenerator.jdbcTemplateFromJndiName}</value>
-                </property>                                                                
-        </bean> 
-         
 </beans>
