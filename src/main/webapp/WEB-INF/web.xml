@@ -71,15 +71,6 @@
 	</context-param>
 	
 	<filter>
-		<filter-name>CorsFilter</filter-name>
-		<filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>CorsFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
-	<filter>
 		<filter-name>CAS Client Info Logging Filter</filter-name>
 		<filter-class>com.github.inspektr.common.web.ClientInfoThreadLocalFilter</filter-class>
 	</filter>
