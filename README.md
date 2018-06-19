@@ -8,16 +8,15 @@ This project depends on [version 3.6.0](https://github.com/apereo/cas/releases/t
 
 This project does not provide user authorization. Eureka! Clinical microservices are responsible for providing their own authorization.
 
-## Version history
 Latest release: [![Latest release](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/cas-server/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/cas-server)
 
-### Version 3.0
+## Version 3.0
 The version 3.0 series has integrated password resets and password changes into this project (they previously were in [Eureka! Clinical Analytics](https://github.com/eurekaclinical/eureka)).
 
-### Version 2.0
+## Version 2.0
 Turned on the REST API access.
 
-### Version 1.0.2
+## Version 1.0.2
 Initial version supported version 1 of Eureka! Clinical Analytics.
 
 ## Build requirements
